@@ -140,9 +140,8 @@
 			children = (
 				02DF0CDA283CB980003D0679 /* CollectionHeaderView.swift */,
 				D2562ED4283DCDD800336E49 /* SearchView */,
+				D2EA19C32840765A00C75419 /* BrowseView */,
 				0287405A283E36C00009C62D /* FindAccomodationView */,
-				D2B52C3D283E0CDE00C58271 /* FamousSpotCollectionView.swift */,
-				D247A489283F63BA00A92DDD /* BrowsingSpotCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,7 +160,6 @@
 				02DF0CD4283CB2C6003D0679 /* MainEventCell.swift */,
 				02DF0CD6283CB3C7003D0679 /* AroundSpotCell.swift */,
 				02DF0CD8283CB77F003D0679 /* ThemeSpotCell.swift */,
-				D247A48B283F640A00A92DDD /* BrowsingSpotCell.swift */,
 				02874049283D3B6D0009C62D /* HomeView.swift */,
 			);
 			path = SearchView;
@@ -216,8 +214,36 @@
 		D2B52C43283F1A2800C58271 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D2EA19C4284076DB00C75419 /* UseCase */,
+				D2EA19C52840770700C75419 /* Data */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D2EA19C32840765A00C75419 /* BrowseView */ = {
+			isa = PBXGroup;
+			children = (
+				D2B52C3D283E0CDE00C58271 /* FamousSpotCollectionView.swift */,
+				D247A489283F63BA00A92DDD /* BrowsingSpotCollectionView.swift */,
+				D247A48B283F640A00A92DDD /* BrowsingSpotCell.swift */,
+			);
+			path = BrowseView;
+			sourceTree = "<group>";
+		};
+		D2EA19C4284076DB00C75419 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				02AE9A2E283FD5AF00F3B5E5 /* FindAccomodationUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		D2EA19C52840770700C75419 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				02AE9A36283FDADF00F3B5E5 /* DateData.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		D2FFBFC4283C868300C97D16 = {
@@ -251,8 +277,6 @@
 				D2FFBFD9283C868400C97D16 /* Assets.xcassets */,
 				D2FFBFDB283C868400C97D16 /* LaunchScreen.storyboard */,
 				D2FFBFDE283C868400C97D16 /* Info.plist */,
-				02AE9A2E283FD5AF00F3B5E5 /* FindAccomodationUseCase.swift */,
-				02AE9A36283FDADF00F3B5E5 /* DateData.swift */,
 			);
 			path = Airbnb_iOS;
 			sourceTree = "<group>";
