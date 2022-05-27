@@ -11,8 +11,8 @@ import HorizonCalendar
 final class SelectCalendarView: UIView {
 
     private lazy var calendarView = CalendarView(initialContent: makeContent())
-    private var selectedDay1: Day?
-    private var selectedDay2: Day?
+    private var selectedDay1: Date?
+    private var selectedDay2: Date?
     private var selectedDateRange: ClosedRange<Date>?
     weak var delegate: SelectCalendarDelegate?
 
@@ -20,7 +20,6 @@ final class SelectCalendarView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         setUpLayout()
-        setCalendar()
     }
 
     @available(*, unavailable)
@@ -28,35 +27,33 @@ final class SelectCalendarView: UIView {
         fatalError()
     }
 
-    func setCalendar() {
-        calendarView.daySelectionHandler = { [weak self] day in
-            guard let self = self else { return }
-
-            if self.selectedDateRange != nil {
-                self.selectedDateRange = nil
-                self.calendarView.setContent(self.makeContent())
-            }
-            if self.selectedDay1 != nil &&
-                self.selectedDay2 != nil {
-                self.selectedDay1 = day
-                self.selectedDay2 = nil
-            } else if self.selectedDay1 != nil {
-                self.selectedDay2 = day
-            } else {
-                self.selectedDay1 = day
-                self.selectedDay2 = nil
-            }
-
-            self.delegate?.didUpdateDay(day)
-            let newContent = self.makeContent()
-            self.calendarView.setContent(newContent)
-        }
+    func setCalendarHandler(_ handler: ((Day) -> Void)?) {
+        calendarView.daySelectionHandler = handler
     }
 
     func setDateRange(_ dateRange: ClosedRange<Date>) {
         selectedDateRange = dateRange
         calendarView.setContent(makeContent())
         delegate?.didPresentDateRange(dateRange)
+    }
+
+    func setSelectedDay(_ date: Date) {
+        if selectedDateRange != nil {
+            selectedDateRange = nil
+        }
+        if selectedDay1 != nil &&
+            selectedDay2 != nil {
+            selectedDay1 = date
+            selectedDay2 = nil
+        } else if selectedDay1 != nil {
+            selectedDay2 = date
+        } else {
+            selectedDay1 = date
+            selectedDay2 = nil
+        }
+
+        let newContent = makeContent()
+        calendarView.setContent(newContent)
     }
 }
 
@@ -83,8 +80,8 @@ private extension SelectCalendarView {
         .dayItemProvider { [weak self] day in
             var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 18), textColor: .darkGray, backgroundColor: .clear)
 
-            if day == self?.selectedDay1 ||
-                day == self?.selectedDay2 {
+            if day.toDate() == self?.selectedDay1 ||
+                day.toDate() == self?.selectedDay2 {
                 invariantViewProperties.textColor = .white
                 invariantViewProperties.backgroundColor = .black
             }

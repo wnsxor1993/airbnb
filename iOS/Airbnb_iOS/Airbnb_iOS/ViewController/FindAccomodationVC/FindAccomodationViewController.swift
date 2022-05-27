@@ -26,6 +26,7 @@ final class FindAccomodationViewController: UIViewController {
         findAccomodationView.setTableViewDelegate(self)
         findAccomodationView.setCalendarDelegate(self)
         useCase.setDelegate(self)
+        setCalendarView()
     }
 }
 
@@ -55,6 +56,12 @@ private extension FindAccomodationViewController {
 
     @objc func nextButtonTouched() {
         print("Next")
+    }
+
+    func setCalendarView() {
+        findAccomodationView.calendarView.setCalendarHandler { day in
+            self.useCase.updateSelectedDay(day.toDate())
+        }
     }
 }
 
@@ -100,15 +107,22 @@ extension FindAccomodationViewController: SelectCalendarDelegate {
 extension FindAccomodationViewController: FindAccomodationUseCaseDelegate {
     func didChangeDate() {
         dataSource[1].data = nil
-        findAccomodationView.reloadCell()
+        DispatchQueue.main.async { [weak self] in
+            self?.findAccomodationView.reloadCell()
+        }
+    }
+
+    func didSetDate(_ newDate: Date) {
+        findAccomodationView.calendarView.setSelectedDay(newDate)
     }
 
     func didSetDateRange(_ dateRange: ClosedRange<Date>) {
-        findAccomodationView.setCalendarDateRange(dateRange)
+        findAccomodationView.calendarView.setDateRange(dateRange)
     }
 }
 
 protocol FindAccomodationUseCaseDelegate: AnyObject {
     func didChangeDate()
+    func didSetDate(_ newDate: Date)
     func didSetDateRange(_ dateRange: ClosedRange<Date>)
 }
