@@ -10,6 +10,8 @@ import MapKit
 
 class BrowseViewController: UIViewController {
 
+    private let findAccomodationVC = FindAccomodationViewController()
+    
     private let famousSpotDataSource = FamousSpotCollectionDataSource()
     private let browsingSpotDataSource = BrowsingSpotCollectionDataSource()
     private lazy var famousSpotCollectionView = FamousSpotCollectionView(frame: view.frame)
@@ -24,19 +26,6 @@ class BrowseViewController: UIViewController {
 
     private var searchCompleter = MKLocalSearchCompleter()
 
-    private lazy var nextVCButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.setTitle("다음 화면", for: .normal)
-        if #available(iOS 14.0, *) {
-            button.addAction(UIAction(handler: { _ in
-                let nextVC = FindAccomodationViewController()
-                self.navigationController?.pushViewController(nextVC, animated: true)
-            }), for: .touchUpInside)
-        }
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationItem()
@@ -48,8 +37,10 @@ class BrowseViewController: UIViewController {
 
         self.famousSpotCollectionView.setDataSource(famousSpotDataSource)
         self.famousSpotCollectionView.collectionView.keyboardDismissMode = .onDrag
+        
         self.browsingSpotCollectionView.setDataSource(browsingSpotDataSource)
         self.browsingSpotCollectionView.collectionView.keyboardDismissMode = .onDrag
+        self.browsingSpotCollectionView.collectionView.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -103,9 +94,12 @@ extension BrowseViewController: MKLocalSearchCompleterDelegate {
             self.browsingSpotCollectionView.collectionView.reloadData()
         }
     }
+}
 
-    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-
+extension BrowseViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.searchBarVC.searchBar.endEditing(true)
+        self.navigationController?.pushViewController(findAccomodationVC, animated: true)
     }
 }
 
@@ -127,8 +121,7 @@ private extension BrowseViewController {
         singleTapGestureRecognizer.numberOfTapsRequired = 1
         singleTapGestureRecognizer.isEnabled = true
         singleTapGestureRecognizer.cancelsTouchesInView = false
-        famousSpotCollectionView.collectionView.addGestureRecognizer(singleTapGestureRecognizer)
-        browsingSpotCollectionView.collectionView.addGestureRecognizer(singleTapGestureRecognizer)
+        self.view.addGestureRecognizer(singleTapGestureRecognizer)
     }
 
     @objc
