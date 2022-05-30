@@ -38,10 +38,6 @@ final class CalendarViewController: UIViewController {
         self.baseDate = baseDate
 
         super.init(nibName: nil, bundle: nil)
-
-        modalPresentationStyle = .overCurrentContext
-        modalTransitionStyle = .crossDissolve
-        definesPresentationContext = true
     }
 
     @available(*, unavailable)
