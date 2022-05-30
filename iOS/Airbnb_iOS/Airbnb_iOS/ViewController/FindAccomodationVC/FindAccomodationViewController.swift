@@ -98,7 +98,7 @@ extension FindAccomodationViewController: SelectCalendarDelegate {
     }
 
     func didPresentDateRange(_ dateRange: ClosedRange<Date>) {
-        let dateData = DateData(dateRange: dateRange)
+        let dateData = DateConverter(dateRange: dateRange)
         dataSource[1].data = dateData.description
         findAccomodationView.reloadCell()
     }
