@@ -11,10 +11,13 @@ import MapKit
 class BrowseViewController: UIViewController {
 
     private let findAccomodationVC = FindAccomodationViewController()
-    
     private let famousSpotDataSource = FamousSpotCollectionDataSource()
     private let browsingSpotDataSource = BrowsingSpotCollectionDataSource()
     private lazy var browsingSpotCollectionView = BorwsingSpotCollectionView(frame: view.frame)
+    private lazy var rightBarItem: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "지우기", style: .plain, target: self, action: #selector(clearSearchingText))
+        return button
+    }()
 
     private var searchBarVC: UISearchController = {
         let searcher = UISearchController(searchResultsController: nil)
@@ -147,11 +150,13 @@ private extension BrowseViewController {
     func changeCollectionViewToSearchingView() {
         self.browsingSpotCollectionView.startToSearch()
         self.setCollectionViewDataSource()
+        self.navigationItem.rightBarButtonItem = self.rightBarItem
     }
     
     func changeCollectionViewToDefaultView() {
         self.browsingSpotCollectionView.stopToSearch()
         self.setCollectionViewDataSource()
+        self.navigationItem.rightBarButtonItem = nil
     }
     
     func setCollectionViewDataSource() {
@@ -161,5 +166,10 @@ private extension BrowseViewController {
         case false:
             self.browsingSpotCollectionView.setDataSource(famousSpotDataSource)
         }
+    }
+    
+    @objc
+    func clearSearchingText(_ sender: Any) {
+        self.searchBarVC.searchBar.text = ""
     }
 }
