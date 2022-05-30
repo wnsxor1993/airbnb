@@ -28,22 +28,11 @@ final class CalendarCollectionCell: UICollectionViewCell {
         return label
     }()
 
-    private lazy var accessibilityDateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.calendar = Calendar(identifier: .gregorian)
-        dateFormatter.setLocalizedDateFormatFromTemplate("EEEE, MMMM d")
-
-        return dateFormatter
-    }()
-
     static let identifier = "CalendarCollectionViewCell"
 
     var day: Day? {
         didSet {
             guard let day = day else { return }
-
-            numberLabel.text = day.number
-            accessibilityLabel = accessibilityDateFormatter.string(from: day.date)
             if day.isBeforeToday {
                 numberLabel.attributedText = day.number.strikeThrough()
             } else {
@@ -113,9 +102,6 @@ private extension CalendarCollectionCell {
     }
 
     func applySelectedStyle() {
-        accessibilityTraits.insert(.selected)
-        accessibilityHint = nil
-
         numberLabel.textColor = .white
         selectionBackgroundView.isHidden = false
     }
