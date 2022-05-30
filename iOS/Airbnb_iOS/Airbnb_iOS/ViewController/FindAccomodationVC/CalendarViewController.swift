@@ -103,12 +103,14 @@ private extension CalendarViewController {
 
     func generateDay(offsetBy dayOffset: Int, for baseDate: Date, isWithinDisplayMonth: Bool) -> Day {
         let date = calendar.date(byAdding: .day, value: dayOffset, to: baseDate) ?? baseDate
-
+        let yesterDay = Date(timeIntervalSinceNow: -86400)
+        let isBeforeToday = date <= yesterDay
         return Day(
             date: date,
             number: dateFormatter.string(from: date),
             isSelected: false,
-            isWithinDisplayedMonth: isWithinDisplayMonth)
+            isWithinDisplayedMonth: isWithinDisplayMonth,
+            isBeforeToday: isBeforeToday)
     }
 }
 
@@ -127,6 +129,8 @@ extension CalendarViewController: UICollectionViewDataSource {
         let day = days[indexPath.item]
 
         cell.day = day
+
+        cell.isHidden = !day.isWithinDisplayedMonth
         return cell
     }
 }
@@ -153,7 +157,8 @@ extension CalendarViewController: CalendarViewControllerUseCaseDelegate {
             let newDay = Day(date: day.date,
                              number: day.number,
                              isSelected: false,
-                             isWithinDisplayedMonth: day.isWithinDisplayedMonth)
+                             isWithinDisplayedMonth: day.isWithinDisplayedMonth,
+                             isBeforeToday: day.isBeforeToday)
             newDays.append(newDay)
         }
 

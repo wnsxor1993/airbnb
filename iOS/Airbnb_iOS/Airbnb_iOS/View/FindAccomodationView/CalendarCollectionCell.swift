@@ -44,6 +44,11 @@ final class CalendarCollectionCell: UICollectionViewCell {
 
             numberLabel.text = day.number
             accessibilityLabel = accessibilityDateFormatter.string(from: day.date)
+            if day.isBeforeToday {
+                numberLabel.attributedText = day.number.strikeThrough()
+            } else {
+                numberLabel.text = day.number
+            }
             updateSelectionStatus()
         }
     }
@@ -86,6 +91,11 @@ final class CalendarCollectionCell: UICollectionViewCell {
 
         layoutSubviews()
     }
+
+    override func prepareForReuse() {
+        numberLabel.text = nil
+        selectionBackgroundView.isHidden = true
+    }
 }
 
 private extension CalendarCollectionCell {
@@ -96,7 +106,9 @@ private extension CalendarCollectionCell {
         if day.isSelected {
             applySelectedStyle()
         } else {
-            applyDefaultStyle(isWithinDisplayedMonth: day.isWithinDisplayedMonth)
+            applyDefaultStyle(
+                isWithinDisplayedMonth: day.isWithinDisplayedMonth,
+                              isBeforeToday: day.isBeforeToday)
         }
     }
 
@@ -108,12 +120,9 @@ private extension CalendarCollectionCell {
         selectionBackgroundView.isHidden = false
     }
 
-    func applyDefaultStyle(isWithinDisplayedMonth: Bool) {
-        accessibilityTraits.remove(.selected)
-        accessibilityHint = "Tap to select"
-
-        numberLabel.textColor = .label
-        numberLabel.isHidden = !isWithinDisplayedMonth
+    func applyDefaultStyle(isWithinDisplayedMonth: Bool, isBeforeToday: Bool) {
+        numberLabel.textColor = isBeforeToday ?
+        (.gray4 ?? .label) : .label
         selectionBackgroundView.isHidden = true
     }
 }
