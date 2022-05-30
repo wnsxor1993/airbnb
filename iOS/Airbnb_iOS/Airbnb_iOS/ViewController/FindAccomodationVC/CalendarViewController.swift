@@ -84,7 +84,7 @@ private extension CalendarViewController {
         let offsetInInitialRow = metadata.firstDayWeekday
         let firstDayOfMonth = metadata.firstDay
 
-        var days: [Day] = (1..<(numberOfDaysInMonth + offsetInInitialRow))
+        let days: [Day] = (1..<(numberOfDaysInMonth + offsetInInitialRow))
             .map { day in
                 let isWithinDisplayMonth = day >= offsetInInitialRow
 
@@ -98,8 +98,6 @@ private extension CalendarViewController {
                 )
             }
 
-        days += generateStartOfNextMonth(using: firstDayOfMonth)
-
         return days
     }
 
@@ -111,30 +109,6 @@ private extension CalendarViewController {
             number: dateFormatter.string(from: date),
             isSelected: false,
             isWithinDisplayedMonth: isWithinDisplayMonth)
-    }
-
-    func generateStartOfNextMonth(using firstDayOfDisplayedMonth: Date) -> [Day] {
-        guard let lastDayInMonth = calendar.date(
-            byAdding: DateComponents(month: 1, day: -1),
-            to: firstDayOfDisplayedMonth) else {
-            return []
-        }
-
-        let additionalDays = 7 - calendar.component(.weekday, from: lastDayInMonth)
-
-        guard additionalDays > 0 else {
-            return []
-        }
-
-        let days: [Day] = (1...additionalDays)
-            .map {
-                generateDay(
-                    offsetBy: $0,
-                    for: lastDayInMonth,
-                    isWithinDisplayMonth: false)
-            }
-
-        return days
     }
 }
 
