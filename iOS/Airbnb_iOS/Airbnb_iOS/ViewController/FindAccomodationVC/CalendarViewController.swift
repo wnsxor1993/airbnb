@@ -162,6 +162,8 @@ extension CalendarViewController: UICollectionViewDataSource {
 
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let yesterDay = Date(timeIntervalSinceNow: -86400)
+        guard days[indexPath.item].date > yesterDay else { return }
         useCase.updateSelectedDay(days[indexPath.item].date, indexPathOfNewDate: indexPath)
     }
 
