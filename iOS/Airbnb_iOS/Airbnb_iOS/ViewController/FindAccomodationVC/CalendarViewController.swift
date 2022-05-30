@@ -26,6 +26,7 @@ final class CalendarViewController: UIViewController {
     }
 
     private let calendar = Calendar(identifier: .gregorian)
+    private var useCase = CalendarViewControllerUseCase()
 
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -53,6 +54,7 @@ final class CalendarViewController: UIViewController {
         view = calendarView
         calendarView.setCollectionViewDelegate(self)
         calendarView.setCollectionViewDataSource(self)
+        useCase.setDelegate(self)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -160,6 +162,7 @@ extension CalendarViewController: UICollectionViewDataSource {
 
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        useCase.updateSelectedDay(days[indexPath.item].date, indexPathOfNewDate: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -167,5 +170,30 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         let height = Int(collectionView.frame.height) / numberOfWeeksInBaseDate
 
         return CGSize(width: width, height: height)
+    }
+}
+
+extension CalendarViewController: CalendarViewControllerUseCaseDelegate {
+    func didChangeDateRange() {
+        var newDays = [Day]()
+        for day in days {
+            let newDay = Day(date: day.date,
+                             number: day.number,
+                             isSelected: false,
+                             isWithinDisplayedMonth: day.isWithinDisplayedMonth)
+            newDays.append(newDay)
+        }
+
+        days = newDays
+        calendarView.reloadData()
+    }
+
+    func didSetDate(newDate: Date, indexPathOfNewDate: IndexPath) {
+        days[indexPathOfNewDate.item].isSelected = true
+        calendarView.reloadItems(at: [indexPathOfNewDate])
+    }
+
+    func didSetDateRange(_ dateRange: ClosedRange<Date>) {
+
     }
 }
