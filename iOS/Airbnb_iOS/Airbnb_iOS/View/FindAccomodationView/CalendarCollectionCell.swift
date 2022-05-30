@@ -112,7 +112,8 @@ private extension CalendarCollectionCell {
         accessibilityTraits.remove(.selected)
         accessibilityHint = "Tap to select"
 
-        numberLabel.textColor = isWithinDisplayedMonth ? .label : .secondaryLabel
+        numberLabel.textColor = .label
+        numberLabel.isHidden = !isWithinDisplayedMonth
         selectionBackgroundView.isHidden = true
     }
 }
