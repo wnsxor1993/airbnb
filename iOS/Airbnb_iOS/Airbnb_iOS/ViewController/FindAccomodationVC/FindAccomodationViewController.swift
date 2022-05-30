@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import HorizonCalendar
 
 final class FindAccomodationViewController: UIViewController {
 
@@ -24,7 +23,6 @@ final class FindAccomodationViewController: UIViewController {
         setViewInitialState()
         findAccomodationView.setTableViewDateSource(self)
         findAccomodationView.setTableViewDelegate(self)
-        findAccomodationView.setCalendarDelegate(self)
         useCase.setDelegate(self)
         setCalendarView()
     }
@@ -59,9 +57,6 @@ private extension FindAccomodationViewController {
     }
 
     func setCalendarView() {
-        findAccomodationView.calendarView.setCalendarHandler { day in
-            self.useCase.updateSelectedDay(day.toDate())
-        }
     }
 }
 
@@ -92,34 +87,6 @@ extension FindAccomodationViewController: UITableViewDelegate {
     }
 }
 
-extension FindAccomodationViewController: SelectCalendarDelegate {
-    func didUpdateDay(_ newDay: Day) {
-        useCase.updateSelectedDay(newDay.toDate())
-    }
-
-    func didPresentDateRange(_ dateRange: ClosedRange<Date>) {
-        let dateData = DateConverter(dateRange: dateRange)
-        dataSource[1].data = dateData.description
-        findAccomodationView.reloadCell()
-    }
-}
-
-extension FindAccomodationViewController: FindAccomodationUseCaseDelegate {
-    func didChangeDate() {
-        dataSource[1].data = nil
-        DispatchQueue.main.async { [weak self] in
-            self?.findAccomodationView.reloadCell()
-        }
-    }
-
-    func didSetDate(_ newDate: Date) {
-        findAccomodationView.calendarView.setSelectedDay(newDate)
-    }
-
-    func didSetDateRange(_ dateRange: ClosedRange<Date>) {
-        findAccomodationView.calendarView.setDateRange(dateRange)
-    }
-}
 
 protocol FindAccomodationUseCaseDelegate: AnyObject {
     func didChangeDate()
