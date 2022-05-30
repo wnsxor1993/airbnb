@@ -16,14 +16,12 @@ final class FindAccomodationViewController: UIViewController {
         AccomodationData(title: "요금"),
         AccomodationData(title: "인원")
     ]
-    private var useCase = FindAccomodationUseCase()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewInitialState()
         findAccomodationView.setTableViewDateSource(self)
         findAccomodationView.setTableViewDelegate(self)
-        useCase.setDelegate(self)
         setCalendarView()
     }
 }
@@ -57,6 +55,13 @@ private extension FindAccomodationViewController {
     }
 
     func setCalendarView() {
+        let today = Date()
+
+        let calendarViewController = CalendarViewController(baseDate: today)
+
+        addChild(calendarViewController)
+        findAccomodationView.setSelectView(calendarViewController.view)
+        calendarViewController.didMove(toParent: self)
     }
 }
 
@@ -87,9 +92,14 @@ extension FindAccomodationViewController: UITableViewDelegate {
     }
 }
 
-
-protocol FindAccomodationUseCaseDelegate: AnyObject {
-    func didChangeDate()
-    func didSetDate(_ newDate: Date)
-    func didSetDateRange(_ dateRange: ClosedRange<Date>)
-}
+//extension FindAccomodationViewController: SelectCalendarDelegate {
+//    func didUpdateDay(_ newDay: Day) {
+//        useCase.updateSelectedDay(newDay.toDate())
+//    }
+//
+//    func didPresentDateRange(_ dateRange: ClosedRange<Date>) {
+//        let dateData = DateConverter(dateRange: dateRange)
+//        dataSource[1].data = dateData.description
+//        findAccomodationView.reloadCell()
+//    }
+//}

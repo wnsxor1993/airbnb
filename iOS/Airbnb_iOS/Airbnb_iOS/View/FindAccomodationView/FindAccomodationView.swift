@@ -41,12 +41,17 @@ final class FindAccomodationView: UIView {
         infoTableView.delegate = delegate
     }
 
-    func setCalendarDelegate(_ delegate: SelectCalendarDelegate) {
-        calendarView.delegate = delegate
-    }
+    func setSelectView(_ view: UIView) {
+        selectView.addSubview(view)
 
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: selectView.topAnchor),
+            view.bottomAnchor.constraint(equalTo: selectView.bottomAnchor),
+            view.leadingAnchor.constraint(equalTo: selectView.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: selectView.trailingAnchor)
+        ])
+    }
     func next() {
-        calendarView.removeFromSuperview()
         selectView.addSubview(budgetView)
 
         NSLayoutConstraint.activate([
