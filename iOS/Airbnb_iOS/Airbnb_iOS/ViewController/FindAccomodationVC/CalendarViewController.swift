@@ -51,6 +51,7 @@ final class CalendarViewController: UIViewController {
         calendarView.setCollectionViewDelegate(self)
         calendarView.setCollectionViewDataSource(self)
         useCase.setDelegate(self)
+        calendarView.setHeaderViewBaseDate(baseDate)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -194,4 +195,8 @@ extension CalendarViewController: CalendarViewControllerUseCaseDelegate {
     func didSetDateRange(_ dateRange: ClosedRange<Date>) {
 
     }
+}
+
+enum CalendarDataError: Error {
+    case metadataGeneration
 }
