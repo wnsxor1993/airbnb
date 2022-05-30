@@ -7,7 +7,9 @@
 
 import UIKit
 
-class FamousSpotCollectionView: UIView {
+class BorwsingSpotCollectionView: UIView {
+    
+    private(set) var isBrowsing: Bool = false
 
     private(set) lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.getCollectionViewLayout())
@@ -18,6 +20,7 @@ class FamousSpotCollectionView: UIView {
 
         collectionView.register(AroundSpotCell.self, forCellWithReuseIdentifier: AroundSpotCell.identifier)
         collectionView.register(CollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionHeaderView.identifier)
+        collectionView.register(BrowsingSpotCell.self, forCellWithReuseIdentifier: BrowsingSpotCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -36,9 +39,19 @@ class FamousSpotCollectionView: UIView {
     func setDataSource(_ dataSource: UICollectionViewDataSource) {
         collectionView.dataSource = dataSource
     }
+    
+    func startToSearch() {
+        self.isBrowsing = true
+        self.collectionView.collectionViewLayout = self.getCollectionViewLayout()
+    }
+    
+    func stopToSearch() {
+        self.isBrowsing = false
+        self.collectionView.collectionViewLayout = self.getCollectionViewLayout()
+    }
 }
 
-private extension FamousSpotCollectionView {
+private extension BorwsingSpotCollectionView {
 
     func setConstraint() {
         addSubview(collectionView)
@@ -52,7 +65,7 @@ private extension FamousSpotCollectionView {
 
     func getCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
-            return BrowseViewCollectionLayout().create()
+            return BrowsingSpotCollectionLayout(isBrowsing: self.isBrowsing).create()
         }
     }
 }
