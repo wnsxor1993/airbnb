@@ -38,14 +38,20 @@ final class SelectCalendarView: UIView {
     }
 
     func setSelectedDay(_ date: Date) {
-        if selectedDateRange != nil {
+        let isSetDateRange = selectedDateRange != nil
+
+        if isSetDateRange {
             selectedDateRange = nil
         }
-        if selectedDay1 != nil &&
-            selectedDay2 != nil {
+
+        let isSetBothSelectedDays = selectedDay1 != nil &&
+        selectedDay2 != nil
+        let isSetFirstSelectedDayOnly = selectedDay1 != nil
+
+        if isSetBothSelectedDays {
             selectedDay1 = date
             selectedDay2 = nil
-        } else if selectedDay1 != nil {
+        } else if isSetFirstSelectedDayOnly {
             selectedDay2 = date
         } else {
             selectedDay1 = date

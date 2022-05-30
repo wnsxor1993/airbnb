@@ -13,7 +13,9 @@ final class FindAccomodationUseCase {
     private var delegate: FindAccomodationUseCaseDelegate?
 
     func updateSelectedDay(_ newDay: Date) {
-        if self.selectedDay1 != nil && self.selectedDay2 != nil {
+        let isSetBothSelectedDays = self.selectedDay1 != nil && self.selectedDay2 != nil
+
+        if isSetBothSelectedDays {
             self.selectedDay1 = newDay
             self.selectedDay2 = nil
             delegate?.didChangeDate()
