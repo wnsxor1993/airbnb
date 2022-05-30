@@ -15,6 +15,7 @@ class SearchViewController: UIViewController {
     private let dataSource = SearchViewCollectionDataSource()
     
     private let locationManager = CLLocationManager()
+    private var currentLocation = CLLocation()
 
     let searchBar: UISearchBar = {
         let searcher = UISearchBar()
@@ -58,6 +59,7 @@ private extension SearchViewController {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
 }
 
@@ -76,9 +78,9 @@ extension SearchViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
-            break
+            manager.startUpdatingLocation()
         case .notDetermined, .restricted:
-            self.locationManager.requestWhenInUseAuthorization()
+            manager.requestWhenInUseAuthorization()
         case .denied:
             break
         @unknown default:
@@ -98,13 +100,23 @@ extension SearchViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
-            break
+            manager.startUpdatingLocation()
         case .restricted, .notDetermined:
-            self.locationManager.requestWhenInUseAuthorization()
+            manager.requestWhenInUseAuthorization()
         case .denied:
             break
         @unknown default:
             return
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        
+        self.currentLocation = location
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
     }
 }
