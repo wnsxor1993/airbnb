@@ -12,4 +12,5 @@ struct Day {
     let number: String
     var isSelected: Bool
     let isWithinDisplayedMonth: Bool
+    let isBeforeToday: Bool
 }
