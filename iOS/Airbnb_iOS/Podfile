@@ -6,7 +6,6 @@ target 'Airbnb_iOS' do
   use_frameworks!
 
   pod 'SwiftLint'
-  pod 'HorizonCalendar'
 
   # Pods for Airbnb_iOS
 

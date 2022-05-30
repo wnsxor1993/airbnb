@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import HorizonCalendar
 
 final class FindAccomodationView: UIView {
     private let selectView: UIView = {
@@ -22,7 +21,6 @@ final class FindAccomodationView: UIView {
         return tableView
     }()
 
-    private(set) lazy var calendarView = SelectCalendarView(frame: selectView.frame)
     private lazy var budgetView = BudgetView(frame: selectView.frame)
 
     override init(frame: CGRect) {
@@ -81,15 +79,6 @@ private extension FindAccomodationView {
             infoTableView.leadingAnchor.constraint(equalTo: selectView.leadingAnchor),
             infoTableView.trailingAnchor.constraint(equalTo: selectView.trailingAnchor),
             infoTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-
-        selectView.addSubview(calendarView)
-
-        NSLayoutConstraint.activate([
-            calendarView.topAnchor.constraint(equalTo: selectView.topAnchor),
-            calendarView.bottomAnchor.constraint(equalTo: selectView.bottomAnchor),
-            calendarView.leadingAnchor.constraint(equalTo: selectView.leadingAnchor),
-            calendarView.trailingAnchor.constraint(equalTo: selectView.trailingAnchor)
         ])
     }
 }
