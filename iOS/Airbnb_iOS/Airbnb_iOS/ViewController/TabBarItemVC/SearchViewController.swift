@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SearchViewController: UIViewController {
 
     private let browseViewController = BrowseViewController()
     private lazy var homeView = HomeView(frame: view.frame)
     private let dataSource = SearchViewCollectionDataSource()
+    
+    private let locationManager = CLLocationManager()
 
     let searchBar: UISearchBar = {
         let searcher = UISearchBar()
@@ -21,10 +24,7 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.addChild(browseViewController)
-        self.setSearchBar()
-        self.view = homeView
-        self.homeView.setDataSource(dataSource)
+        self.configureSettings()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -34,9 +34,30 @@ class SearchViewController: UIViewController {
 }
 
 private extension SearchViewController {
+    
+    func configureSettings() {
+        self.addChild(browseViewController)
+        self.setHomeView()
+        self.setSearchBar()
+        self.setLocationAccess()
+    }
+    
+    func setHomeView() {
+        self.view = homeView
+        self.homeView.setDataSource(dataSource)
+    }
+    
     func setSearchBar() {
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
+    }
+    
+    func setLocationAccess() {
+        guard CLLocationManager.locationServicesEnabled() else { return }
+        
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
     }
 }
 
@@ -46,5 +67,44 @@ extension SearchViewController: UISearchBarDelegate {
         self.navigationController?.pushViewController(browseViewController, animated: true)
 
         return false
+    }
+}
+
+extension SearchViewController: CLLocationManagerDelegate {
+    
+    @available(iOS 14, *)
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            break
+        case .notDetermined, .restricted:
+            self.locationManager.requestWhenInUseAuthorization()
+        case .denied:
+            break
+        @unknown default:
+            return
+        }
+        
+        switch manager.accuracyAuthorization {
+        case .fullAccuracy:
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        case .reducedAccuracy:
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced
+        @unknown default:
+            return
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            break
+        case .restricted, .notDetermined:
+            self.locationManager.requestWhenInUseAuthorization()
+        case .denied:
+            break
+        @unknown default:
+            return
+        }
     }
 }
