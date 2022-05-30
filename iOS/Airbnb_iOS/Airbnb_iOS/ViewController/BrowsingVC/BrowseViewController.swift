@@ -133,7 +133,7 @@ private extension BrowseViewController {
     
     func setSearchCompleter() {
         self.searchCompleter.delegate = self
-        self.searchCompleter.resultTypes = .address
+        self.searchCompleter.resultTypes = .query
     }
     
     func setBrowsingCollectionView() {
