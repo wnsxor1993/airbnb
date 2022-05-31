@@ -47,6 +47,7 @@ class BrowseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.searchBarVC.searchBar.text = ""
+        self.searchBarVC.dismiss(animated: false)
     }
 }
 
