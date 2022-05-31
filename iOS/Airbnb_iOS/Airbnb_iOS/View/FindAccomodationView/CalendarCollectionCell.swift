@@ -82,6 +82,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
+        numberLabel.attributedText = nil
         numberLabel.text = nil
         selectionBackgroundView.isHidden = true
     }
