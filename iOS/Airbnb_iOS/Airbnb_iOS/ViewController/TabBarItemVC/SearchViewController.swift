@@ -58,8 +58,30 @@ private extension SearchViewController {
         
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
+        
+        if #available(iOS 14.0, *) {
+            switch locationManager.authorizationStatus {
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.startUpdatingLocation()
+            case .notDetermined, .restricted:
+                locationManager.requestWhenInUseAuthorization()
+            case .denied:
+                break
+            @unknown default:
+                return
+            }
+        } else {
+            switch CLLocationManager.authorizationStatus() {
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.startUpdatingLocation()
+            case .restricted, .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            case .denied:
+                break
+            @unknown default:
+                return
+            }
+        }
     }
 }
 
@@ -79,11 +101,7 @@ extension SearchViewController: CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
-        case .notDetermined, .restricted:
-            manager.requestWhenInUseAuthorization()
-        case .denied:
-            break
-        @unknown default:
+        default:
             return
         }
         
@@ -101,11 +119,7 @@ extension SearchViewController: CLLocationManagerDelegate {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
-        case .restricted, .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        case .denied:
-            break
-        @unknown default:
+        default:
             return
         }
     }
@@ -114,6 +128,7 @@ extension SearchViewController: CLLocationManagerDelegate {
         guard let location = locations.first else { return }
         
         self.currentLocation = location
+        print(self.currentLocation)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
