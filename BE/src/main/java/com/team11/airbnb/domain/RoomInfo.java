@@ -1,7 +1,5 @@
 package com.team11.airbnb.domain;
 
-import java.time.LocalTime;
-
 import javax.persistence.Embeddable;
 import lombok.Getter;
 
@@ -10,21 +8,19 @@ import lombok.Getter;
 public class RoomInfo {
 
     private String roomType;
-    private int numberOfBedroom;
-    private int numberOfBed;
-    private int numberOfBathroom;
-    private LocalTime checkInTime;
-    private LocalTime checkOutTime;
+    private String numberOfBedroom;
+    private String numberOfBed;
+    private String checkInTime;
+    private String checkOutTime;
 
     protected RoomInfo() {
     }
 
-    public RoomInfo(String roomType, int numberOfBedroom, int numberOfBed, int numberOfBathroom,
-        LocalTime checkInTime, LocalTime checkOutTime) {
+    public RoomInfo(String roomType, String numberOfBedroom, String numberOfBed, String checkInTime,
+        String checkOutTime) {
         this.roomType = roomType;
         this.numberOfBedroom = numberOfBedroom;
         this.numberOfBed = numberOfBed;
-        this.numberOfBathroom = numberOfBathroom;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
     }

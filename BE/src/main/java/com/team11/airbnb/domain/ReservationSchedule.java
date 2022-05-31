@@ -9,7 +9,7 @@ public class ReservationSchedule {
     private LocalDateTime checkInDate;
     private LocalDateTime checkOutDate;
 
-    protected ReservationSchedule() {
+    public ReservationSchedule() {
     }
 
     public ReservationSchedule(LocalDateTime checkInDate, LocalDateTime checkOutDate) {
