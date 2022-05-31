@@ -128,7 +128,6 @@ extension SearchViewController: CLLocationManagerDelegate {
         guard let location = locations.first else { return }
         
         self.currentLocation = location
-        print(self.currentLocation)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
