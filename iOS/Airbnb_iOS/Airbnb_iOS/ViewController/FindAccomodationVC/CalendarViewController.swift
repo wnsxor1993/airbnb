@@ -59,7 +59,6 @@ final class CalendarViewController: UIViewController {
         calendarView.setCollectionViewDelegate(self)
         calendarView.setCollectionViewDataSource(self)
         useCase.setDelegate(self)
-        calendarView.setHeaderViewBaseDate(baseDate)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -145,6 +144,21 @@ extension CalendarViewController: UICollectionViewDataSource {
         cell.isHidden = !day.isWithinDisplayedMonth
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CalendarCollectionHeaderView.identifier, for: indexPath) as? CalendarCollectionHeaderView else {
+                return UICollectionReusableView()
+            }
+
+            headerView.baseDate = Calendar.current.date(byAdding: .month, value: indexPath.section, to: baseDate) ?? Date()
+
+            return headerView
+        default:
+            return UICollectionReusableView()
+        }
+    }
 }
 
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
@@ -157,6 +171,13 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = Int(collectionView.frame.width / 7)
         let height = Int(collectionView.frame.height) / numberOfWeeksInBaseDate
+
+        return CGSize(width: width, height: height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let width = collectionView.frame.width
+        let height = 30
 
         return CGSize(width: width, height: height)
     }

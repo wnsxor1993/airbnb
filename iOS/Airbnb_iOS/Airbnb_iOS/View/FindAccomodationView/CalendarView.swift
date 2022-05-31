@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CalendarView: UIView {
+final class CalendarView: UIView {
     private let monthCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -20,13 +20,12 @@ class CalendarView: UIView {
         return collectionView
     }()
 
-    private let headerView = CalendarCollectionHeaderView()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         monthCollectionView.register(CalendarCollectionCell.self, forCellWithReuseIdentifier: CalendarCollectionCell.identifier)
+        monthCollectionView.register(CalendarCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CalendarCollectionHeaderView.identifier)
         translatesAutoresizingMaskIntoConstraints = false
-        addSubViews(monthCollectionView, headerView)
+        addSubview(monthCollectionView)
     }
 
     @available(*, unavailable)
@@ -54,19 +53,11 @@ class CalendarView: UIView {
         monthCollectionView.dataSource = dataSource
     }
 
-    func setHeaderViewBaseDate(_ basedate: Date) {
-        headerView.baseDate = basedate
-    }
-
     override func layoutSubviews() {
         NSLayoutConstraint.activate([
-            headerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            headerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            headerView.topAnchor.constraint(equalTo: topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 20),
             monthCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             monthCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            monthCollectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            monthCollectionView.topAnchor.constraint(equalTo: topAnchor),
             monthCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }

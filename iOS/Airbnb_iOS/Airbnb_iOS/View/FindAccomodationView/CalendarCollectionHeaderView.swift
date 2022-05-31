@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CalendarCollectionHeaderView: UIView {
+final class CalendarCollectionHeaderView: UICollectionReusableView {
     private let monthLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -29,10 +29,11 @@ final class CalendarCollectionHeaderView: UIView {
         }
     }
 
-    init() {
-        super.init(frame: .zero)
+    static let identifier = "CollectionHeaderView"
 
-        translatesAutoresizingMaskIntoConstraints = false
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
         backgroundColor = .white
         addSubview(monthLabel)
     }
@@ -47,7 +48,7 @@ final class CalendarCollectionHeaderView: UIView {
 
         NSLayoutConstraint.activate([
             monthLabel.topAnchor.constraint(equalTo: topAnchor),
-            monthLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            monthLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             monthLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             monthLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
