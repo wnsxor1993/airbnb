@@ -24,4 +24,13 @@ extension String {
 
         return attributedString
     }
+
+    static func calculateHeaderHeight(fontSize: CGFloat, weight: UIFont.Weight) -> CGFloat {
+        let textForCalculatingHeight: NSString = "년월"
+        let fittedHeight = textForCalculatingHeight
+            .size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: weight)])
+            .height
+
+        return fittedHeight
+    }
 }
