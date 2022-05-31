@@ -1,5 +1,5 @@
 //
-//  DateData.swift
+//  DateConverter.swift
 //  Airbnb_iOS
 //
 //  Created by 김한솔 on 2022/05/27.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DateData {
+struct DateConverter {
     let startDate: Date
     let endDate: Date
     var description: String {

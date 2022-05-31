@@ -19,7 +19,7 @@
 		0287405D283E3B4A0009C62D /* DayRangeIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287405C283E3B4A0009C62D /* DayRangeIndicatorView.swift */; };
 		0287405F283E3BA40009C62D /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287405E283E3BA40009C62D /* DayLabel.swift */; };
 		02AE9A2F283FD5AF00F3B5E5 /* FindAccomodationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AE9A2E283FD5AF00F3B5E5 /* FindAccomodationUseCase.swift */; };
-		02AE9A37283FDADF00F3B5E5 /* DateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AE9A36283FDADF00F3B5E5 /* DateData.swift */; };
+		02AE9A37283FDADF00F3B5E5 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AE9A36283FDADF00F3B5E5 /* DateConverter.swift */; };
 		02AE9A3D28406A6600F3B5E5 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AE9A3C28406A6600F3B5E5 /* String+.swift */; };
 		02AE9A3F28406A7A00F3B5E5 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AE9A3E28406A7A00F3B5E5 /* Date+.swift */; };
 		02AE9A4128406A9B00F3B5E5 /* Day+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AE9A4028406A9B00F3B5E5 /* Day+.swift */; };
@@ -59,7 +59,7 @@
 		0287405C283E3B4A0009C62D /* DayRangeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRangeIndicatorView.swift; sourceTree = "<group>"; };
 		0287405E283E3BA40009C62D /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
 		02AE9A2E283FD5AF00F3B5E5 /* FindAccomodationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAccomodationUseCase.swift; sourceTree = "<group>"; };
-		02AE9A36283FDADF00F3B5E5 /* DateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateData.swift; sourceTree = "<group>"; };
+		02AE9A36283FDADF00F3B5E5 /* DateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
 		02AE9A3C28406A6600F3B5E5 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		02AE9A3E28406A7A00F3B5E5 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		02AE9A4028406A9B00F3B5E5 /* Day+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+.swift"; sourceTree = "<group>"; };
@@ -135,6 +135,14 @@
 			path = FindAccomodationVC;
 			sourceTree = "<group>";
 		};
+		02B3BB972844561400753CA7 /* Converter */ = {
+			isa = PBXGroup;
+			children = (
+				02AE9A36283FDADF00F3B5E5 /* DateConverter.swift */,
+			);
+			path = Converter;
+			sourceTree = "<group>";
+		};
 		02DF0CD3283CB2B9003D0679 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +213,7 @@
 		D2B52C42283F1A0E00C58271 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				02B3BB972844561400753CA7 /* Converter */,
 				D2B52C41283F19F600C58271 /* CollectionLayout */,
 				D2562ED8283DCE3B00336E49 /* DataSource */,
 				02874046283D37AA0009C62D /* Extension */,
@@ -241,7 +250,6 @@
 		D2EA19C52840770700C75419 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				02AE9A36283FDADF00F3B5E5 /* DateData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -451,7 +459,7 @@
 				02DF0CDB283CB980003D0679 /* CollectionHeaderView.swift in Sources */,
 				D2FFBFD5283C868300C97D16 /* TabBarController.swift in Sources */,
 				02874057283E0E600009C62D /* BudgetView.swift in Sources */,
-				02AE9A37283FDADF00F3B5E5 /* DateData.swift in Sources */,
+				02AE9A37283FDADF00F3B5E5 /* DateConverter.swift in Sources */,
 				02874053283E01E70009C62D /* FindAccomodationCell.swift in Sources */,
 				D2EA1A17284455F800C75419 /* BrowsingSpotCollectionLayout.swift in Sources */,
 				D247A490284068DA00A92DDD /* FamousSpotCollectionDataSource.swift in Sources */,
