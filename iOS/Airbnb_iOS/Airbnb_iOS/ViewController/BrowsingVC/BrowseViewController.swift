@@ -11,11 +11,14 @@ import MapKit
 class BrowseViewController: UIViewController {
 
     private let findAccomodationVC = FindAccomodationViewController()
-    
     private let famousSpotDataSource = FamousSpotCollectionDataSource()
     private let browsingSpotDataSource = BrowsingSpotCollectionDataSource()
-    private lazy var famousSpotCollectionView = FamousSpotCollectionView(frame: view.frame)
-    private lazy var browsingSpotCollectionView = BrowsingSpotCollectionView(frame: view.frame)
+    private lazy var browsingSpotCollectionView = BorwsingSpotCollectionView(frame: view.frame)
+    private lazy var rightBarItem: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "지우기", style: .plain, target: self, action: #selector(clearSearchingText))
+        return button
+    }()
+
     private var searchBarVC: UISearchController = {
         let searcher = UISearchController(searchResultsController: nil)
         searcher.searchBar.showsCancelButton = false
@@ -28,27 +31,12 @@ class BrowseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationItem()
-        self.setSearchBar()
-        self.setTouchCollectionViewToDismissKeyboard()
-
-        self.searchCompleter.delegate = self
-        self.searchCompleter.resultTypes = .address
-
-        self.famousSpotCollectionView.setDataSource(famousSpotDataSource)
-        self.famousSpotCollectionView.collectionView.keyboardDismissMode = .onDrag
-        
-        self.browsingSpotCollectionView.setDataSource(browsingSpotDataSource)
-        self.browsingSpotCollectionView.collectionView.keyboardDismissMode = .onDrag
-        self.browsingSpotCollectionView.collectionView.delegate = self
+        self.configureAllInitialSettings()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.browsingSpotCollectionView.removeFromSuperview()
-        self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.navigationController?.hidesBarsOnSwipe = false
-        self.view.addSubview(famousSpotCollectionView)
+        self.changeCollectionViewToDefaultView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -73,8 +61,7 @@ extension BrowseViewController: UISearchBarDelegate {
             return
         }
 
-        self.view.addSubview(browsingSpotCollectionView)
-        self.famousSpotCollectionView.removeFromSuperview()
+        self.changeCollectionViewToSearchingView()
         searchCompleter.queryFragment = searchText
     }
 }
@@ -99,15 +86,30 @@ extension BrowseViewController: MKLocalSearchCompleterDelegate {
 extension BrowseViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.searchBarVC.searchBar.endEditing(true)
-        self.navigationController?.pushViewController(findAccomodationVC, animated: true)
+        
+        if self.browsingSpotCollectionView.isBrowsing {
+            self.navigationController?.pushViewController(findAccomodationVC, animated: true)
+        }
     }
 }
 
+// MARK: Configure All Initial setting
+
 private extension BrowseViewController {
 
+    func configureAllInitialSettings() {
+        self.setNavigationItem()
+        self.setSearchBar()
+        self.setTouchCollectionViewToDismissKeyboard()
+        self.setSearchCompleter()
+        self.setBrowsingCollectionView()
+    }
+    
     func setNavigationItem() {
         self.navigationItem.title = "숙소 찾기"
         self.navigationItem.backButtonTitle = "뒤로"
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.navigationController?.hidesBarsOnSwipe = false
     }
 
     func setSearchBar() {
@@ -127,5 +129,47 @@ private extension BrowseViewController {
     @objc
     func myTapMethod(sender: UITapGestureRecognizer) {
         self.searchBarVC.searchBar.endEditing(true)
+    }
+    
+    func setSearchCompleter() {
+        self.searchCompleter.delegate = self
+        self.searchCompleter.resultTypes = .query
+    }
+    
+    func setBrowsingCollectionView() {
+        self.browsingSpotCollectionView.collectionView.keyboardDismissMode = .onDrag
+        self.browsingSpotCollectionView.collectionView.delegate = self
+        self.view.addSubview(browsingSpotCollectionView)
+    }
+}
+
+// MARK: Configure changing collectionView layout and dataSource
+
+private extension BrowseViewController {
+    
+    func changeCollectionViewToSearchingView() {
+        self.browsingSpotCollectionView.startToSearch()
+        self.setCollectionViewDataSource()
+        self.navigationItem.rightBarButtonItem = self.rightBarItem
+    }
+    
+    func changeCollectionViewToDefaultView() {
+        self.browsingSpotCollectionView.stopToSearch()
+        self.setCollectionViewDataSource()
+        self.navigationItem.rightBarButtonItem = nil
+    }
+    
+    func setCollectionViewDataSource() {
+        switch browsingSpotCollectionView.isBrowsing {
+        case true:
+            self.browsingSpotCollectionView.setDataSource(browsingSpotDataSource)
+        case false:
+            self.browsingSpotCollectionView.setDataSource(famousSpotDataSource)
+        }
+    }
+    
+    @objc
+    func clearSearchingText(_ sender: Any) {
+        self.searchBarVC.searchBar.text = ""
     }
 }
