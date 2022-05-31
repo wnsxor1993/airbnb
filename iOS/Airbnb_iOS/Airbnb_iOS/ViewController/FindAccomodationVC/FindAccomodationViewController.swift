@@ -62,6 +62,7 @@ private extension FindAccomodationViewController {
         addChild(calendarViewController)
         findAccomodationView.setSelectView(calendarViewController.view)
         calendarViewController.didMove(toParent: self)
+        calendarViewController.setDelegate(self)
     }
 }
 
@@ -92,14 +93,10 @@ extension FindAccomodationViewController: UITableViewDelegate {
     }
 }
 
-//extension FindAccomodationViewController: SelectCalendarDelegate {
-//    func didUpdateDay(_ newDay: Day) {
-//        useCase.updateSelectedDay(newDay.toDate())
-//    }
-//
-//    func didPresentDateRange(_ dateRange: ClosedRange<Date>) {
-//        let dateData = DateConverter(dateRange: dateRange)
-//        dataSource[1].data = dateData.description
-//        findAccomodationView.reloadCell()
-//    }
-//}
+extension FindAccomodationViewController: CalendarViewControllerDelegate {
+    func didSetDateRange(_ dateRange: ClosedRange<Date>) {
+        let dateData = DateConverter(dateRange: dateRange)
+        dataSource[1].data = dateData.description
+        findAccomodationView.reloadCell()
+    }
+}
