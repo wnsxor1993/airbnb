@@ -14,12 +14,20 @@ final class CalendarViewController: UIViewController {
     private var selectedDate: Date?
     private var baseDate: Date {
         didSet {
-            days = generateDaysInMonth(for: baseDate)
+            days = (0..<6).map { offset in
+                generateDaysInMonth(for: Calendar.current.date(byAdding: .month, value: offset, to: baseDate) ?? Date())
+            }
             calendarView.reloadData()
         }
     }
 
-    private lazy var days = generateDaysInMonth(for: baseDate)
+    private lazy var days: [[Day]] = {
+        let days = (0..<12).map { offset in
+            generateDaysInMonth(for: Calendar.current.date(byAdding: .month, value: offset, to: baseDate) ?? Date())
+        }
+
+        return days
+    }()
 
     private var numberOfWeeksInBaseDate: Int {
         calendar.range(of: .weekOfMonth, in: .month, for: baseDate)?.count ?? 0
@@ -116,6 +124,10 @@ private extension CalendarViewController {
 
 extension CalendarViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        days[section].count
+    }
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         days.count
     }
 
@@ -126,7 +138,7 @@ extension CalendarViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
-        let day = days[indexPath.item]
+        let day = days[indexPath.section][indexPath.item]
 
         cell.day = day
 
@@ -138,8 +150,8 @@ extension CalendarViewController: UICollectionViewDataSource {
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let yesterDay = Date(timeIntervalSinceNow: -86400)
-        guard days[indexPath.item].date > yesterDay else { return }
-        useCase.updateSelectedDay(days[indexPath.item].date, indexPathOfNewDate: indexPath)
+        guard days[indexPath.section][indexPath.item].date > yesterDay else { return }
+        useCase.updateSelectedDay(days[indexPath.section][indexPath.item].date, indexPathOfNewDate: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -152,22 +164,22 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 
 extension CalendarViewController: CalendarViewControllerUseCaseDelegate {
     func didChangeDateRange() {
-        var newDays = [Day]()
-        for day in days {
-            let newDay = Day(date: day.date,
-                             number: day.number,
-                             isSelected: false,
-                             isWithinDisplayedMonth: day.isWithinDisplayedMonth,
-                             isBeforeToday: day.isBeforeToday)
-            newDays.append(newDay)
-        }
-
-        days = newDays
+//        var newDays = [Day]()
+//        for day in days {
+//            let newDay = Day(date: day.date,
+//                             number: day.number,
+//                             isSelected: false,
+//                             isWithinDisplayedMonth: day.isWithinDisplayedMonth,
+//                             isBeforeToday: day.isBeforeToday)
+//            newDays.append(newDay)
+//        }
+//
+//        days = newDays
         calendarView.reloadData()
     }
 
     func didSetDate(newDate: Date, indexPathOfNewDate: IndexPath) {
-        days[indexPathOfNewDate.item].isSelected = true
+        days[indexPathOfNewDate.section][indexPathOfNewDate.item].isSelected = true
         calendarView.reloadItems(at: [indexPathOfNewDate])
     }
 
