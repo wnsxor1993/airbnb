@@ -22,7 +22,7 @@ final class FindAccomodationView: UIView {
         return tableView
     }()
 
-    private lazy var calendarView = SelectCalendarView(frame: selectView.frame)
+    private(set) lazy var calendarView = SelectCalendarView(frame: selectView.frame)
     private lazy var budgetView = BudgetView(frame: selectView.frame)
 
     override init(frame: CGRect) {
@@ -57,10 +57,6 @@ final class FindAccomodationView: UIView {
             budgetView.leadingAnchor.constraint(equalTo: selectView.leadingAnchor),
             budgetView.trailingAnchor.constraint(equalTo: selectView.trailingAnchor)
         ])
-    }
-
-    func setCalendarDateRange(_ dateRange: ClosedRange<Date>) {
-        calendarView.setDateRange(dateRange)
     }
 
     func reloadCell() {

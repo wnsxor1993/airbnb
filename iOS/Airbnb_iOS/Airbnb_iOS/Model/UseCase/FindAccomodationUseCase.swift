@@ -24,7 +24,7 @@ final class FindAccomodationUseCase {
             } else {
                 selectedDay2 = newDay
             }
-
+            delegate?.didSetDate(newDay)
             if let dateRange = calculateDateRange() {
                 delegate?.didSetDateRange(dateRange)
                 self.selectedDay1 = nil
@@ -33,6 +33,7 @@ final class FindAccomodationUseCase {
         } else {
             selectedDay1 = newDay
             selectedDay2 = nil
+            delegate?.didSetDate(newDay)
         }
     }
 
