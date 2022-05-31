@@ -11,23 +11,14 @@ struct DateConverter {
     let startDate: Date
     let endDate: Date
     var description: String {
-        return "\(startDate.toString()) - \(endDate.toString())"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월 d일"
+        dateFormatter.timeZone = .autoupdatingCurrent
+        return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
     }
 
     init(dateRange: ClosedRange<Date>) {
-        let dateComponents = dateRange.description
-            .components(separatedBy: [".", " ", "+", "-"])
-            .filter {!$0.isEmpty}
-            .compactMap { Int($0) }
-        let dates = Self.getDates(from: dateComponents)
-        startDate = dates[0]
-        endDate = dates[1]
-    }
-
-    private static func getDates(from dateComponents: [Int]) -> [Date] {
-        return [
-            "\(dateComponents[0])-\(dateComponents[1])-\(dateComponents[2])".toDate(),
-            "\(dateComponents[4])-\(dateComponents[5])-\(dateComponents[6])".toDate()
-        ]
+        startDate = dateRange.lowerBound
+        endDate = dateRange.upperBound
     }
 }
