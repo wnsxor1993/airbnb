@@ -1,20 +1,16 @@
 PODS:
-  - HorizonCalendar (1.13.4)
-  - SwiftLint (0.47.0)
+  - SwiftLint (0.47.1)
 
 DEPENDENCIES:
-  - HorizonCalendar
   - SwiftLint
 
 SPEC REPOS:
   trunk:
-    - HorizonCalendar
     - SwiftLint
 
 SPEC CHECKSUMS:
-  HorizonCalendar: 3e5cc89c30bb0207663581d2c798378dd6400406
-  SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
+  SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: e209c117ed2b3346cf6a60514beebab7089277d4
+PODFILE CHECKSUM: 21231dc725a9f19fceae880f98deb80e0c1617e1
 
 COCOAPODS: 1.11.3
