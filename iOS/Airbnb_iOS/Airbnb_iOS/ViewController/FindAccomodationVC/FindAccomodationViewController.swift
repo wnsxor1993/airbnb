@@ -24,6 +24,16 @@ final class FindAccomodationViewController: UIViewController {
         findAccomodationView.setTableViewDelegate(self)
         setCalendarView()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isToolbarHidden = true
+    }
 }
 
 private extension FindAccomodationViewController {
@@ -32,7 +42,6 @@ private extension FindAccomodationViewController {
         view.backgroundColor = .white
         navigationItem.title = "숙소 찾기"
         view = findAccomodationView
-        navigationController?.hidesBarsOnSwipe = false
         setToolbar()
     }
 
