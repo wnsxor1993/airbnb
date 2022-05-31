@@ -42,6 +42,8 @@ final class CalendarViewController: UIViewController {
         return dateFormatter
     }()
 
+    private var delegate: CalendarViewControllerDelegate?
+
     init(baseDate: Date) {
         self.baseDate = baseDate
 
@@ -64,6 +66,10 @@ final class CalendarViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         calendarView.reloadData()
+    }
+
+    func setDelegate(_ delegate: CalendarViewControllerDelegate) {
+        self.delegate = delegate
     }
 }
 
@@ -185,17 +191,9 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 
 extension CalendarViewController: CalendarViewControllerUseCaseDelegate {
     func didChangeDateRange() {
-//        var newDays = [Day]()
-//        for day in days {
-//            let newDay = Day(date: day.date,
-//                             number: day.number,
-//                             isSelected: false,
-//                             isWithinDisplayedMonth: day.isWithinDisplayedMonth,
-//                             isBeforeToday: day.isBeforeToday)
-//            newDays.append(newDay)
-//        }
-//
-//        days = newDays
+        days = (0..<12).map { offset in
+            generateDaysInMonth(for: Calendar.current.date(byAdding: .month, value: offset, to: baseDate) ?? Date())
+        }
         calendarView.reloadData()
     }
 
@@ -205,10 +203,14 @@ extension CalendarViewController: CalendarViewControllerUseCaseDelegate {
     }
 
     func didSetDateRange(_ dateRange: ClosedRange<Date>) {
-
+        delegate?.didSetDateRange(dateRange)
     }
 }
 
 enum CalendarDataError: Error {
     case metadataGeneration
+}
+
+protocol CalendarViewControllerDelegate: AnyObject {
+    func didSetDateRange(_ dateRange: ClosedRange<Date>)
 }
