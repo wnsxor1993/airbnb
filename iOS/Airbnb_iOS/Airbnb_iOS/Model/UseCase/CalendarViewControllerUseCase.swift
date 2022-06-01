@@ -7,6 +7,12 @@
 
 import Foundation
 
+protocol CalendarViewControllerUseCaseDelegate: AnyObject {
+    func didChangeDateRange()
+    func didSetDate(newDate: Date, indexPathOfNewDate: IndexPath)
+    func didSetDateRange(_ dateRange: ClosedRange<Date>)
+}
+
 final class CalendarViewControllerUseCase {
     private var selectedDay1: Date?
     private var selectedDay2: Date?
@@ -51,10 +57,4 @@ private extension CalendarViewControllerUseCase {
         }
         return selectedDay1...selectedDay2
     }
-}
-
-protocol CalendarViewControllerUseCaseDelegate: AnyObject {
-    func didChangeDateRange()
-    func didSetDate(newDate: Date, indexPathOfNewDate: IndexPath)
-    func didSetDateRange(_ dateRange: ClosedRange<Date>)
 }

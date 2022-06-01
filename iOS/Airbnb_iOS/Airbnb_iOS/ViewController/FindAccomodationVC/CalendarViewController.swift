@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CalendarViewControllerDelegate: AnyObject {
+    func didSetDateRange(_ dateRange: ClosedRange<Date>)
+}
+
 final class CalendarViewController: UIViewController {
 
     private lazy var calendarView = CalendarView(frame: view.frame)
@@ -203,8 +207,4 @@ extension CalendarViewController: CalendarViewControllerUseCaseDelegate {
 
 enum CalendarDataError: Error {
     case metadataGeneration
-}
-
-protocol CalendarViewControllerDelegate: AnyObject {
-    func didSetDateRange(_ dateRange: ClosedRange<Date>)
 }
