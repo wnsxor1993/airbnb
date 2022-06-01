@@ -36,12 +36,6 @@ final class CalendarViewController: UIViewController {
     private let calendar = Calendar(identifier: .gregorian)
     private var useCase = CalendarViewControllerUseCase()
 
-    private lazy var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d"
-        return dateFormatter
-    }()
-
     private var delegate: CalendarViewControllerDelegate?
 
     init(baseDate: Date) {
@@ -120,7 +114,7 @@ private extension CalendarViewController {
         let isBeforeToday = date <= yesterDay
         return Day(
             date: date,
-            number: dateFormatter.string(from: date),
+            number: DateConverter.convertToDayString(date: date),
             isSelected: false,
             isWithinDisplayedMonth: isWithinDisplayMonth,
             isBeforeToday: isBeforeToday)

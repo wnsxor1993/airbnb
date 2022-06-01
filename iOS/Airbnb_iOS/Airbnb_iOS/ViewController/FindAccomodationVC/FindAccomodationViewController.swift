@@ -104,8 +104,8 @@ extension FindAccomodationViewController: UITableViewDelegate {
 
 extension FindAccomodationViewController: CalendarViewControllerDelegate {
     func didSetDateRange(_ dateRange: ClosedRange<Date>) {
-        let dateData = DateConverter(dateRange: dateRange)
-        dataSource[1].data = dateData.description
+        let dateRangeDescription = DateConverter.convertToDateRangeString(dateRange: dateRange)
+        dataSource[1].data = dateRangeDescription.description
         findAccomodationView.reloadCell()
     }
 }

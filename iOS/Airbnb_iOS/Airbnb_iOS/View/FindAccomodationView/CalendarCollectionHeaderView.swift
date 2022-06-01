@@ -15,17 +15,9 @@ final class CalendarCollectionHeaderView: UICollectionReusableView {
         return label
     }()
 
-    private lazy var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.calendar = Calendar(identifier: .gregorian)
-        dateFormatter.locale = Locale.autoupdatingCurrent
-        dateFormatter.setLocalizedDateFormatFromTemplate("MMMM y")
-        return dateFormatter
-    }()
-
     var baseDate = Date() {
         didSet {
-            monthLabel.text = dateFormatter.string(from: baseDate)
+            monthLabel.text = DateConverter.convertToYearAndMonthString(date: baseDate)
         }
     }
 

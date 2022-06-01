@@ -8,17 +8,24 @@
 import Foundation
 
 struct DateConverter {
-    let startDate: Date
-    let endDate: Date
-    var description: String {
+    static private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M월 d일"
         dateFormatter.timeZone = .autoupdatingCurrent
-        return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
+        return dateFormatter
+    }()
+
+    static func convertToDateRangeString(dateRange: ClosedRange<Date>) -> String {
+        dateFormatter.dateFormat = "M월 d일"
+        return "\(dateFormatter.string(from: dateRange.lowerBound)) - \(dateFormatter.string(from: dateRange.upperBound))"
     }
 
-    init(dateRange: ClosedRange<Date>) {
-        startDate = dateRange.lowerBound
-        endDate = dateRange.upperBound
+    static func convertToYearAndMonthString(date: Date) -> String {
+        dateFormatter.dateFormat = "y년 M월"
+        return dateFormatter.string(from: date)
+    }
+
+    static func convertToDayString(date: Date) -> String {
+        dateFormatter.dateFormat = "d"
+        return dateFormatter.string(from: date)
     }
 }
