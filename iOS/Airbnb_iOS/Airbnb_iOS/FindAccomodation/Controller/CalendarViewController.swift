@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CalendarViewControllerDelegate: AnyObject {
+    func didSetDateRange(_ dateRange: ClosedRange<Date>)
+}
+
 final class CalendarViewController: UIViewController {
 
     private lazy var calendarView = CalendarView(frame: view.frame)
@@ -35,12 +39,6 @@ final class CalendarViewController: UIViewController {
 
     private let calendar = Calendar(identifier: .gregorian)
     private var useCase = CalendarViewControllerUseCase()
-
-    private lazy var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d"
-        return dateFormatter
-    }()
 
     private var delegate: CalendarViewControllerDelegate?
 
@@ -120,7 +118,7 @@ private extension CalendarViewController {
         let isBeforeToday = date <= yesterDay
         return Day(
             date: date,
-            number: dateFormatter.string(from: date),
+            number: DateConverter.convertToDayString(date: date),
             isSelected: false,
             isWithinDisplayedMonth: isWithinDisplayMonth,
             isBeforeToday: isBeforeToday)
@@ -209,8 +207,4 @@ extension CalendarViewController: CalendarViewControllerUseCaseDelegate {
 
 enum CalendarDataError: Error {
     case metadataGeneration
-}
-
-protocol CalendarViewControllerDelegate: AnyObject {
-    func didSetDateRange(_ dateRange: ClosedRange<Date>)
 }

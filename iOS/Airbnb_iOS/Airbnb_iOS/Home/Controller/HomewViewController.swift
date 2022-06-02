@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  HomewViewController.swift
 //  Airbnb_iOS
 //
 //  Created by juntaek.oh on 2022/05/24.
@@ -8,13 +8,13 @@
 import UIKit
 import CoreLocation
 
-class SearchViewController: UIViewController {
+class HomewViewController: UIViewController {
 
     private let browseViewController = BrowseViewController()
     private lazy var homeView = HomeView(frame: view.frame)
     private let dataSource = SearchViewCollectionDataSource()
     
-    private let locationManager = CLLocationManager()
+    private let locationManager = LocationManager()
     private var currentLocation = CLLocation()
 
     let searchBar: UISearchBar = {
@@ -34,7 +34,7 @@ class SearchViewController: UIViewController {
     }
 }
 
-private extension SearchViewController {
+private extension HomewViewController {
     
     func configureSettings() {
         self.addChild(browseViewController)
@@ -54,38 +54,38 @@ private extension SearchViewController {
     }
     
     func setLocationAccess() {
-        guard CLLocationManager.locationServicesEnabled() else { return }
+        self.locationManager.locationManager.delegate = self
+        self.alertLocationAccessNeeded(isDenied: self.locationManager.setLocationAccess())
+    }
+    
+    func alertLocationAccessNeeded(isDenied: LocationManager.AceessCase) {
+        var settingsAppURL: URL?
         
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        self.locationManager.delegate = self
-        
-        if #available(iOS 14.0, *) {
-            switch locationManager.authorizationStatus {
-            case .authorizedAlways, .authorizedWhenInUse:
-                locationManager.startUpdatingLocation()
-            case .notDetermined, .restricted:
-                locationManager.requestWhenInUseAuthorization()
-            case .denied:
-                break
-            @unknown default:
-                return
-            }
+        if #available(iOS 15.4, *) {
+            settingsAppURL = URL(string: UIApplicationOpenNotificationSettingsURLString)
         } else {
-            switch CLLocationManager.authorizationStatus() {
-            case .authorizedAlways, .authorizedWhenInUse:
-                locationManager.startUpdatingLocation()
-            case .restricted, .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
-            case .denied:
-                break
-            @unknown default:
-                return
-            }
+            settingsAppURL = URL(string: UIApplication.openSettingsURLString)
+        }
+        
+        guard let settingsAppURL = settingsAppURL else { return }
+        
+        switch isDenied {
+        case .denied:
+            let alert = UIAlertController(title: "위치 권한이 필요합니다", message: "설정창에서 위치 권한 설정 내역을 변경하실 수 있습니다.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "설정창으로 가기", style: .cancel, handler: { _ in
+                UIApplication.shared.open(settingsAppURL)
+            }))
+            alert.addAction(UIAlertAction(title: "취소", style: .default, handler: nil))
+            
+            present(alert, animated: true)
+        default:
+            return
         }
     }
 }
 
-extension SearchViewController: UISearchBarDelegate {
+extension HomewViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         browseViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(browseViewController, animated: true)
@@ -94,23 +94,16 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchViewController: CLLocationManagerDelegate {
+extension HomewViewController: CLLocationManagerDelegate {
     
     @available(iOS 14, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
+        case .denied:
+            self.alertLocationAccessNeeded(isDenied: .denied)
         default:
-            return
-        }
-        
-        switch manager.accuracyAuthorization {
-        case .fullAccuracy:
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        case .reducedAccuracy:
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced
-        @unknown default:
             return
         }
     }
@@ -119,6 +112,8 @@ extension SearchViewController: CLLocationManagerDelegate {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
+        case .denied:
+            self.alertLocationAccessNeeded(isDenied: .denied)
         default:
             return
         }
@@ -128,9 +123,5 @@ extension SearchViewController: CLLocationManagerDelegate {
         guard let location = locations.first else { return }
         
         self.currentLocation = location
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
     }
 }

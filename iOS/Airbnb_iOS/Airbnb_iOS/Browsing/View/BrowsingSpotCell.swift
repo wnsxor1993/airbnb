@@ -49,7 +49,7 @@ final class BrowsingSpotCell: UICollectionViewCell {
 private extension BrowsingSpotCell {
 
     func setLayout() {
-        addSubViews(imageView, titleLabel)
+        self.contentView.addSubViews(imageView, titleLabel)
 
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
