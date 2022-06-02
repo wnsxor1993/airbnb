@@ -10,9 +10,9 @@ import UIKit
 final class FindAccomodationViewController: UIViewController {
 
     private lazy var findAccomodationView = FindAccomodationView(frame: view.frame)
-    private var useCase = FindAccomodationUseCase()
     private let dataSource = FindAccomodationTableDataSource()
     private let findAccomodationTableDelegate = FindAccomodationTableDelegate()
+    private var calendarViewController: CalendarViewController? // removeFromParent()를 위한 프로퍼티화
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,30 +45,48 @@ private extension FindAccomodationViewController {
     func setToolbar() {
         navigationController?.isToolbarHidden = false
         let toolBarButtons = [
-            UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(skipButtonTouched)),
+            UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(nextButtonOfCalendarViewTouched)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-            UIBarButtonItem(title: "다음", style: .plain, target: self, action: #selector(nextButtonTouched))
+            UIBarButtonItem(title: "다음", style: .plain, target: self, action: #selector(nextButtonOfCalendarViewTouched))
         ]
         toolbarItems = toolBarButtons
+        toolBarButtons[2].isEnabled = false
     }
 
-    @objc func skipButtonTouched() {
-        findAccomodationView.next()
+    @objc func nextButtonOfCalendarViewTouched() {
+        setBudgetView()
     }
 
-    @objc func nextButtonTouched() {
-        print("Next")
+    @objc func removeButtonOfCalendarViewTouched() {
+        guard let calendarViewController = calendarViewController else { return }
+        resetCalendarView()
+        calendarViewController.resetSelectedCells()
+        toolbarItems?[0] = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(nextButtonOfCalendarViewTouched))
     }
 
     func setCalendarView() {
         let today = Date()
 
         let calendarViewController = CalendarViewController(baseDate: today)
+        self.calendarViewController = calendarViewController
 
         addChild(calendarViewController)
         findAccomodationView.setSelectView(calendarViewController.view)
         calendarViewController.didMove(toParent: self)
         calendarViewController.setDelegate(self)
+    }
+
+    func resetCalendarView() {
+        dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init())
+        findAccomodationView.reloadCell()
+        toolbarItems?[2].isEnabled = false
+    }
+
+    func setBudgetView() {
+        if let calendarViewController = calendarViewController {
+            calendarViewController.removeFromParent()
+        }
+        // BudgetView 세팅을 위한 코드 구현 필요
     }
 }
 
@@ -76,10 +94,12 @@ extension FindAccomodationViewController: CalendarViewControllerDelegate {
     func didSetDateRange(_ dateRange: ClosedRange<Date>) {
         dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init(dateRange: dateRange))
         findAccomodationView.reloadCell()
+        toolbarItems?[2].isEnabled = true
+        toolbarItems?[0] = UIBarButtonItem(title: "지우기", style: .plain, target: self, action: #selector(removeButtonOfCalendarViewTouched))
     }
 
     func didChangeDateRange() {
-        dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init())
-        findAccomodationView.reloadCell()
+        resetCalendarView()
+        toolbarItems?[0] = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(nextButtonOfCalendarViewTouched))
     }
 }

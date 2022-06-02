@@ -47,6 +47,10 @@ final class CalendarViewController: UIViewController {
     func setDelegate(_ delegate: CalendarViewControllerDelegate) {
         self.delegate = delegate
     }
+
+    func resetSelectedCells() {
+        collectionDataSource.resetDays()
+    }
 }
 
 private extension CalendarViewController {

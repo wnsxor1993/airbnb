@@ -21,8 +21,6 @@ final class FindAccomodationView: UIView {
         return tableView
     }()
 
-    private lazy var budgetView = BudgetView(frame: selectView.frame)
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpLayout()
@@ -49,16 +47,6 @@ final class FindAccomodationView: UIView {
             view.bottomAnchor.constraint(equalTo: selectView.bottomAnchor),
             view.leadingAnchor.constraint(equalTo: selectView.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: selectView.trailingAnchor)
-        ])
-    }
-    func next() {
-        selectView.addSubview(budgetView)
-
-        NSLayoutConstraint.activate([
-            budgetView.topAnchor.constraint(equalTo: selectView.topAnchor),
-            budgetView.bottomAnchor.constraint(equalTo: selectView.bottomAnchor),
-            budgetView.leadingAnchor.constraint(equalTo: selectView.leadingAnchor),
-            budgetView.trailingAnchor.constraint(equalTo: selectView.trailingAnchor)
         ])
     }
 
