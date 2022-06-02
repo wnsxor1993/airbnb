@@ -11,10 +11,10 @@ final class FindAccomodationViewController: UIViewController {
 
     private lazy var findAccomodationView = FindAccomodationView(frame: view.frame)
     private var dataSource: [AccomodationData] = [
-        AccomodationData(title: "위치"),
-        AccomodationData(title: "체크인/체크아웃"),
-        AccomodationData(title: "요금"),
-        AccomodationData(title: "인원")
+        .location(.init()),
+        .accomodationPeriod(.init()),
+        .budget(price: nil),
+        .headCount(.init())
     ]
 
     override func viewDidLoad() {
@@ -89,11 +89,6 @@ extension FindAccomodationViewController: UITableViewDataSource {
 
         return cell
     }
-
-    private struct AccomodationData {
-        let title: String
-        var data: String?
-    }
 }
 
 extension FindAccomodationViewController: UITableViewDelegate {
@@ -104,8 +99,7 @@ extension FindAccomodationViewController: UITableViewDelegate {
 
 extension FindAccomodationViewController: CalendarViewControllerDelegate {
     func didSetDateRange(_ dateRange: ClosedRange<Date>) {
-        let dateRangeDescription = DateConverter.convertToDateRangeString(dateRange: dateRange)
-        dataSource[1].data = dateRangeDescription.description
+        dataSource[1] = AccomodationData.accomodationPeriod(.init(dateRange: dateRange))
         findAccomodationView.reloadCell()
     }
 }
