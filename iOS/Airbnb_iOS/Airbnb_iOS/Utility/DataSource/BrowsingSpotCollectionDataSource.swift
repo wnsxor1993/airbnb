@@ -10,26 +10,22 @@ import MapKit
 
 class BrowsingSpotCollectionDataSource: NSObject, UICollectionViewDataSource {
 
-    private(set) var searchResults = [MKLocalSearchCompletion]()
+    private(set) var searchManager: MKDataManager?
 
-    func inputMKLocalSearchResults(input: [MKLocalSearchCompletion]) {
-        self.searchResults = input
+    func connectDataManager(manager: MKDataManager) {
+        self.searchManager = manager
     }
-
-    func removeAllResults() {
-        self.searchResults.removeAll()
-    }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchResults.count
+        return searchManager?.searchResults.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BrowsingSpotCell.identifier, for: indexPath) as? BrowsingSpotCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BrowsingSpotCell.identifier, for: indexPath) as? BrowsingSpotCell, let results = searchManager?.searchResults else {
             return UICollectionViewCell()
         }
 
-        let item = searchResults[indexPath.item]
+        let item = results[indexPath.item]
         cell.configure(image: UIImage(systemName: "mappin.square.fill"), title: item.title)
 
         return cell
