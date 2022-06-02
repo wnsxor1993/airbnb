@@ -66,7 +66,7 @@ private extension SearchViewController {
             case .notDetermined, .restricted:
                 locationManager.requestWhenInUseAuthorization()
             case .denied:
-                break
+                self.alertLocationAccessNeeded()
             @unknown default:
                 return
             }
@@ -77,11 +77,32 @@ private extension SearchViewController {
             case .restricted, .notDetermined:
                 locationManager.requestWhenInUseAuthorization()
             case .denied:
-                break
+                self.alertLocationAccessNeeded()
             @unknown default:
                 return
             }
         }
+    }
+    
+    func alertLocationAccessNeeded() {
+        var settingsAppURL: URL?
+        
+        if #available(iOS 15.4, *) {
+            settingsAppURL = URL(string: UIApplicationOpenNotificationSettingsURLString)
+        } else {
+            settingsAppURL = URL(string: UIApplication.openSettingsURLString)
+        }
+        
+        guard let settingsAppURL = settingsAppURL else { return }
+        
+        let alert = UIAlertController(title: "Need Location Access", message: "Location access is required for including the location of the hazard.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Allow Location access", style: .cancel, handler: { alert in
+            UIApplication.shared.open(settingsAppURL)
+        }))
+        
+        present(alert, animated: true)
     }
 }
 
@@ -101,6 +122,8 @@ extension SearchViewController: CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
+        case .denied:
+            self.alertLocationAccessNeeded()
         default:
             return
         }
@@ -119,6 +142,8 @@ extension SearchViewController: CLLocationManagerDelegate {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
+        case .denied:
+            self.alertLocationAccessNeeded()
         default:
             return
         }
