@@ -37,10 +37,9 @@ enum AccomodationData {
             return DateConverter.convertToDateRangeString(dateRange: period)
         case .budget(let price):
             if let price = price {
-                return "\(price)"
+                return price.toKRW()
             }
             return nil
-            // ~,~ 원 단위로 변환하는 로직 필요
         case .headCount(let persons):
             var headCount = 0
             var nullCount = 3
