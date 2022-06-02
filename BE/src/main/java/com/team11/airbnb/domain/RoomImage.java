@@ -10,10 +10,12 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
+@Getter
 public class RoomImage {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
