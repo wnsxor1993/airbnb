@@ -247,6 +247,7 @@
 		02FAD35A28484A810053327B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				02FAD36B2848AA1A0053327B /* DataSource&Delegate */,
 				0287404E283DFD250009C62D /* FindAccomodationViewController.swift */,
 				02B3BB9A2844653600753CA7 /* CalendarViewController.swift */,
 			);
@@ -256,7 +257,6 @@
 		02FAD35B28484A870053327B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				02FAD36B2848AA1A0053327B /* DataSource&Delegate */,
 				02874050283DFDCE0009C62D /* FindAccomodationView.swift */,
 				02B3BB9828445E9B00753CA7 /* CalendarView.swift */,
 				02874052283E01E70009C62D /* FindAccomodationCell.swift */,
