@@ -10,18 +10,15 @@ import UIKit
 final class FindAccomodationViewController: UIViewController {
 
     private lazy var findAccomodationView = FindAccomodationView(frame: view.frame)
-    private var dataSource: [AccomodationData] = [
-        .location(.init()),
-        .accomodationPeriod(.init()),
-        .budget(price: nil),
-        .headCount(.init())
-    ]
+    private var useCase = FindAccomodationUseCase()
+    private let dataSource = FindAccomodationTableDataSource()
+    private let findAccomodationTableDelegate = FindAccomodationTableDelegate()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewInitialState()
-        findAccomodationView.setTableViewDateSource(self)
-        findAccomodationView.setTableViewDelegate(self)
+        findAccomodationView.setTableViewDateSource(dataSource)
+        findAccomodationView.setTableViewDelegate(findAccomodationTableDelegate)
         setCalendarView()
     }
 
@@ -75,31 +72,9 @@ private extension FindAccomodationViewController {
     }
 }
 
-extension FindAccomodationViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FindAccomodationCell.identifier, for: indexPath) as? FindAccomodationCell else {
-            return UITableViewCell()
-        }
-        cell.setTitleLabel(dataSource[indexPath.row].title)
-        cell.setDesctiption(dataSource[indexPath.row].data)
-
-        return cell
-    }
-}
-
-extension FindAccomodationViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
-    }
-}
-
 extension FindAccomodationViewController: CalendarViewControllerDelegate {
     func didSetDateRange(_ dateRange: ClosedRange<Date>) {
-        dataSource[1] = AccomodationData.accomodationPeriod(.init(dateRange: dateRange))
+        dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init(dateRange: dateRange))
         findAccomodationView.reloadCell()
     }
 }

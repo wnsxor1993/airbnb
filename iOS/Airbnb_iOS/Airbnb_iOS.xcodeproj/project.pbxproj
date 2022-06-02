@@ -30,6 +30,8 @@
 		02DF0CDB283CB980003D0679 /* CollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF0CDA283CB980003D0679 /* CollectionHeaderView.swift */; };
 		02DF0CDD283CBAB6003D0679 /* SearchViewCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF0CDC283CBAB6003D0679 /* SearchViewCollectionDataSource.swift */; };
 		02FAD3682848A13B0053327B /* AccomodationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAD3672848A13B0053327B /* AccomodationData.swift */; };
+		02FAD36D2848AA340053327B /* FindAccomodationTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAD36C2848AA340053327B /* FindAccomodationTableDataSource.swift */; };
+		02FAD36F2848AB110053327B /* FindAccomodationTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */; };
 		6D77C14CD0C71F86C79B5949 /* Pods_Airbnb_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FCF364B69EE3C5A4173A56F /* Pods_Airbnb_iOS.framework */; };
 		D247A48C283F640A00A92DDD /* BrowsingSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247A48B283F640A00A92DDD /* BrowsingSpotCell.swift */; };
 		D247A490284068DA00A92DDD /* FamousSpotCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247A48F284068DA00A92DDD /* FamousSpotCollectionDataSource.swift */; };
@@ -73,6 +75,8 @@
 		02DF0CDA283CB980003D0679 /* CollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderView.swift; sourceTree = "<group>"; };
 		02DF0CDC283CBAB6003D0679 /* SearchViewCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewCollectionDataSource.swift; sourceTree = "<group>"; };
 		02FAD3672848A13B0053327B /* AccomodationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationData.swift; sourceTree = "<group>"; };
+		02FAD36C2848AA340053327B /* FindAccomodationTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAccomodationTableDataSource.swift; sourceTree = "<group>"; };
+		02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAccomodationTableDelegate.swift; sourceTree = "<group>"; };
 		1E326D4FAA083AF8388B21BD /* Pods-Airbnb_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbnb_iOS.release.xcconfig"; path = "Target Support Files/Pods-Airbnb_iOS/Pods-Airbnb_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		9FCF364B69EE3C5A4173A56F /* Pods_Airbnb_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Airbnb_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C9C3510E21BC4268E4F21D /* Pods-Airbnb_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbnb_iOS.debug.xcconfig"; path = "Target Support Files/Pods-Airbnb_iOS/Pods-Airbnb_iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 		02FAD35B28484A870053327B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				02FAD36B2848AA1A0053327B /* DataSource&Delegate */,
 				02874050283DFDCE0009C62D /* FindAccomodationView.swift */,
 				02B3BB9828445E9B00753CA7 /* CalendarView.swift */,
 				02874052283E01E70009C62D /* FindAccomodationCell.swift */,
@@ -335,6 +340,15 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		02FAD36B2848AA1A0053327B /* DataSource&Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				02FAD36C2848AA340053327B /* FindAccomodationTableDataSource.swift */,
+				02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */,
+			);
+			path = "DataSource&Delegate";
 			sourceTree = "<group>";
 		};
 		67B1015EE3E0A53022A3C4B0 /* Frameworks */ = {
@@ -565,6 +579,7 @@
 				02B3BB9B2844653600753CA7 /* CalendarViewController.swift in Sources */,
 				02874057283E0E600009C62D /* BudgetView.swift in Sources */,
 				02AE9A37283FDADF00F3B5E5 /* DateConverter.swift in Sources */,
+				02FAD36D2848AA340053327B /* FindAccomodationTableDataSource.swift in Sources */,
 				02874053283E01E70009C62D /* FindAccomodationCell.swift in Sources */,
 				D2EA1A17284455F800C75419 /* BrowsingSpotCollectionLayout.swift in Sources */,
 				D247A490284068DA00A92DDD /* FamousSpotCollectionDataSource.swift in Sources */,
@@ -584,6 +599,7 @@
 				02B3BB9D28446AB400753CA7 /* CalendarCollectionCell.swift in Sources */,
 				02874048283D37B50009C62D /* UIColor+.swift in Sources */,
 				02AE9A3D28406A6600F3B5E5 /* String+.swift in Sources */,
+				02FAD36F2848AB110053327B /* FindAccomodationTableDelegate.swift in Sources */,
 				02B3BBA02844B85600753CA7 /* Day.swift in Sources */,
 				02B3BBA22844B85F00753CA7 /* MonthMetadata.swift in Sources */,
 				D247A4922840690400A92DDD /* BrowsingSpotCollectionDataSource.swift in Sources */,
