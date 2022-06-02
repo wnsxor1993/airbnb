@@ -1,6 +1,7 @@
 package com.team11.airbnb.web.controller;
 
 import com.team11.airbnb.domain.Room;
+import com.team11.airbnb.web.service.RoomService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

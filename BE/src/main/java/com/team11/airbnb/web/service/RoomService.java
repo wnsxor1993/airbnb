@@ -1,6 +1,7 @@
-package com.team11.airbnb.web.controller;
+package com.team11.airbnb.web.service;
 
 import com.team11.airbnb.domain.Room;
+import com.team11.airbnb.web.repository.RoomRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,6 @@ public class RoomService {
     }
     
     public Room findOne(Long roomId) throws Exception {
-        return repository.findById(roomId).orElseThrow(() -> new Exception());
+        return repository.findById(roomId).orElseThrow(Exception::new);
     }
 }
