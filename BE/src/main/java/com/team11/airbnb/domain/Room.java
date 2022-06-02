@@ -1,6 +1,5 @@
 package com.team11.airbnb.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
@@ -27,15 +26,16 @@ public class Room {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
     @JoinColumn(name = "host_id")
     private Host host;
 
     @Embedded
-    private Address address;
+    private Location location;
 
     private Double averageGrade;
 
+    @OneToMany(mappedBy = "room")
+    private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "room")
     @JsonManagedReference
