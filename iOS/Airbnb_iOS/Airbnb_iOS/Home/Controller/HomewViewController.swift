@@ -14,7 +14,7 @@ class HomewViewController: UIViewController {
     private lazy var homeView = HomeView(frame: view.frame)
     private let dataSource = SearchViewCollectionDataSource()
     
-    private let locationManager = CLLocationManager()
+    private let locationManager = LocationManager()
     private var currentLocation = CLLocation()
 
     let searchBar: UISearchBar = {
@@ -54,37 +54,11 @@ private extension HomewViewController {
     }
     
     func setLocationAccess() {
-        guard CLLocationManager.locationServicesEnabled() else { return }
-        
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        self.locationManager.delegate = self
-        
-        if #available(iOS 14.0, *) {
-            switch locationManager.authorizationStatus {
-            case .authorizedAlways, .authorizedWhenInUse:
-                locationManager.startUpdatingLocation()
-            case .notDetermined, .restricted:
-                locationManager.requestWhenInUseAuthorization()
-            case .denied:
-                self.alertLocationAccessNeeded()
-            @unknown default:
-                return
-            }
-        } else {
-            switch CLLocationManager.authorizationStatus() {
-            case .authorizedAlways, .authorizedWhenInUse:
-                locationManager.startUpdatingLocation()
-            case .restricted, .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
-            case .denied:
-                self.alertLocationAccessNeeded()
-            @unknown default:
-                return
-            }
-        }
+        self.locationManager.locationManager.delegate = self
+        self.alertLocationAccessNeeded(isDenied: self.locationManager.setLocationAccess())
     }
     
-    func alertLocationAccessNeeded() {
+    func alertLocationAccessNeeded(isDenied: LocationManager.AceessCase) {
         var settingsAppURL: URL?
         
         if #available(iOS 15.4, *) {
@@ -95,14 +69,19 @@ private extension HomewViewController {
         
         guard let settingsAppURL = settingsAppURL else { return }
         
-        let alert = UIAlertController(title: "Need Location Access", message: "Location access is required for including the location of the hazard.", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Allow Location access", style: .cancel, handler: { alert in
-            UIApplication.shared.open(settingsAppURL)
-        }))
-        
-        present(alert, animated: true)
+        switch isDenied {
+        case .denied:
+            let alert = UIAlertController(title: "위치 권한이 필요합니다", message: "설정창에서 위치 권한 설정 내역을 변경하실 수 있습니다.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "설정창으로 가기", style: .cancel, handler: { _ in
+                UIApplication.shared.open(settingsAppURL)
+            }))
+            alert.addAction(UIAlertAction(title: "취소", style: .default, handler: nil))
+            
+            present(alert, animated: true)
+        default:
+            return
+        }
     }
 }
 
@@ -123,17 +102,8 @@ extension HomewViewController: CLLocationManagerDelegate {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
         case .denied:
-            self.alertLocationAccessNeeded()
+            self.alertLocationAccessNeeded(isDenied: .denied)
         default:
-            return
-        }
-        
-        switch manager.accuracyAuthorization {
-        case .fullAccuracy:
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        case .reducedAccuracy:
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced
-        @unknown default:
             return
         }
     }
@@ -143,7 +113,7 @@ extension HomewViewController: CLLocationManagerDelegate {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
         case .denied:
-            self.alertLocationAccessNeeded()
+            self.alertLocationAccessNeeded(isDenied: .denied)
         default:
             return
         }
@@ -153,9 +123,5 @@ extension HomewViewController: CLLocationManagerDelegate {
         guard let location = locations.first else { return }
         
         self.currentLocation = location
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
     }
 }
