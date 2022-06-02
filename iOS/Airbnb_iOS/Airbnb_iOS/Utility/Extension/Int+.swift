@@ -13,6 +13,10 @@ extension Int {
         var splitted = [String]()
         let offset = 3
 
+        if String(self).count <= offset {
+            return "\(self)원"
+        }
+
         while reversed.count > offset {
             let startPoint = reversed.startIndex
             let endPoint = reversed.index(startPoint, offsetBy: offset)
