@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  HomewViewController.swift
 //  Airbnb_iOS
 //
 //  Created by juntaek.oh on 2022/05/24.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-class SearchViewController: UIViewController {
+class HomewViewController: UIViewController {
 
     private let browseViewController = BrowseViewController()
     private lazy var homeView = HomeView(frame: view.frame)
@@ -34,7 +34,7 @@ class SearchViewController: UIViewController {
     }
 }
 
-private extension SearchViewController {
+private extension HomewViewController {
     
     func configureSettings() {
         self.addChild(browseViewController)
@@ -106,7 +106,7 @@ private extension SearchViewController {
     }
 }
 
-extension SearchViewController: UISearchBarDelegate {
+extension HomewViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         browseViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(browseViewController, animated: true)
@@ -115,7 +115,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchViewController: CLLocationManagerDelegate {
+extension HomewViewController: CLLocationManagerDelegate {
     
     @available(iOS 14, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

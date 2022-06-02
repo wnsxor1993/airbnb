@@ -9,7 +9,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    let searchVC = SearchViewController()
+    let searchVC = HomewViewController()
     let wishlistVC = WishlistViewController()
     let reserveVC = ReservationViewController()
 
