@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: datasource_url
+    username: datasource_username
+    password: datasource_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    generate-ddl: true
