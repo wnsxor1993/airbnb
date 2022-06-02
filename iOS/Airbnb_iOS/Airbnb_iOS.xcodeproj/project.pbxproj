@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		026731772848B0BC007FEBEF /* CalendarCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */; };
 		02874048283D37B50009C62D /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02874047283D37B50009C62D /* UIColor+.swift */; };
 		0287404A283D3B6D0009C62D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02874049283D3B6D0009C62D /* HomeView.swift */; };
 		0287404C283DBE810009C62D /* UiView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287404B283DBE810009C62D /* UiView+.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionDataSource.swift; sourceTree = "<group>"; };
 		02874047283D37B50009C62D /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		02874049283D3B6D0009C62D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0287404B283DBE810009C62D /* UiView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiView+.swift"; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 			children = (
 				02FAD36C2848AA340053327B /* FindAccomodationTableDataSource.swift */,
 				02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */,
+				026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */,
 			);
 			path = "DataSource&Delegate";
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				026731772848B0BC007FEBEF /* CalendarCollectionDataSource.swift in Sources */,
 				02DF0CD7283CB3C7003D0679 /* AroundSpotCell.swift in Sources */,
 				0287404A283D3B6D0009C62D /* HomeView.swift in Sources */,
 				D2B52C40283F153900C58271 /* HomeViewCollectionLayout.swift in Sources */,
