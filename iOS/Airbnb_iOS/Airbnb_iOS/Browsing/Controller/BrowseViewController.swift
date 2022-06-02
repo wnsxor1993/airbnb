@@ -47,7 +47,7 @@ class BrowseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.searchBarVC.searchBar.text = ""
-        self.searchBarVC.dismiss(animated: false)
+        self.searchBarVC.isActive = false
     }
 }
 
@@ -134,6 +134,8 @@ private extension BrowseViewController {
     
     func setSearchCompleter() {
         self.searchCompleter.delegate = self
+        self.searchCompleter.pointOfInterestFilter = .excludingAll
+        self.searchCompleter.pointOfInterestFilter = .init(including: [.park, .university, .publicTransport])
         self.searchCompleter.resultTypes = MKLocalSearchCompleter.ResultType([.address, .pointOfInterest])
     }
     
