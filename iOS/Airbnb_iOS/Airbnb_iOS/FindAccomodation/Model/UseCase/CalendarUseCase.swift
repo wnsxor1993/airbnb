@@ -7,16 +7,16 @@
 
 import Foundation
 
-protocol CalendarViewControllerUseCaseDelegate: AnyObject {
+protocol CalendarUseCaseDelegate: AnyObject {
     func didChangeDateRange()
     func didSetDate(newDate: Date, indexPathOfNewDate: IndexPath)
     func didSetDateRange(_ dateRange: ClosedRange<Date>)
 }
 
-final class CalendarViewControllerUseCase {
+final class CalendarUseCase {
     private var selectedDay1: Date?
     private var selectedDay2: Date?
-    private var delegate: CalendarViewControllerUseCaseDelegate?
+    private var delegate: CalendarUseCaseDelegate?
 
     func updateSelectedDay(_ newDate: Date, indexPathOfNewDate: IndexPath) {
         let isSetBothSelectedDays = self.selectedDay1 != nil && self.selectedDay2 != nil
@@ -44,12 +44,12 @@ final class CalendarViewControllerUseCase {
         }
     }
 
-    func setDelegate(_ delegate: CalendarViewControllerUseCaseDelegate) {
+    func setDelegate(_ delegate: CalendarUseCaseDelegate) {
         self.delegate = delegate
     }
 }
 
-private extension CalendarViewControllerUseCase {
+private extension CalendarUseCase {
     func calculateDateRange() -> ClosedRange<Date>? {
         guard let selectedDay1 = selectedDay1,
               let selectedDay2 = selectedDay2 else {

@@ -38,7 +38,7 @@ final class CalendarViewController: UIViewController {
     }
 
     private let calendar = Calendar(identifier: .gregorian)
-    private var useCase = CalendarViewControllerUseCase()
+    private var useCase = CalendarUseCase()
 
     private var delegate: CalendarViewControllerDelegate?
 
@@ -187,7 +187,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension CalendarViewController: CalendarViewControllerUseCaseDelegate {
+extension CalendarViewController: CalendarUseCaseDelegate {
     func didChangeDateRange() {
         days = (0..<12).map { offset in
             generateDaysInMonth(for: Calendar.current.date(byAdding: .month, value: offset, to: baseDate) ?? Date())
