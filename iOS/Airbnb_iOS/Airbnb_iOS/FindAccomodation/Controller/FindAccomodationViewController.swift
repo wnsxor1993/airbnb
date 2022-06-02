@@ -77,4 +77,9 @@ extension FindAccomodationViewController: CalendarViewControllerDelegate {
         dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init(dateRange: dateRange))
         findAccomodationView.reloadCell()
     }
+
+    func didChangeDateRange() {
+        dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init())
+        findAccomodationView.reloadCell()
+    }
 }

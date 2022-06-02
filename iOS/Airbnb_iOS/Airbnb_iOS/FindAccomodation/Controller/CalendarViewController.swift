@@ -9,6 +9,7 @@ import UIKit
 
 protocol CalendarViewControllerDelegate: AnyObject {
     func didSetDateRange(_ dateRange: ClosedRange<Date>)
+    func didChangeDateRange()
 }
 
 final class CalendarViewController: UIViewController {
@@ -85,6 +86,7 @@ extension CalendarViewController: CalendarUseCaseDelegate {
     func didChangeDateRange() {
         collectionDataSource.resetDays()
         calendarView.reloadData()
+        delegate?.didChangeDateRange()
     }
 
     func didSetDate(newDate: Date, indexPathOfNewDate: IndexPath) {
