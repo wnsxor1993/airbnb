@@ -91,7 +91,7 @@ extension BrowseViewController: UICollectionViewDelegate {
             searchDataManager.getCoordinate(path: indexPath, handler: { [weak self] result in
                 switch result {
                 case .success(let coordinate):
-                    let locationName = self?.browsingSpotDataSource.searchManager?.searchResults[indexPath.row].title
+                    let locationName = self?.searchDataManager.searchResults[indexPath.item].title
                     let locationData = AccomodationData.location(.init(name: locationName, latitude: coordinate.latitude, longitude: coordinate.longitude))
 
                     DispatchQueue.main.async {
