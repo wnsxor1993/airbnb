@@ -10,18 +10,15 @@ import UIKit
 final class FindAccomodationViewController: UIViewController {
 
     private lazy var findAccomodationView = FindAccomodationView(frame: view.frame)
-    private var dataSource: [AccomodationData] = [
-        AccomodationData(title: "위치"),
-        AccomodationData(title: "체크인/체크아웃"),
-        AccomodationData(title: "요금"),
-        AccomodationData(title: "인원")
-    ]
+    private let dataSource = FindAccomodationTableDataSource()
+    private let findAccomodationTableDelegate = FindAccomodationTableDelegate()
+    private var calendarViewController: CalendarViewController? // removeFromParent()를 위한 프로퍼티화
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewInitialState()
-        findAccomodationView.setTableViewDateSource(self)
-        findAccomodationView.setTableViewDelegate(self)
+        findAccomodationView.setTableViewDateSource(dataSource)
+        findAccomodationView.setTableViewDelegate(findAccomodationTableDelegate)
         setCalendarView()
     }
 
@@ -33,6 +30,10 @@ final class FindAccomodationViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isToolbarHidden = true
+    }
+
+    func setLocationData(_ data: AccomodationData) {
+        dataSource.reservationInfo[0] = data
     }
 }
 
@@ -48,64 +49,60 @@ private extension FindAccomodationViewController {
     func setToolbar() {
         navigationController?.isToolbarHidden = false
         let toolBarButtons = [
-            UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(skipButtonTouched)),
+            UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(nextButtonOfCalendarViewTouched)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-            UIBarButtonItem(title: "다음", style: .plain, target: self, action: #selector(nextButtonTouched))
+            UIBarButtonItem(title: "다음", style: .plain, target: self, action: #selector(nextButtonOfCalendarViewTouched))
         ]
         toolbarItems = toolBarButtons
+        toolBarButtons[2].isEnabled = false
     }
 
-    @objc func skipButtonTouched() {
-        findAccomodationView.next()
+    @objc func nextButtonOfCalendarViewTouched() {
+        setBudgetView()
     }
 
-    @objc func nextButtonTouched() {
-        print("Next")
+    @objc func removeButtonOfCalendarViewTouched() {
+        guard let calendarViewController = calendarViewController else { return }
+        resetCalendarView()
+        calendarViewController.resetSelectedCells()
+        toolbarItems?[0] = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(nextButtonOfCalendarViewTouched))
     }
 
     func setCalendarView() {
         let today = Date()
 
         let calendarViewController = CalendarViewController(baseDate: today)
+        self.calendarViewController = calendarViewController
 
         addChild(calendarViewController)
         findAccomodationView.setSelectView(calendarViewController.view)
         calendarViewController.didMove(toParent: self)
         calendarViewController.setDelegate(self)
     }
-}
 
-extension FindAccomodationViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+    func resetCalendarView() {
+        dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init())
+        findAccomodationView.reloadCell()
+        toolbarItems?[2].isEnabled = false
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FindAccomodationCell.identifier, for: indexPath) as? FindAccomodationCell else {
-            return UITableViewCell()
+    func setBudgetView() {
+        if let calendarViewController = calendarViewController {
+            calendarViewController.removeFromParent()
         }
-        cell.setTitleLabel(dataSource[indexPath.row].title)
-        cell.setDesctiption(dataSource[indexPath.row].data)
-
-        return cell
-    }
-
-    private struct AccomodationData {
-        let title: String
-        var data: String?
-    }
-}
-
-extension FindAccomodationViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
     }
 }
 
 extension FindAccomodationViewController: CalendarViewControllerDelegate {
     func didSetDateRange(_ dateRange: ClosedRange<Date>) {
-        let dateRangeDescription = DateConverter.convertToDateRangeString(dateRange: dateRange)
-        dataSource[1].data = dateRangeDescription.description
+        dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init(dateRange: dateRange))
         findAccomodationView.reloadCell()
+        toolbarItems?[2].isEnabled = true
+        toolbarItems?[0] = UIBarButtonItem(title: "지우기", style: .plain, target: self, action: #selector(removeButtonOfCalendarViewTouched))
+    }
+
+    func didChangeDateRange() {
+        resetCalendarView()
+        toolbarItems?[0] = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(nextButtonOfCalendarViewTouched))
     }
 }
