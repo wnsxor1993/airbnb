@@ -27,7 +27,7 @@ class BrowseViewController: UIViewController {
         return searcher
     }()
 
-    private var searchCompleter = MKLocalSearchCompleter()
+    private var searchDataManager = MKDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +55,6 @@ extension BrowseViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard searchText != "" else {
-            browsingSpotDataSource.removeAllResults()
             DispatchQueue.main.async {
                 self.browsingSpotCollectionView.collectionView.reloadData()
             }
@@ -63,7 +62,7 @@ extension BrowseViewController: UISearchBarDelegate {
         }
 
         self.changeCollectionViewToSearchingView()
-        searchCompleter.queryFragment = searchText
+        searchDataManager.getQuearyFragment(text: searchText)
     }
 }
 
@@ -77,7 +76,7 @@ extension BrowseViewController: UISearchControllerDelegate {
 
 extension BrowseViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        browsingSpotDataSource.inputMKLocalSearchResults(input: completer.results)
+        self.searchDataManager.getResults(input: completer.results)
         DispatchQueue.main.async {
             self.browsingSpotCollectionView.collectionView.reloadData()
         }
@@ -87,9 +86,10 @@ extension BrowseViewController: MKLocalSearchCompleterDelegate {
 extension BrowseViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.searchBarVC.searchBar.endEditing(true)
+        let pushVC = { () -> () in self.navigationController?.pushViewController(self.findAccomodationVC, animated: true) }
         
         if self.browsingSpotCollectionView.isBrowsing {
-            self.navigationController?.pushViewController(findAccomodationVC, animated: true)
+            self.searchDataManager.getCoordinate(path: indexPath, handler: pushVC)
         }
     }
 }
@@ -102,7 +102,7 @@ private extension BrowseViewController {
         self.setNavigationItem()
         self.setSearchBar()
         self.setTouchCollectionViewToDismissKeyboard()
-        self.setSearchCompleter()
+        self.setDataManager()
         self.setBrowsingCollectionView()
     }
     
@@ -132,11 +132,9 @@ private extension BrowseViewController {
         self.searchBarVC.searchBar.endEditing(true)
     }
     
-    func setSearchCompleter() {
-        self.searchCompleter.delegate = self
-        self.searchCompleter.pointOfInterestFilter = .excludingAll
-        self.searchCompleter.pointOfInterestFilter = .init(including: [.park, .university, .publicTransport])
-        self.searchCompleter.resultTypes = MKLocalSearchCompleter.ResultType([.address, .pointOfInterest])
+    func setDataManager() {
+        self.searchDataManager.setDelegate(viewController: self)
+        self.browsingSpotDataSource.connectDataManager(manager: self.searchDataManager)
     }
     
     func setBrowsingCollectionView() {
