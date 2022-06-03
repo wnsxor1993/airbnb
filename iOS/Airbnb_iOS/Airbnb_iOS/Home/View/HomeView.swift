@@ -40,6 +40,10 @@ final class HomeView: UIView {
     func setDataSource(_ dataSource: UICollectionViewDataSource) {
         collectionView.dataSource = dataSource
     }
+
+    func reloadCollectionViewCell() {
+        collectionView.reloadData()
+    }
 }
 
 private extension HomeView {

@@ -7,12 +7,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
-
-    let searchVC = HomewViewController()
-    let wishlistVC = WishlistViewController()
-    let reserveVC = ReservationViewController()
-
+final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTabBarItem()
@@ -22,13 +17,18 @@ class TabBarController: UITabBarController {
 
 private extension TabBarController {
     func setTabBarItem() {
-        let navigationVC = UINavigationController(rootViewController: searchVC)
+        let homeViewController = HomeViewController()
+        homeViewController.getHomeViewComponents()
+        let navigationViewController = UINavigationController(rootViewController: homeViewController)
+        navigationViewController.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
 
-        navigationVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
-        wishlistVC.tabBarItem = UITabBarItem(title: "위시리스트", image: UIImage(systemName: "heart"), tag: 1)
-        reserveVC.tabBarItem = UITabBarItem(title: "내 예약", image: UIImage(systemName: "person"), tag: 2)
+        let wishlistViewController = WishlistViewController()
+        wishlistViewController.tabBarItem = UITabBarItem(title: "위시리스트", image: UIImage(systemName: "hear"), tag: 1)
 
-        self.viewControllers = [navigationVC, wishlistVC, reserveVC]
+        let reservationViewController = ReservationViewController()
+        reservationViewController.tabBarItem = UITabBarItem(title: "내 예약", image: UIImage(systemName: "person"), tag: 2)
+
+        self.viewControllers = [navigationViewController, wishlistViewController, reservationViewController]
     }
 
     func setTabBarBackgroundColor() {

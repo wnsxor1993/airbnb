@@ -1,5 +1,5 @@
 //
-//  HomewViewController.swift
+//  HomeViewController.swift
 //  Airbnb_iOS
 //
 //  Created by juntaek.oh on 2022/05/24.
@@ -8,11 +8,13 @@
 import UIKit
 import CoreLocation
 
-class HomewViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     private let browseViewController = BrowseViewController()
     private lazy var homeView = HomeView(frame: view.frame)
     private let dataSource = HomeViewCollectionDataSource()
+
+    private let homeViewDataManager = HomeDataManager()
 
     private let locationManager = LocationManager()
     private var currentLocation = CLLocation()
@@ -23,6 +25,15 @@ class HomewViewController: UIViewController {
         return searcher
     }()
 
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        setHomeDataManagerDelegate()
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureSettings()
@@ -32,9 +43,13 @@ class HomewViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.hidesBarsOnSwipe = true
     }
+
+    func getHomeViewComponents() {
+        homeViewDataManager.getHomeViewComponents(currentLocation: currentLocation)
+    }
 }
 
-private extension HomewViewController {
+private extension HomeViewController {
 
     func configureSettings() {
         self.addChild(browseViewController)
@@ -56,6 +71,10 @@ private extension HomewViewController {
     func setLocationAccess() {
         self.locationManager.locationManager.delegate = self
         self.alertLocationAccessNeeded(isDenied: self.locationManager.setLocationAccess())
+    }
+
+    func setHomeDataManagerDelegate() {
+        homeViewDataManager.setDelegate(self)
     }
 
     func alertLocationAccessNeeded(isDenied: LocationManager.AceessCase) {
@@ -86,12 +105,12 @@ private extension HomewViewController {
             UIApplication.shared.open(url)
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .default, handler: nil))
-        
+
         present(alert, animated: true)
     }
 }
 
-extension HomewViewController: UISearchBarDelegate {
+extension HomeViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         browseViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(browseViewController, animated: true)
@@ -100,7 +119,7 @@ extension HomewViewController: UISearchBarDelegate {
     }
 }
 
-extension HomewViewController: CLLocationManagerDelegate {
+extension HomeViewController: CLLocationManagerDelegate {
 
     @available(iOS 14, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -129,5 +148,18 @@ extension HomewViewController: CLLocationManagerDelegate {
         guard let location = locations.first else { return }
 
         self.currentLocation = location
+    }
+}
+
+extension HomeViewController: HomeDataManagerDelegate {
+    func updateHomeComponents(_ homeComponentsData: [HomeViewComponentsData]) {
+        dataSource.data = homeComponentsData
+        DispatchQueue.main.async { [weak self] in
+            self?.homeView.reloadCollectionViewCell()
+        }
+    }
+
+    func didGetComponentsError(_ error: Error) {
+        print(error)
     }
 }
