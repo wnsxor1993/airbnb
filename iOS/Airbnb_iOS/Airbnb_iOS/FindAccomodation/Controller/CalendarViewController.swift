@@ -80,7 +80,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.frame.width
-        let height = String.calculateHeaderHeight(fontSize: 17, weight: .init(rawValue: 700))
+        let height = String.calculateLabelHeight(fontSize: 17, weight: .init(rawValue: 700))
 
         return CGSize(width: width, height: height)
     }

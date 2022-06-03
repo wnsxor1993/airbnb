@@ -35,7 +35,10 @@ extension HomeViewCollectionDataSource: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
 
-            cell.configure(image: UIImage(data: heroImageData.imageData))
+            cell.configure(imageData: heroImageData.imageData,
+                           title: heroImageData.title,
+                           description: heroImageData.description,
+                           buttonTitle: heroImageData.buttonTitle)
             return cell
         case let .secondSection(aroundSpotData):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AroundSpotCell.identifier, for: indexPath) as? AroundSpotCell else {
