@@ -71,17 +71,23 @@ private extension HomewViewController {
         
         switch isDenied {
         case .denied:
-            let alert = UIAlertController(title: "위치 권한이 필요합니다", message: "설정창에서 위치 권한 설정 내역을 변경하실 수 있습니다.", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "설정창으로 가기", style: .cancel, handler: { _ in
-                UIApplication.shared.open(settingsAppURL)
-            }))
-            alert.addAction(UIAlertAction(title: "취소", style: .default, handler: nil))
-            
-            present(alert, animated: true)
+            DispatchQueue.main.async {
+                self.presentAlert(url: settingsAppURL)
+            }
         default:
             return
         }
+    }
+    
+    func presentAlert(url: URL) {
+        let alert = UIAlertController(title: "위치 권한이 필요합니다", message: "설정창에서 위치 권한 설정 내역을 변경하실 수 있습니다.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "설정창으로 가기", style: .cancel, handler: { _ in
+            UIApplication.shared.open(url)
+        }))
+        alert.addAction(UIAlertAction(title: "취소", style: .default, handler: nil))
+        
+        present(alert, animated: true)
     }
 }
 
