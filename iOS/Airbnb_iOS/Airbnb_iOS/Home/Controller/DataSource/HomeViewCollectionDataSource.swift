@@ -9,11 +9,7 @@ import UIKit
 
 final class HomeViewCollectionDataSource: NSObject {
 
-    var data: [MySection] = [
-        .first([MySection.FirstItem.init(image: UIImage(named: "heroImage") ?? UIImage())]),
-        .second([MySection.SecondItem].init(repeating: MySection.SecondItem.init(image: UIImage(named: "SeoulImage") ?? UIImage(), title: "서울", distance: "차로 30분 거리"), count: 20)),
-        .third([MySection.ThirdItem].init(repeating: MySection.ThirdItem.init(image: UIImage(named: "LivingImage") ?? UIImage(), title: "자연생활을 만끽할 수 있는 숙소"), count: 5))
-    ]
+    var data = [HomeViewComponentsData]()
 }
 
 extension HomeViewCollectionDataSource: UICollectionViewDataSource {
@@ -23,42 +19,39 @@ extension HomeViewCollectionDataSource: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch data[section] {
-        case let .first(items):
+        case .firstSection:
+            return 1
+        case let .secondSection(items):
             return items.count
-        case let .second(items):
-            return items.count
-        case let .third(items):
+        case let .thirdSection(items):
             return items.count
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch data[indexPath.section] {
-        case let .first(items):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainEventCell.identifier,
-                                                                for: indexPath) as? MainEventCell else {
+        case let .firstSection(heroImageData):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainEventCell.identifier, for: indexPath) as? MainEventCell else {
                 return UICollectionViewCell()
             }
-            cell.configure(image: items[indexPath.item].image)
 
+            cell.configure(image: UIImage(data: heroImageData.imageData))
             return cell
-        case let .second(items):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AroundSpotCell.identifier,
-                                                                for: indexPath) as? AroundSpotCell else {
+        case let .secondSection(aroundSpotData):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AroundSpotCell.identifier, for: indexPath) as? AroundSpotCell else {
                 return UICollectionViewCell()
             }
-            let item = items[indexPath.item]
-            cell.configure(image: item.image, title: item.title, distance: item.distance)
 
+            let item = aroundSpotData[indexPath.item]
+            cell.configure(image: UIImage(data: item.imageData), title: item.title, distance: item.distanceDescription)
             return cell
-        case let .third(items):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThemeSpotCell.identifier,
-                                                                for: indexPath) as? ThemeSpotCell else {
+        case let .thirdSection(themeSpotData):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThemeSpotCell.identifier, for: indexPath) as? ThemeSpotCell else {
                 return UICollectionViewCell()
             }
-            let item = items[indexPath.item]
-            cell.configure(image: item.image, title: item.title)
 
+            let item = themeSpotData[indexPath.item]
+            cell.configure(image: UIImage(data: item.imageData), title: item.title)
             return cell
         }
     }
@@ -75,10 +68,7 @@ extension HomeViewCollectionDataSource: UICollectionViewDataSource {
                 headerView.setHeaderText(text: "가까운 여행지 둘러보기")
                 headerView.setHeaderFontSize(size: 22)
             case 2:
-                headerView.setHeaderText(text: """
-                                           어디에서나,
-                                           여행은 살아보는거야!
-                                           """)
+                headerView.setHeaderText(text: "어디에서나, 여행은\n살아보는거야!")
                 headerView.setHeaderFontSize(size: 22)
             default:
                 headerView.setHeaderText(text: nil)
@@ -88,26 +78,5 @@ extension HomeViewCollectionDataSource: UICollectionViewDataSource {
         default:
             return UICollectionReusableView()
         }
-    }
-}
-
-enum MySection {
-    case first([FirstItem])
-    case second([SecondItem])
-    case third([ThirdItem])
-
-    struct FirstItem {
-        let image: UIImage
-    }
-
-    struct SecondItem {
-        let image: UIImage
-        let title: String
-        let distance: String
-    }
-
-    struct ThirdItem {
-        let image: UIImage
-        let title: String
     }
 }
