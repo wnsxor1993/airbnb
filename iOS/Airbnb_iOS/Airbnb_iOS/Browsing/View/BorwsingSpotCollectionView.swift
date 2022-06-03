@@ -1,13 +1,15 @@
 //
-//  SearchingSpotCollectionView.swift
+//  BrowseCollectionView.swift
 //  Airbnb_iOS
 //
-//  Created by juntaek.oh on 2022/05/26.
+//  Created by juntaek.oh on 2022/05/25.
 //
 
 import UIKit
 
-class BrowsingSpotCollectionView: UIView {
+class BorwsingSpotCollectionView: UIView {
+    
+    private(set) var isBrowsing: Bool = false
 
     private(set) lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.getCollectionViewLayout())
@@ -16,6 +18,8 @@ class BrowsingSpotCollectionView: UIView {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.clipsToBounds = true
 
+        collectionView.register(AroundSpotCell.self, forCellWithReuseIdentifier: AroundSpotCell.identifier)
+        collectionView.register(CollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionHeaderView.identifier)
         collectionView.register(BrowsingSpotCell.self, forCellWithReuseIdentifier: BrowsingSpotCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -35,9 +39,19 @@ class BrowsingSpotCollectionView: UIView {
     func setDataSource(_ dataSource: UICollectionViewDataSource) {
         collectionView.dataSource = dataSource
     }
+    
+    func startToSearch() {
+        self.isBrowsing = true
+        self.collectionView.collectionViewLayout = self.getCollectionViewLayout()
+    }
+    
+    func stopToSearch() {
+        self.isBrowsing = false
+        self.collectionView.collectionViewLayout = self.getCollectionViewLayout()
+    }
 }
 
-private extension BrowsingSpotCollectionView {
+private extension BorwsingSpotCollectionView {
 
     func setConstraint() {
         addSubview(collectionView)
@@ -50,26 +64,8 @@ private extension BrowsingSpotCollectionView {
     }
 
     func getCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        UICollectionViewCompositionalLayout { (section, _) -> NSCollectionLayoutSection? in
-            let itemFractionalWidthFraction = 0.8
-
-            let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(itemFractionalWidthFraction),
-                heightDimension: .fractionalHeight(1/8))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = .init(top: 0, leading: 10, bottom: 16, trailing: 0)
-
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.7)), subitem: item, count: 8)
-
-            let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = .init(top: 16, leading: 0, bottom: 0, trailing: 0)
-
-            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                    heightDimension: .absolute(22))
-            let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-            section.boundarySupplementaryItems = [header]
-
-            return section
+        UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
+            return BrowsingSpotCollectionLayout(isBrowsing: self.isBrowsing).create()
         }
     }
 }
