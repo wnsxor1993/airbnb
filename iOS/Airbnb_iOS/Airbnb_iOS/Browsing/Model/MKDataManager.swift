@@ -29,6 +29,19 @@ final class MKDataManager {
         self.searchCompleter.delegate = delegateVC
     }
 
+    func getCoordinate(path: IndexPath, handler: @escaping () -> ()) {
+        let selectedResult = searchResults[path.item]
+        let searchRequest = MKLocalSearch.Request(completion: selectedResult)
+        let localSearch = MKLocalSearch(request: searchRequest)
+        
+        localSearch.start { response, error in
+            guard error == nil, let placeMark = response?.mapItems[0].placemark else { return }
+            
+            let coordinate = placeMark.coordinate
+            
+            handler()
+        }
+    }
 }
 
 private extension MKDataManager {
