@@ -1,5 +1,5 @@
 //
-//  SearchViewCollectionDataSource.swift
+//  HomeViewCollectionDataSource.swift
 //  Airbnb_iOS
 //
 //  Created by 김한솔 on 2022/05/24.
@@ -7,17 +7,20 @@
 
 import UIKit
 
-final class SearchViewCollectionDataSource: NSObject, UICollectionViewDataSource {
+final class HomeViewCollectionDataSource: NSObject {
 
     var data: [MySection] = [
         .first([MySection.FirstItem.init(image: UIImage(named: "heroImage") ?? UIImage())]),
         .second([MySection.SecondItem].init(repeating: MySection.SecondItem.init(image: UIImage(named: "SeoulImage") ?? UIImage(), title: "서울", distance: "차로 30분 거리"), count: 20)),
         .third([MySection.ThirdItem].init(repeating: MySection.ThirdItem.init(image: UIImage(named: "LivingImage") ?? UIImage(), title: "자연생활을 만끽할 수 있는 숙소"), count: 5))
     ]
+}
 
+extension HomeViewCollectionDataSource: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return data.count
     }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch data[section] {
         case let .first(items):

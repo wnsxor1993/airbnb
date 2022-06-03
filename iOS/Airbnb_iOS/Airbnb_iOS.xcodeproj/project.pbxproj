@@ -30,7 +30,7 @@
 		02DF0CD7283CB3C7003D0679 /* AroundSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF0CD6283CB3C7003D0679 /* AroundSpotCell.swift */; };
 		02DF0CD9283CB77F003D0679 /* ThemeSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF0CD8283CB77F003D0679 /* ThemeSpotCell.swift */; };
 		02DF0CDB283CB980003D0679 /* CollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF0CDA283CB980003D0679 /* CollectionHeaderView.swift */; };
-		02DF0CDD283CBAB6003D0679 /* SearchViewCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF0CDC283CBAB6003D0679 /* SearchViewCollectionDataSource.swift */; };
+		02DF0CDD283CBAB6003D0679 /* HomeViewCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF0CDC283CBAB6003D0679 /* HomeViewCollectionDataSource.swift */; };
 		02FAD3682848A13B0053327B /* AccomodationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAD3672848A13B0053327B /* AccomodationData.swift */; };
 		02FAD36D2848AA340053327B /* FindAccomodationTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAD36C2848AA340053327B /* FindAccomodationTableDataSource.swift */; };
 		02FAD36F2848AB110053327B /* FindAccomodationTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */; };
@@ -78,7 +78,7 @@
 		02DF0CD6283CB3C7003D0679 /* AroundSpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundSpotCell.swift; sourceTree = "<group>"; };
 		02DF0CD8283CB77F003D0679 /* ThemeSpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSpotCell.swift; sourceTree = "<group>"; };
 		02DF0CDA283CB980003D0679 /* CollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderView.swift; sourceTree = "<group>"; };
-		02DF0CDC283CBAB6003D0679 /* SearchViewCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewCollectionDataSource.swift; sourceTree = "<group>"; };
+		02DF0CDC283CBAB6003D0679 /* HomeViewCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCollectionDataSource.swift; sourceTree = "<group>"; };
 		02FAD3672848A13B0053327B /* AccomodationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationData.swift; sourceTree = "<group>"; };
 		02FAD36C2848AA340053327B /* FindAccomodationTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAccomodationTableDataSource.swift; sourceTree = "<group>"; };
 		02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAccomodationTableDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +118,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02072FF32849D151003D7D28 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				02DF0CDC283CBAB6003D0679 /* HomeViewCollectionDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
 		02874046283D37AA0009C62D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +178,7 @@
 		02FAD3502848498D0053327B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				02072FF32849D151003D7D28 /* DataSource */,
 				D2FFBFE5283CA70B00C97D16 /* HomewViewController.swift */,
 			);
 			path = Controller;
@@ -371,7 +380,6 @@
 		D2562ED8283DCE3B00336E49 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				02DF0CDC283CBAB6003D0679 /* SearchViewCollectionDataSource.swift */,
 				D247A48F284068DA00A92DDD /* FamousSpotCollectionDataSource.swift */,
 				D247A4912840690400A92DDD /* BrowsingSpotCollectionDataSource.swift */,
 			);
@@ -605,7 +613,7 @@
 				D2B52C3E283E0CDE00C58271 /* BorwsingSpotCollectionView.swift in Sources */,
 				02B3BB9928445E9B00753CA7 /* CalendarView.swift in Sources */,
 				D2FFBFEA283CA73B00C97D16 /* ReservationViewController.swift in Sources */,
-				02DF0CDD283CBAB6003D0679 /* SearchViewCollectionDataSource.swift in Sources */,
+				02DF0CDD283CBAB6003D0679 /* HomeViewCollectionDataSource.swift in Sources */,
 				0267317B284924D8007FEBEF /* Int+.swift in Sources */,
 				02B3BB9D28446AB400753CA7 /* CalendarCollectionCell.swift in Sources */,
 				02874048283D37B50009C62D /* UIColor+.swift in Sources */,
