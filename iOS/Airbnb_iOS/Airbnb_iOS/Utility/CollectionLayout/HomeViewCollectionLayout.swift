@@ -33,18 +33,16 @@ struct HomeViewCollectionLayout {
             let itemInset: CGFloat = 0
 
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(itemFractionalWidthFraction),
-                                                  heightDimension: .fractionalHeight(1))
+                                                  heightDimension: .estimated(44))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: itemInset, leading: itemInset,
-                                                         bottom: 40, trailing: itemInset)
 
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: .fractionalHeight(groupFractionalHeightFraction))
+                                                   heightDimension: .estimated(44))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = NSDirectionalEdgeInsets(top: itemInset, leading: itemInset,
-                                                            bottom: itemInset, trailing: itemInset)
+                                                            bottom: 24, trailing: itemInset)
 
             return section
         }
@@ -73,7 +71,7 @@ struct HomeViewCollectionLayout {
 
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = NSDirectionalEdgeInsets(top: itemInset, leading: itemInset,
-                                                            bottom: itemInset, trailing: itemInset)
+                                                            bottom: 24, trailing: itemInset)
             section.boundarySupplementaryItems = [header]
             section.orthogonalScrollingBehavior = .continuous
 
