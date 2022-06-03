@@ -23,7 +23,7 @@ private extension TabBarController {
         navigationViewController.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
 
         let wishlistViewController = WishlistViewController()
-        wishlistViewController.tabBarItem = UITabBarItem(title: "위시리스트", image: UIImage(systemName: "hear"), tag: 1)
+        wishlistViewController.tabBarItem = UITabBarItem(title: "위시리스트", image: UIImage(systemName: "heart"), tag: 1)
 
         let reservationViewController = ReservationViewController()
         reservationViewController.tabBarItem = UITabBarItem(title: "내 예약", image: UIImage(systemName: "person"), tag: 2)
