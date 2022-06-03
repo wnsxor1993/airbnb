@@ -86,10 +86,23 @@ extension BrowseViewController: MKLocalSearchCompleterDelegate {
 extension BrowseViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.searchBarVC.searchBar.endEditing(true)
-        let pushVC = { () -> () in self.navigationController?.pushViewController(self.findAccomodationVC, animated: true) }
         
         if self.browsingSpotCollectionView.isBrowsing {
-            self.searchDataManager.getCoordinate(path: indexPath, handler: pushVC)
+            searchDataManager.getCoordinate(path: indexPath, handler: { [weak self] result in
+                switch result {
+                case .success(let coordinate):
+                    let locationName = self?.browsingSpotDataSource.searchManager?.searchResults[indexPath.row].title
+                    let locationData = AccomodationData.location(.init(name: locationName, latitude: coordinate.latitude, longitude: coordinate.longitude))
+
+                    DispatchQueue.main.async {
+                        guard let nextViewController = self?.findAccomodationVC else { return }
+                        nextViewController.setLocationData(locationData)
+                        self?.navigationController?.pushViewController(nextViewController, animated: true)
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            })
         }
     }
 }

@@ -29,17 +29,22 @@ final class MKDataManager {
         self.searchCompleter.delegate = delegateVC
     }
 
-    func getCoordinate(path: IndexPath, handler: @escaping () -> ()) {
+    func getCoordinate(path: IndexPath, handler: @escaping (Result<CLLocationCoordinate2D, MKDataError>) -> Void) {
         let selectedResult = searchResults[path.item]
         let searchRequest = MKLocalSearch.Request(completion: selectedResult)
         let localSearch = MKLocalSearch(request: searchRequest)
         
         localSearch.start { response, error in
-            guard error == nil, let placeMark = response?.mapItems[0].placemark else { return }
+            guard error == nil else {
+                return handler(.failure(.unknown))
+            }
+            guard let placeMark = response?.mapItems[0].placemark else {
+                return handler(.failure(.notConverted))
+            }
             
             let coordinate = placeMark.coordinate
             
-            handler()
+            handler(.success(coordinate))
         }
     }
 }
@@ -51,4 +56,9 @@ private extension MKDataManager {
         self.searchCompleter.pointOfInterestFilter = .init(including: [.park, .university, .publicTransport])
         self.searchCompleter.resultTypes = MKLocalSearchCompleter.ResultType([.address, .pointOfInterest])
     }
+}
+
+enum MKDataError: Error {
+    case notConverted
+    case unknown
 }
