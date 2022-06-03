@@ -26,7 +26,7 @@ class BrowsingSpotCollectionDataSource: NSObject, UICollectionViewDataSource {
         }
 
         let item = results[indexPath.item]
-        cell.configure(image: UIImage(systemName: "mappin.square.fill"), title: item.title)
+        cell.configure(image: UIImage(systemName: "mappin.square.fill"), title: item.title, subText: item.subtitle)
 
         return cell
     }
