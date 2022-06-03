@@ -15,7 +15,7 @@ final class HomeView: UIView {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.clipsToBounds = true
 
-        collectionView.register(MainEventCell.self, forCellWithReuseIdentifier: MainEventCell.identifier)
+        collectionView.register(HeroImageCell.self, forCellWithReuseIdentifier: HeroImageCell.identifier)
         collectionView.register(AroundSpotCell.self, forCellWithReuseIdentifier: AroundSpotCell.identifier)
         collectionView.register(ThemeSpotCell.self, forCellWithReuseIdentifier: ThemeSpotCell.identifier)
 

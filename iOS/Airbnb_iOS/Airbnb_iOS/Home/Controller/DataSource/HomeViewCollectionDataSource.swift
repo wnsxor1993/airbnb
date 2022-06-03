@@ -31,7 +31,7 @@ extension HomeViewCollectionDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch data[indexPath.section] {
         case let .firstSection(heroImageData):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainEventCell.identifier, for: indexPath) as? MainEventCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeroImageCell.identifier, for: indexPath) as? HeroImageCell else {
                 return UICollectionViewCell()
             }
 

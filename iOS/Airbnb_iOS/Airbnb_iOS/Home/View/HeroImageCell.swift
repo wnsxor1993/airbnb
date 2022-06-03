@@ -1,5 +1,5 @@
 //
-//  MainEventCell.swift
+//  HeroImageCell.swift
 //  Airbnb_iOS
 //
 //  Created by 김한솔 on 2022/05/24.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class MainEventCell: UICollectionViewCell {
+final class HeroImageCell: UICollectionViewCell {
 
-    static let identifier = "MainEventCell"
+    static let identifier = "HeroImageCell"
 
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -37,7 +37,7 @@ final class MainEventCell: UICollectionViewCell {
     }
 }
 
-private extension MainEventCell {
+private extension HeroImageCell {
 
     func setLayout() {
         contentView.addSubview(imageView)
