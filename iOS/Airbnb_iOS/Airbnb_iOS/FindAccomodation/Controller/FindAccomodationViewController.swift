@@ -31,6 +31,10 @@ final class FindAccomodationViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.isToolbarHidden = true
     }
+
+    func setLocationData(_ data: AccomodationData) {
+        dataSource.reservationInfo[0] = data
+    }
 }
 
 private extension FindAccomodationViewController {
@@ -86,7 +90,6 @@ private extension FindAccomodationViewController {
         if let calendarViewController = calendarViewController {
             calendarViewController.removeFromParent()
         }
-        // BudgetView 세팅을 위한 코드 구현 필요
     }
 }
 
