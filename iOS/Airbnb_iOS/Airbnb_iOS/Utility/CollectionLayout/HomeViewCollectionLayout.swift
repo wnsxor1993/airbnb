@@ -29,7 +29,6 @@ struct HomeViewCollectionLayout {
     struct HomeViewZeroCaseLayoutSection {
         func create() -> NSCollectionLayoutSection? {
             let itemFractionalWidthFraction = 1.0
-            let groupFractionalHeightFraction = 1.0 / 2.0
             let itemInset: CGFloat = 0
 
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(itemFractionalWidthFraction),
