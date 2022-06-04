@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ BE-deploy ]
+    branches: [ BE-develop ]
   pull_request:
-    branches: [ BE-deploy ]
+    branches: [ BE-develop ]
 
 jobs:
   build:
@@ -43,13 +43,13 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew clean bootJar
+        run: ./gradlew bootJar
 
       # 도커 빌드(도커 이미지 생성)
       - name: Docker build
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t meenzino/airbnb:1.0 .
+          docker build -t philsogood/airbnb:1.0 .
           docker push ${{ secrets.DOCKER_USERNAME }}/airbnb:1.0
           docker rmi ${{ secrets.DOCKER_USERNAME }}/airbnb:1.0
 
@@ -69,17 +69,6 @@ jobs:
       - name: Make zip file
         run: zip -r ./airbnb.zip ./deploy
 
-      # 빌드 성공시 슬랙 알람
-      - name: action-slack
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          author_name: Github Action Test # default: 8398a7@action-slack
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: always() # Pick up events even if the job fails or is canceled.
-
       # S3와 CodeDeploy를 통한 배포
       - name: Deploy
         uses: aws-actions/configure-aws-credentials@v1
@@ -90,7 +79,18 @@ jobs:
 
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 --acl private ./airbnb.zip s3://airbnb-deploy-s3/
+        run: aws s3 cp --region ap-northeast-2 --acl private ./airbnb.zip s3://airbnb-phil-deploy-dockerimage/
 
       - name: Start CodeDeploy
-        run: aws deploy create-deployment --application-name airbnb-deploy-group --deployment-group-name airbnb-deploy-auto-scaling-group --s3-location bucket=airbnb-deploy-s3,key=airbnb.zip,bundleType=zip
+        run: aws deploy create-deployment --application-name Airbnb-Codedeploy-Application --deployment-group-name Airbnb-Codedeploy-Target-Group --s3-location bucket=airbnb-phil-deploy-dockerimage,key=airbnb.zip,bundleType=zip
+
+      # 배경 성공시 슬랙 알람
+      - name: action-slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: Github Action Test # default: 8398a7@action-slack
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always() # Pick up events even if the job fails or is canceled.

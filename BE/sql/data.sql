@@ -6,7 +6,7 @@ VALUES ('종로구', '한국', '서울시', '짱짱로', 1234, 3, '짱짱이에�
        ('광주시', '한국', '경기도', '선을로', 1234, 4, '칭찬해요', '오포숲-숲뷰 맛집/넷플릭스/무료주차공간/매일 소독/서현10분', 100714, 15, 11, 2, 2, 2, 'SHARE_HOUSE', 1);
 
 insert into room_image (image_path, room_id)
-values ('https://a0.muscache.com/im/pictures/miso/Hosting-22724133/original/8514626f-60c8-4118-b207-b25285305915.jpeg?im_w=960',
+values ('https://a0.muscache.com/im/pictures/miso/Hostinvg-22724133/original/8514626f-60c8-4118-b207-b25285305915.jpeg?im_w=960',
         1),
        ('https://a0.muscache.com/im/pictures/miso/Hosting-22724133/original/a98f70e9-a56e-41cd-9363-2656dfccb353.jpeg?im_w=720',
         1),
