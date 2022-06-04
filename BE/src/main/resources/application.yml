@@ -10,9 +10,12 @@ spring:
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     properties:
       hibernate:
         show_sql: true
         format_sql: true
     generate-ddl: true
+logging:
+  level:
+    com.team11: debug
