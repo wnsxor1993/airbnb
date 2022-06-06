@@ -45,6 +45,7 @@
 		D2B52C40283F153900C58271 /* HomeViewCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B52C3F283F153900C58271 /* HomeViewCollectionLayout.swift */; };
 		D2BD027228484CA100AC7B78 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD027128484CA100AC7B78 /* LocationManager.swift */; };
 		D2BD02772848A63400AC7B78 /* MKDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD02762848A63400AC7B78 /* MKDataManager.swift */; };
+		D2BD0279284DACA800AC7B78 /* JSONConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD0278284DACA800AC7B78 /* JSONConverter.swift */; };
 		D2EA1A17284455F800C75419 /* BrowsingSpotCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EA1A16284455F800C75419 /* BrowsingSpotCollectionLayout.swift */; };
 		D2FFBFD1283C868300C97D16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FFBFD0283C868300C97D16 /* AppDelegate.swift */; };
 		D2FFBFD3283C868300C97D16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FFBFD2283C868300C97D16 /* SceneDelegate.swift */; };
@@ -98,6 +99,7 @@
 		D2B52C3F283F153900C58271 /* HomeViewCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCollectionLayout.swift; sourceTree = "<group>"; };
 		D2BD027128484CA100AC7B78 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		D2BD02762848A63400AC7B78 /* MKDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKDataManager.swift; sourceTree = "<group>"; };
+		D2BD0278284DACA800AC7B78 /* JSONConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConverter.swift; sourceTree = "<group>"; };
 		D2EA1A16284455F800C75419 /* BrowsingSpotCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowsingSpotCollectionLayout.swift; sourceTree = "<group>"; };
 		D2FFBFCD283C868300C97D16 /* Airbnb_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbnb_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2FFBFD0283C868300C97D16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				02072FF82849F365003D7D28 /* HomeService.swift */,
+				D2BD0278284DACA800AC7B78 /* JSONConverter.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				02B3BB9928445E9B00753CA7 /* CalendarView.swift in Sources */,
 				D2FFBFEA283CA73B00C97D16 /* ReservationViewController.swift in Sources */,
 				02DF0CDD283CBAB6003D0679 /* HomeViewCollectionDataSource.swift in Sources */,
+				D2BD0279284DACA800AC7B78 /* JSONConverter.swift in Sources */,
 				0267317B284924D8007FEBEF /* Int+.swift in Sources */,
 				02B3BB9D28446AB400753CA7 /* CalendarCollectionCell.swift in Sources */,
 				02874048283D37B50009C62D /* UIColor+.swift in Sources */,

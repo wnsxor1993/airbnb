@@ -90,9 +90,7 @@ private extension HomeViewController {
 
         switch isDenied {
         case .denied:
-            DispatchQueue.main.async {
-                self.presentAlert(url: settingsAppURL)
-            }
+            self.presentAlert(url: settingsAppURL)
         default:
             return
         }
