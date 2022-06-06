@@ -21,7 +21,7 @@ struct AlamofireNet {
                 
                 let decodedValue: T? = JSONConverter.decodeJsonObject(data: validValue)
                 
-                handler(decodedValue)g
+                handler(decodedValue)
                 
             case .failure(_):
                 return
