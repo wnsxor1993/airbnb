@@ -54,7 +54,7 @@ class BrowseViewController: UIViewController {
 extension BrowseViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard searchText != "" else {
+        guard !searchText.isEmpty else {
             DispatchQueue.main.async {
                 self.browsingSpotCollectionView.collectionView.reloadData()
             }
@@ -62,7 +62,7 @@ extension BrowseViewController: UISearchBarDelegate {
         }
 
         self.changeCollectionViewToSearchingView()
-        searchDataManager.getQuearyFragment(text: searchText)
+        searchDataManager.updateQuearyFragment(text: searchText)
     }
 }
 
@@ -76,7 +76,7 @@ extension BrowseViewController: UISearchControllerDelegate {
 
 extension BrowseViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        self.searchDataManager.getResults(input: completer.results)
+        self.searchDataManager.updateResults(input: completer.results)
         DispatchQueue.main.async {
             self.browsingSpotCollectionView.collectionView.reloadData()
         }

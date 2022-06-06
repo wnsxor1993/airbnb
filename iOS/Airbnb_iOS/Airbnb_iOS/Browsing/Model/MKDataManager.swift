@@ -16,11 +16,11 @@ final class MKDataManager {
         self.setCompleter()
     }
     
-    func getQuearyFragment(text: String) {
+    func updateQuearyFragment(text: String) {
         self.searchCompleter.queryFragment = text
     }
     
-    func getResults(input: [MKLocalSearchCompletion]) {
+    func updateResults(input: [MKLocalSearchCompletion]) {
         self.searchResults = input
     }
     
@@ -52,7 +52,6 @@ final class MKDataManager {
 private extension MKDataManager {
     
     func setCompleter() {
-        self.searchCompleter.pointOfInterestFilter = .excludingAll
         self.searchCompleter.pointOfInterestFilter = .init(including: [.park, .university, .publicTransport])
         self.searchCompleter.resultTypes = MKLocalSearchCompleter.ResultType([.address, .pointOfInterest])
     }
