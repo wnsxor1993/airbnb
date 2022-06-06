@@ -1,0 +1,21 @@
+{
+    "hero_image": {
+        "imageURL":"https://image.istarbucks.co.kr/upload/promotion/APP_THUM_20220429124913428.jpg",
+
+        "title": "슬기로운\n자연생활",
+
+        "description": "에어비앤비가 엄선한\n위시리스트를 만나보세요.",
+
+        "buttonTitle": "여행 아이디어 얻기"
+        },
+    "aroundSpot": {
+        "imageURL": "https://image.istarbucks.co.kr/upload/promotion/APP_THUM_20220321083416535.jpg",
+        "title": "서울",
+        "location": [100.1, 100.2],
+        "거리": 300
+    },
+    "themeSpot": {
+        "imageURL": "https://image.istarbucks.co.kr/upload/promotion/APP_THUM_20211231080741192.jpg",
+        "title": "자연생활을 만끽할 수 있는 숙소"
+    }
+}

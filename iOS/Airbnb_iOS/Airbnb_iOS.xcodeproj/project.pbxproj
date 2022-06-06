@@ -10,6 +10,8 @@
 		02072FF52849D216003D7D28 /* HomeViewComponentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */; };
 		02072FF72849E242003D7D28 /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF62849E242003D7D28 /* HomeDataManager.swift */; };
 		02072FF92849F365003D7D28 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF82849F365003D7D28 /* HomeService.swift */; };
+		02501E16284DC84B00CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
+		02501E18284DC94A00CB4CB8 /* JSONConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */; };
 		026731772848B0BC007FEBEF /* CalendarCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */; };
 		0267317B284924D8007FEBEF /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0267317A284924D8007FEBEF /* Int+.swift */; };
 		02874048283D37B50009C62D /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02874047283D37B50009C62D /* UIColor+.swift */; };
@@ -75,6 +77,8 @@
 		02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewComponentsData.swift; sourceTree = "<group>"; };
 		02072FF62849E242003D7D28 /* HomeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
 		02072FF82849F365003D7D28 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		02501E15284DC84B00CB4CB8 /* mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
+		02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConverterTests.swift; sourceTree = "<group>"; };
 		026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionDataSource.swift; sourceTree = "<group>"; };
 		0267317A284924D8007FEBEF /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		02874047283D37B50009C62D /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -446,6 +450,8 @@
 			isa = PBXGroup;
 			children = (
 				D298A21F284DBB79004B12C9 /* NetworkingTest.swift */,
+				02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */,
+				02501E15284DC84B00CB4CB8 /* mock.json */,
 			);
 			path = Airbnb_iOSTests;
 			sourceTree = "<group>";
@@ -627,6 +633,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02501E16284DC84B00CB4CB8 /* mock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +752,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02501E18284DC94A00CB4CB8 /* JSONConverterTests.swift in Sources */,
 				D298A220284DBB79004B12C9 /* NetworkingTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
