@@ -65,17 +65,19 @@ final class HeroImageCell: UICollectionViewCell {
 
             titleLabel.leadingAnchor.constraint(equalTo: imageView.layoutMarginsGuide.leadingAnchor),
             titleLabel.topAnchor.constraint(equalTo: imageView.layoutMarginsGuide.topAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 82),
+            titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: String.calculateLabelHeight(targetString: "슬기로운\n자연생활", fontSize: 34, weight: .init(rawValue: 500))),
+            titleLabel.heightAnchor.constraint(lessThanOrEqualTo: imageView.heightAnchor, multiplier: 1/3),
             titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
 
             descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            descriptionLabel.heightAnchor.constraint(equalToConstant: 44),
+            descriptionLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: String.calculateLabelHeight(targetString: "에어비앤비가 엄선한\n위시리스트를 만나보세요.", fontSize: 17, weight: .init(rawValue: 400))),
+            descriptionLabel.heightAnchor.constraint(lessThanOrEqualTo: titleLabel.heightAnchor),
 
             heroButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             heroButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            heroButton.layoutMarginsGuide.heightAnchor.constraint(equalToConstant: 38),
+            heroButton.layoutMarginsGuide.heightAnchor.constraint(equalToConstant: String.calculateLabelHeight(targetString: "여행아이디어", fontSize: 17, weight: .init(rawValue: 400))),
             heroButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 165),
             heroButton.widthAnchor.constraint(lessThanOrEqualTo: imageView.widthAnchor)
         ])
@@ -88,32 +90,15 @@ final class HeroImageCell: UICollectionViewCell {
         descriptionLabel.text = description
         heroButton.setTitle(buttonTitle, for: .normal)
 
-        setAdditionalConstraint(imageSize: heroImage.size, titleText: title, descriptionText: description, buttonTitleText: buttonTitle)
-    }
-}
-
-private extension HeroImageCell {
-    func setAdditionalConstraint(imageSize: CGSize, titleText: String, descriptionText: String, buttonTitleText: String) {
-        let imageRatio = imageSize.height / imageSize.width
-        let imageViewNewWidth = safeAreaLayoutGuide.layoutFrame.width
-        let imageViewNewHeight = imageViewNewWidth * imageRatio
-
-        let titleLabelNewHeight = String.calculateLabelHeight(targetString: titleText, fontSize: titleLabel.font.pointSize, weight: titleLabel.font.weight)
-
-        let descriptionLabelNewHeight = String.calculateLabelHeight(targetString: descriptionText, fontSize: descriptionLabel.font.pointSize, weight: descriptionLabel.font.weight)
-
-        let heroButtonNewHeight = String.calculateLabelHeight(targetString: buttonTitleText, fontSize: heroButton.titleLabel?.font.pointSize ?? 0, weight: heroButton.titleLabel?.font.weight ?? .regular)
+        let ratio = heroImage.size.height / heroImage.size.width
+        let newWidth = safeAreaLayoutGuide.layoutFrame.width
+        let newHeight = newWidth * ratio
 
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: imageViewNewHeight),
-
-            titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: titleLabelNewHeight),
-            titleLabel.heightAnchor.constraint(lessThanOrEqualTo: imageView.heightAnchor, multiplier: 1/3),
-
-            descriptionLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: descriptionLabelNewHeight),
-            descriptionLabel.heightAnchor.constraint(lessThanOrEqualTo: imageView.heightAnchor, multiplier: 1/3),
-
-            heroButton.layoutMarginsGuide.heightAnchor.constraint(equalToConstant: heroButtonNewHeight)
+            imageView.heightAnchor.constraint(equalToConstant: newHeight),
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }
