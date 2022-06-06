@@ -20,7 +20,7 @@ final class CalendarViewController: UIViewController {
     private var selectedDate: Date?
     private var useCase = CalendarUseCase()
 
-    private var delegate: CalendarViewControllerDelegate?
+    private weak var delegate: CalendarViewControllerDelegate?
 
     init(baseDate: Date) {
         collectionDataSource = CalendarCollectionDataSource(baseDate: baseDate)

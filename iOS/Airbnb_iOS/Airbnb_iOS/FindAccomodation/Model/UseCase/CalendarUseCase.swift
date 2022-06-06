@@ -16,7 +16,7 @@ protocol CalendarUseCaseDelegate: AnyObject {
 final class CalendarUseCase {
     private var selectedDay1: Date?
     private var selectedDay2: Date?
-    private var delegate: CalendarUseCaseDelegate?
+    private weak var delegate: CalendarUseCaseDelegate?
 
     func updateSelectedDay(_ newDate: Date, indexPathOfNewDate: IndexPath) {
         let isSetBothSelectedDays = self.selectedDay1 != nil && self.selectedDay2 != nil
