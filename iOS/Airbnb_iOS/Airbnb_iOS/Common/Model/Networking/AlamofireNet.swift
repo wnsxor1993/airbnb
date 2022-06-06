@@ -9,10 +9,10 @@ import Alamofire
 
 struct AlamofireNet {
     
-    func getNetwork<T: Codable>(url: String, completion handler: @escaping (T?) -> Void) {
+    func connectNetwork<T: Codable>(url: String, method: Alamofire.HTTPMethod, param: Parameters?, completion handler: @escaping (T?) -> Void) {
         guard let validURL = URL(string: url) else { return }
         
-        let validRequest = AF.request(validURL, method: .get).validate(statusCode: 200..<300)
+        let validRequest = AF.request(validURL, method: method, parameters: param).validate(statusCode: 200..<300)
         
         validRequest.response { response in
             switch response.result {

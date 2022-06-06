@@ -140,8 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				02072FF82849F365003D7D28 /* HomeService.swift */,
-				D2BD0278284DACA800AC7B78 /* JSONConverter.swift */,
-				D2BD027A284DAD4000AC7B78 /* AlamofireNet.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -269,6 +267,7 @@
 		02FAD35828484A520053327B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D298A211284DB419004B12C9 /* Networking */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -406,6 +405,15 @@
 				D247A4912840690400A92DDD /* BrowsingSpotCollectionDataSource.swift */,
 			);
 			path = DataSource;
+			sourceTree = "<group>";
+		};
+		D298A211284DB419004B12C9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D2BD0278284DACA800AC7B78 /* JSONConverter.swift */,
+				D2BD027A284DAD4000AC7B78 /* AlamofireNet.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		D2B52C41283F19F600C58271 /* CollectionLayout */ = {
