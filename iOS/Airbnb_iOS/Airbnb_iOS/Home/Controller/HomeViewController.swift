@@ -1,5 +1,5 @@
 //
-//  HomewViewController.swift
+//  HomeViewController.swift
 //  Airbnb_iOS
 //
 //  Created by juntaek.oh on 2022/05/24.
@@ -8,12 +8,14 @@
 import UIKit
 import CoreLocation
 
-class HomewViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     private let browseViewController = BrowseViewController()
     private lazy var homeView = HomeView(frame: view.frame)
-    private let dataSource = SearchViewCollectionDataSource()
-    
+    private let dataSource = HomeViewCollectionDataSource()
+
+    private let homeViewDataManager = HomeDataManager()
+
     private let locationManager = LocationManager()
     private var currentLocation = CLLocation()
 
@@ -23,6 +25,15 @@ class HomewViewController: UIViewController {
         return searcher
     }()
 
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        setHomeDataManagerDelegate()
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureSettings()
@@ -32,66 +43,72 @@ class HomewViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.hidesBarsOnSwipe = true
     }
+
+    func getHomeViewComponents() {
+        homeViewDataManager.getHomeViewComponents(currentLocation: currentLocation)
+    }
 }
 
-private extension HomewViewController {
-    
+private extension HomeViewController {
+
     func configureSettings() {
         self.addChild(browseViewController)
         self.setHomeView()
         self.setSearchBar()
         self.setLocationAccess()
     }
-    
+
     func setHomeView() {
         self.view = homeView
         self.homeView.setDataSource(dataSource)
     }
-    
+
     func setSearchBar() {
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
     }
-    
+
     func setLocationAccess() {
         self.locationManager.locationManager.delegate = self
         self.alertLocationAccessNeeded(isDenied: self.locationManager.setLocationAccess())
     }
-    
+
+    func setHomeDataManagerDelegate() {
+        homeViewDataManager.setDelegate(self)
+    }
+
     func alertLocationAccessNeeded(isDenied: LocationManager.AceessCase) {
         var settingsAppURL: URL?
-        
+
         if #available(iOS 15.4, *) {
             settingsAppURL = URL(string: UIApplicationOpenNotificationSettingsURLString)
         } else {
             settingsAppURL = URL(string: UIApplication.openSettingsURLString)
         }
-        
+
         guard let settingsAppURL = settingsAppURL else { return }
-        
+
         switch isDenied {
         case .denied:
-            DispatchQueue.main.async {
-                self.presentAlert(url: settingsAppURL)
-            }
+            self.presentAlert(url: settingsAppURL)
         default:
             return
         }
     }
-    
+
     func presentAlert(url: URL) {
         let alert = UIAlertController(title: "위치 권한이 필요합니다", message: "설정창에서 위치 권한 설정 내역을 변경하실 수 있습니다.", preferredStyle: .alert)
-        
+
         alert.addAction(UIAlertAction(title: "설정창으로 가기", style: .cancel, handler: { _ in
             UIApplication.shared.open(url)
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .default, handler: nil))
-        
+
         present(alert, animated: true)
     }
 }
 
-extension HomewViewController: UISearchBarDelegate {
+extension HomeViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         browseViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(browseViewController, animated: true)
@@ -100,8 +117,8 @@ extension HomewViewController: UISearchBarDelegate {
     }
 }
 
-extension HomewViewController: CLLocationManagerDelegate {
-    
+extension HomeViewController: CLLocationManagerDelegate {
+
     @available(iOS 14, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
@@ -113,7 +130,7 @@ extension HomewViewController: CLLocationManagerDelegate {
             return
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
@@ -124,10 +141,23 @@ extension HomewViewController: CLLocationManagerDelegate {
             return
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
-        
+
         self.currentLocation = location
+    }
+}
+
+extension HomeViewController: HomeDataManagerDelegate {
+    func updateHomeComponents(_ homeComponentsData: [HomeViewComponentsData]) {
+        dataSource.data = homeComponentsData
+        DispatchQueue.main.async { [weak self] in
+            self?.homeView.reloadCollectionViewCell()
+        }
+    }
+
+    func didGetComponentsError(_ error: Error) {
+        print(error)
     }
 }
