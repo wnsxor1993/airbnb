@@ -9,7 +9,7 @@ import Alamofire
 
 struct AlamofireNet {
     
-    func connectNetwork<T: Codable>(url: String, method: Alamofire.HTTPMethod, param: Parameters?, completion handler: @escaping (T?) -> Void) {
+    func connectNetwork(url: String, method: Alamofire.HTTPMethod, param: Parameters?, completion handler: @escaping (Data) -> Void) {
         guard let validURL = URL(string: url) else { return }
         
         let validRequest = AF.request(validURL, method: method, parameters: param).validate(statusCode: 200..<300)
@@ -19,9 +19,7 @@ struct AlamofireNet {
             case .success(let value):
                 guard let validValue = value else { return }
                 
-                let decodedValue: T? = JSONConverter.decodeJsonObject(data: validValue)
-                
-                handler(decodedValue)
+                handler(validValue)
                 
             case .failure(_):
                 return
