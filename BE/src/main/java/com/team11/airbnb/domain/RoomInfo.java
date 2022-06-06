@@ -3,13 +3,16 @@ package com.team11.airbnb.domain;
 import java.time.LocalTime;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import lombok.Getter;
 
 @Embeddable
 @Getter
 public class RoomInfo {
 
-    private String roomType;
+    @Enumerated(EnumType.STRING)
+    private RoomType roomType;
     private int numberOfBedroom;
     private int numberOfBed;
     private int numberOfBathroom;
@@ -20,7 +23,7 @@ public class RoomInfo {
     protected RoomInfo() {
     }
 
-    public RoomInfo(String roomType, int numberOfBedroom, int numberOfBed, int numberOfBathroom,
+    public RoomInfo(RoomType roomType, int numberOfBedroom, int numberOfBed, int numberOfBathroom,
         int capacity, LocalTime checkInTime, LocalTime checkOutTime) {
         this.roomType = roomType;
         this.numberOfBedroom = numberOfBedroom;
