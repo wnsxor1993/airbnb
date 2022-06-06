@@ -11,3 +11,12 @@ target 'Airbnb_iOS' do
   # Pods for Airbnb_iOS
 
 end
+
+target 'Airbnb_iOSTests' do
+  use_frameworks!
+
+  pod 'Alamofire'
+
+  # Pods for Airbnb_iOSTests
+
+end
