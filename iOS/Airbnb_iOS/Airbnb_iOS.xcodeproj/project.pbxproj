@@ -12,6 +12,7 @@
 		02072FF92849F365003D7D28 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF82849F365003D7D28 /* HomeService.swift */; };
 		02501E16284DC84B00CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
 		02501E18284DC94A00CB4CB8 /* JSONConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */; };
+		02501E19284DC9C400CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
 		026731772848B0BC007FEBEF /* CalendarCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */; };
 		0267317B284924D8007FEBEF /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0267317A284924D8007FEBEF /* Int+.swift */; };
 		02874048283D37B50009C62D /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02874047283D37B50009C62D /* UIColor+.swift */; };
@@ -644,6 +645,7 @@
 				02874059283E15420009C62D /* .swiftlint.yml in Resources */,
 				D2FFBFDD283C868400C97D16 /* LaunchScreen.storyboard in Resources */,
 				D2FFBFDA283C868400C97D16 /* Assets.xcassets in Resources */,
+				02501E19284DC9C400CB4CB8 /* mock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
