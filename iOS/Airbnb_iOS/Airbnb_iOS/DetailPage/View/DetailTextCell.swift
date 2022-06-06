@@ -9,7 +9,7 @@ import UIKit
 
 class DetailTextCell: UICollectionViewCell {
     
-    static let identifier = "HostTextCell"
+    static let identifier = "DetailTextCell"
 
     private let detailText: UILabel = {
         let detail = UILabel()
