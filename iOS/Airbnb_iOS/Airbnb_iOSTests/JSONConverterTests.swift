@@ -20,7 +20,7 @@ final class JSONConverterTests: XCTestCase {
         XCTAssertNotNil(result)
     }
     
-    func test_encodeJsonObject호출시() {
+    func test_encodeJsonObject호출시_JSON파일로_인코딩되는지() {
         let targetParam = TestDTO(
             heroImage: .init(imageURL: "url", title: "title", heroImageDescription: "description", buttonTitle: "buttontitle"),
             aroundSpot: .init(imageURL: "url", title: "title", location: [100.1, 100.2], 거리: 300),
