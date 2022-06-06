@@ -35,6 +35,8 @@ final class ThumbnailImageCell: UICollectionViewCell {
 private extension ThumbnailImageCell {
     
     func setLayout() {
+        self.addSubview(imageView)
+        
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

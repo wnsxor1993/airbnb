@@ -44,6 +44,8 @@
 		D298A228284DD84A004B12C9 /* DetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A227284DD84A004B12C9 /* DetailPageViewController.swift */; };
 		D298A22B284DD8E3004B12C9 /* ThumbnailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A22A284DD8E3004B12C9 /* ThumbnailImageCell.swift */; };
 		D298A22D284DDA73004B12C9 /* TitleTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A22C284DDA73004B12C9 /* TitleTextCell.swift */; };
+		D298A22F284DE0E3004B12C9 /* HostTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A22E284DE0E3004B12C9 /* HostTextCell.swift */; };
+		D298A231284DE46D004B12C9 /* DetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A230284DE46D004B12C9 /* DetailTextCell.swift */; };
 		D2B52C3E283E0CDE00C58271 /* BorwsingSpotCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B52C3D283E0CDE00C58271 /* BorwsingSpotCollectionView.swift */; };
 		D2B52C40283F153900C58271 /* HomeViewCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B52C3F283F153900C58271 /* HomeViewCollectionLayout.swift */; };
 		D2BD027228484CA100AC7B78 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD027128484CA100AC7B78 /* LocationManager.swift */; };
@@ -102,6 +104,8 @@
 		D298A227284DD84A004B12C9 /* DetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageViewController.swift; sourceTree = "<group>"; };
 		D298A22A284DD8E3004B12C9 /* ThumbnailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailImageCell.swift; sourceTree = "<group>"; };
 		D298A22C284DDA73004B12C9 /* TitleTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextCell.swift; sourceTree = "<group>"; };
+		D298A22E284DE0E3004B12C9 /* HostTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTextCell.swift; sourceTree = "<group>"; };
+		D298A230284DE46D004B12C9 /* DetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextCell.swift; sourceTree = "<group>"; };
 		D2B52C3D283E0CDE00C58271 /* BorwsingSpotCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorwsingSpotCollectionView.swift; sourceTree = "<group>"; };
 		D2B52C3F283F153900C58271 /* HomeViewCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCollectionLayout.swift; sourceTree = "<group>"; };
 		D2BD027128484CA100AC7B78 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -444,6 +448,8 @@
 			children = (
 				D298A22A284DD8E3004B12C9 /* ThumbnailImageCell.swift */,
 				D298A22C284DDA73004B12C9 /* TitleTextCell.swift */,
+				D298A22E284DE0E3004B12C9 /* HostTextCell.swift */,
+				D298A230284DE46D004B12C9 /* DetailTextCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -681,6 +687,7 @@
 				02874057283E0E600009C62D /* BudgetView.swift in Sources */,
 				02AE9A37283FDADF00F3B5E5 /* DateConverter.swift in Sources */,
 				02FAD36D2848AA340053327B /* FindAccomodationTableDataSource.swift in Sources */,
+				D298A231284DE46D004B12C9 /* DetailTextCell.swift in Sources */,
 				02874053283E01E70009C62D /* FindAccomodationCell.swift in Sources */,
 				D2EA1A17284455F800C75419 /* BrowsingSpotCollectionLayout.swift in Sources */,
 				02072FF52849D216003D7D28 /* HomeViewComponentsData.swift in Sources */,
@@ -693,6 +700,7 @@
 				0287404F283DFD250009C62D /* FindAccomodationViewController.swift in Sources */,
 				D2BD027228484CA100AC7B78 /* LocationManager.swift in Sources */,
 				D2FFBFD3283C868300C97D16 /* SceneDelegate.swift in Sources */,
+				D298A22F284DE0E3004B12C9 /* HostTextCell.swift in Sources */,
 				02B3BBA42844E7A100753CA7 /* CalendarCollectionHeaderView.swift in Sources */,
 				D2B52C3E283E0CDE00C58271 /* BorwsingSpotCollectionView.swift in Sources */,
 				02B3BB9928445E9B00753CA7 /* CalendarView.swift in Sources */,
