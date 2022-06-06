@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "CroppedHeroImage.png",
+      "filename" : "heroImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "CroppedHeroImage@2x.png",
+      "filename" : "heroImage@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "CroppedHeroImage@3x.png",
+      "filename" : "heroImage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

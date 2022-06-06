@@ -84,21 +84,9 @@ final class HeroImageCell: UICollectionViewCell {
     }
 
     func configure(imageData: Data, title: String, description: String, buttonTitle: String) {
-        let heroImage = UIImage(data: imageData) ?? UIImage()
-        imageView.image = heroImage
+        imageView.image = UIImage(data: imageData)
         titleLabel.text = title
         descriptionLabel.text = description
         heroButton.setTitle(buttonTitle, for: .normal)
-
-        let ratio = heroImage.size.height / heroImage.size.width
-        let newWidth = safeAreaLayoutGuide.layoutFrame.width
-        let newHeight = newWidth * ratio
-
-        NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: newHeight),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
     }
 }
