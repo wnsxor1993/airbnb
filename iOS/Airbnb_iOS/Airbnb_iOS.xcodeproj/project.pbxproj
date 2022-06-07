@@ -18,6 +18,8 @@
 		02501E19284DC9C400CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
 		026731772848B0BC007FEBEF /* CalendarCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */; };
 		0267317B284924D8007FEBEF /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0267317A284924D8007FEBEF /* Int+.swift */; };
+		027F9C34284F1E3E00AEC054 /* AccomodationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C33284F1E3E00AEC054 /* AccomodationsViewController.swift */; };
+		027F9C36284F1EB600AEC054 /* AccomodationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C35284F1EB600AEC054 /* AccomodationsView.swift */; };
 		027F9C38284F207A00AEC054 /* AccomodationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C37284F207A00AEC054 /* AccomodationsCell.swift */; };
 		027F9C3A284F4C6500AEC054 /* AccomodationOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C39284F4C6500AEC054 /* AccomodationOptionCell.swift */; };
 		027F9C3C284F4D6500AEC054 /* CountAccomodationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C3B284F4D6500AEC054 /* CountAccomodationsCell.swift */; };
@@ -92,6 +94,8 @@
 		02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConverterTests.swift; sourceTree = "<group>"; };
 		026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionDataSource.swift; sourceTree = "<group>"; };
 		0267317A284924D8007FEBEF /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		027F9C33284F1E3E00AEC054 /* AccomodationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsViewController.swift; sourceTree = "<group>"; };
+		027F9C35284F1EB600AEC054 /* AccomodationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsView.swift; sourceTree = "<group>"; };
 		027F9C37284F207A00AEC054 /* AccomodationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsCell.swift; sourceTree = "<group>"; };
 		027F9C39284F4C6500AEC054 /* AccomodationOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationOptionCell.swift; sourceTree = "<group>"; };
 		027F9C3B284F4D6500AEC054 /* CountAccomodationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountAccomodationsCell.swift; sourceTree = "<group>"; };
@@ -333,6 +337,7 @@
 				02FAD36B2848AA1A0053327B /* DataSource&Delegate */,
 				0287404E283DFD250009C62D /* FindAccomodationViewController.swift */,
 				02B3BB9A2844653600753CA7 /* CalendarViewController.swift */,
+				027F9C33284F1E3E00AEC054 /* AccomodationsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				02874056283E0E600009C62D /* BudgetView.swift */,
 				02B3BB9C28446AB400753CA7 /* CalendarCollectionCell.swift */,
 				02B3BBA32844E7A100753CA7 /* CalendarCollectionHeaderView.swift */,
+				027F9C35284F1EB600AEC054 /* AccomodationsView.swift */,
 				027F9C37284F207A00AEC054 /* AccomodationsCell.swift */,
 				027F9C39284F4C6500AEC054 /* AccomodationOptionCell.swift */,
 				027F9C3B284F4D6500AEC054 /* CountAccomodationsCell.swift */,
@@ -817,11 +823,13 @@
 				02B3BB9928445E9B00753CA7 /* CalendarView.swift in Sources */,
 				D2FFBFEA283CA73B00C97D16 /* ReservationViewController.swift in Sources */,
 				02DF0CDD283CBAB6003D0679 /* HomeViewCollectionDataSource.swift in Sources */,
+				027F9C36284F1EB600AEC054 /* AccomodationsView.swift in Sources */,
 				D2BD0279284DACA800AC7B78 /* JSONConverter.swift in Sources */,
 				0267317B284924D8007FEBEF /* Int+.swift in Sources */,
 				02B3BB9D28446AB400753CA7 /* CalendarCollectionCell.swift in Sources */,
 				0244F60F284DD3DE002D385C /* HomeDto.swift in Sources */,
 				027F9C38284F207A00AEC054 /* AccomodationsCell.swift in Sources */,
+				027F9C34284F1E3E00AEC054 /* AccomodationsViewController.swift in Sources */,
 				02874048283D37B50009C62D /* UIColor+.swift in Sources */,
 				02AE9A3D28406A6600F3B5E5 /* String+.swift in Sources */,
 				D2BD027B284DAD4000AC7B78 /* AlamofireNet.swift in Sources */,
