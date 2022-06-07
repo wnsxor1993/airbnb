@@ -10,6 +10,7 @@
 		02072FF52849D216003D7D28 /* HomeViewComponentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */; };
 		02072FF72849E242003D7D28 /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF62849E242003D7D28 /* HomeDataManager.swift */; };
 		02072FF92849F365003D7D28 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF82849F365003D7D28 /* HomeService.swift */; };
+		0244F60F284DD3DE002D385C /* HomeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0244F60E284DD3DE002D385C /* HomeDto.swift */; };
 		02501E16284DC84B00CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
 		02501E18284DC94A00CB4CB8 /* JSONConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */; };
 		02501E19284DC9C400CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
@@ -78,6 +79,7 @@
 		02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewComponentsData.swift; sourceTree = "<group>"; };
 		02072FF62849E242003D7D28 /* HomeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
 		02072FF82849F365003D7D28 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		0244F60E284DD3DE002D385C /* HomeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDto.swift; sourceTree = "<group>"; };
 		02501E15284DC84B00CB4CB8 /* mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
 		02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConverterTests.swift; sourceTree = "<group>"; };
 		026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionDataSource.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				D2BD027028484C7600AC7B78 /* UseCase */,
 				02072FFB2849F3CA003D7D28 /* Service */,
 				02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */,
+				0244F60E284DD3DE002D385C /* HomeDto.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				D2BD0279284DACA800AC7B78 /* JSONConverter.swift in Sources */,
 				0267317B284924D8007FEBEF /* Int+.swift in Sources */,
 				02B3BB9D28446AB400753CA7 /* CalendarCollectionCell.swift in Sources */,
+				0244F60F284DD3DE002D385C /* HomeDto.swift in Sources */,
 				02874048283D37B50009C62D /* UIColor+.swift in Sources */,
 				02AE9A3D28406A6600F3B5E5 /* String+.swift in Sources */,
 				D2BD027B284DAD4000AC7B78 /* AlamofireNet.swift in Sources */,
