@@ -157,6 +157,39 @@ extension HomeViewController: HomeDataManagerDelegate {
         }
     }
 
+    func updateHeroImageData(_ heroImageData: HomeViewComponentsData.HeroImageData) {
+        dataSource.data[0] = .firstSection(heroImageData)
+        DispatchQueue.main.async { [weak self] in
+            self?.homeView.reloadCollectionViewCell(sectionNumber: 0)
+        }
+    }
+
+    func updateAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData) {
+        switch dataSource.data[1] {
+        case .secondSection(let previousData):
+            let updatedData = previousData + [aroundSpotData]
+            dataSource.data[1] = .secondSection(updatedData)
+        default:
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.homeView.reloadCollectionViewCell(sectionNumber: 1)
+        }
+    }
+
+    func updateThemeSpotData(_ themeSpotData: HomeViewComponentsData.ThemeSpotData) {
+        switch dataSource.data[2] {
+        case .thirdSection(let previousData):
+            let updatedData = previousData + [themeSpotData]
+            dataSource.data[2] = .thirdSection(updatedData)
+        default:
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.homeView.reloadCollectionViewCell(sectionNumber: 2)
+        }
+    }
+
     func didGetComponentsError(_ error: Error) {
         print(error)
     }
