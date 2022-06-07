@@ -11,11 +11,16 @@ class DetailPageViewController: UIViewController {
 
     private let detailPageDataSource = DetailPageCollectionDataSource()
     private lazy var detailPageCollectionView = DetailPageCollectionView(frame: view.frame)
+    private lazy var toolBarView = DetailPageToolBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setDetailPageCollectionView()
-        
+        self.setToolbar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 }
 
@@ -37,10 +42,9 @@ private extension DetailPageViewController {
     
     func setToolbar() {
         navigationController?.navigationBar.isHidden = true
-        navigationController?.isToolbarHidden = false
-        let toolBarButtons = [
-            UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector())
-        ]
-        toolbarItems = toolBarButtons
+        navigationController?.setToolbarHidden(false, animated: false)
+        
+        let customView = UIBarButtonItem(customView: toolBarView)
+        navigationController?.toolbar.setItems([customView], animated: false)
     }
 }
