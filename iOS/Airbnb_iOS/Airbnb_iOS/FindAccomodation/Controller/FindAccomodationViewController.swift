@@ -12,7 +12,7 @@ final class FindAccomodationViewController: UIViewController {
     private lazy var findAccomodationView = FindAccomodationView(frame: view.frame)
     private let dataSource = FindAccomodationTableDataSource()
     private let findAccomodationTableDelegate = FindAccomodationTableDelegate()
-    private var calendarViewController: CalendarViewController? // removeFromParent()를 위한 프로퍼티화
+    private var calendarViewController: CalendarViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,7 @@ final class FindAccomodationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.hidesBarsOnSwipe = false
+        navigationController?.isToolbarHidden = false
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,7 +48,6 @@ private extension FindAccomodationViewController {
     }
 
     func setToolbar() {
-        navigationController?.isToolbarHidden = false
         let toolBarButtons = [
             UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(nextButtonOfCalendarViewTouched)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
@@ -58,7 +58,11 @@ private extension FindAccomodationViewController {
     }
 
     @objc func nextButtonOfCalendarViewTouched() {
-        setBudgetView()
+        if case let .location(locationData) = dataSource.reservationInfo[0],
+           case let .accomodationPeriod(dataRangeData) = dataSource.reservationInfo[1] {
+            let accomodationsViewController = AccomodationsViewController(location: locationData, dateRange: dataRangeData.dateRange)
+            navigationController?.pushViewController(accomodationsViewController, animated: true)
+        }
     }
 
     @objc func removeButtonOfCalendarViewTouched() {
