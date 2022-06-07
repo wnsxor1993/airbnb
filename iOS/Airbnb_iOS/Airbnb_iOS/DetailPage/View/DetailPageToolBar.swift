@@ -29,6 +29,7 @@ class DetailPageToolBar: UIView {
         
         reserve.setAttributedTitle(attributedString, for: .normal)
         reserve.setTitleColor(UIColor.white, for: .normal)
+        reserve.backgroundColor = .black
         reserve.translatesAutoresizingMaskIntoConstraints = false
         return reserve
     }()
@@ -36,11 +37,20 @@ class DetailPageToolBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        setContstraint()
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    func setCostLabel(text: String?) {
+        costLabel.text = text
+    }
+    
+    func setDateLabel(text: String?) {
+        dateLabel.text = text
     }
 }
 

@@ -12,6 +12,7 @@ class DetailPageViewController: UIViewController {
     private let detailPageDataSource = DetailPageCollectionDataSource()
     private lazy var detailPageCollectionView = DetailPageCollectionView(frame: view.frame)
     private lazy var toolBarView = DetailPageToolBar()
+    
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrowshape.turn.up.backward"), for: .normal)
@@ -48,14 +49,43 @@ private extension DetailPageViewController {
         self.detailPageCollectionView.collectionView.delegate = self
         self.detailPageCollectionView.setDataSource(detailPageDataSource)
         self.view.addSubview(detailPageCollectionView)
+//        detailPageCollectionView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            detailPageCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            detailPageCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            detailPageCollectionView.bottomAnchor.constraint(equalTo: toolBarView.topAnchor),
+//            detailPageCollectionView.topAnchor.constraint(equalTo: view.topAnchor)
+//        ])
     }
     
     func setToolbar() {
         navigationController?.navigationBar.isHidden = true
-        navigationController?.setToolbarHidden(false, animated: false)
+//        self.view.addSubview(toolBarView)
+//        toolBarView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            toolBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            toolBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            toolBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            toolBarView.heightAnchor.constraint(equalToConstant: 105)
+//        ])
+        let toolBar = UIToolbar()
+        view.addSubview(toolBar)
+        toolBar.translatesAutoresizingMaskIntoConstraints = false
         
-        let customView = UIBarButtonItem(customView: toolBarView)
-        navigationController?.toolbar.setItems([customView], animated: false)
+        NSLayoutConstraint.activate([
+            toolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            toolBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            toolBar.heightAnchor.constraint(equalToConstant: 105)
+        ])
+        
+        let toolItem = UIBarButtonItem(customView: toolBarView)
+        toolBar.setItems([toolItem], animated: true)
+        
+        toolBarView.setCostLabel(text: "$1,500 /박")
+        toolBarView.setDateLabel(text: "7월 7일 - 7월 18일")
     }
     
     func setBackButton() {
