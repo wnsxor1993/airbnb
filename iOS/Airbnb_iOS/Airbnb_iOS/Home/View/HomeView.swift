@@ -44,6 +44,10 @@ final class HomeView: UIView {
     func reloadCollectionViewCell() {
         collectionView.reloadData()
     }
+
+    func reloadCollectionViewCell(sectionNumber: Int) {
+        collectionView.reloadSections([sectionNumber])
+    }
 }
 
 private extension HomeView {

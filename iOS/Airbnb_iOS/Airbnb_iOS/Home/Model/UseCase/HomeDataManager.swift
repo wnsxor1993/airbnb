@@ -9,6 +9,9 @@ import CoreLocation
 
 protocol HomeDataManagerDelegate: AnyObject {
     func updateHomeComponents(_ homeComponentsData: [HomeViewComponentsData])
+    func updateHeroImageData(_ heroImageData: HomeViewComponentsData.HeroImageData)
+    func updateAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData)
+    func updateThemeSpotData(_ themeSpotData: HomeViewComponentsData.ThemeSpotData)
     func didGetComponentsError(_ error: Error)
 }
 
@@ -34,11 +37,14 @@ final class HomeDataManager {
 
 extension HomeDataManager: HomeServiceDelegate {
     func didFetchHeroImageData(_ heroImageData: HomeViewComponentsData.HeroImageData) {
+        delegate?.updateHeroImageData(heroImageData)
     }
     
     func didFetchAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData) {
+        delegate?.updateAroundSpotData(aroundSpotData)
     }
     
     func didFetchThemeSpotData(_ themeSpotData: HomeViewComponentsData.ThemeSpotData) {
+        delegate?.updateThemeSpotData(themeSpotData)
     }
 }

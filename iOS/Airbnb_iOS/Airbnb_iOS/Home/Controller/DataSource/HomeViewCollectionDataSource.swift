@@ -9,7 +9,9 @@ import UIKit
 
 final class HomeViewCollectionDataSource: NSObject {
 
-    var data = [HomeViewComponentsData]()
+    var data = [HomeViewComponentsData.firstSection(.init()),
+                HomeViewComponentsData.secondSection([]),
+                HomeViewComponentsData.thirdSection([])]
 }
 
 extension HomeViewCollectionDataSource: UICollectionViewDataSource {
