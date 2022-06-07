@@ -1,20 +1,17 @@
 package com.team11.airbnb.domain;
 
 import javax.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class Location {
 
     private String latitude;
     private String longitude;
 
-    protected Location() {
-    }
-
-    public Location(String latitude, String longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
 }
