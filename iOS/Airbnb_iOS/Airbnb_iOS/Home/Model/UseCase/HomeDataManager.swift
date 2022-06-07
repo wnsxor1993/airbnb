@@ -14,22 +14,31 @@ protocol HomeDataManagerDelegate: AnyObject {
 
 final class HomeDataManager {
 
-    private let homeService = HomeService()
-    private var delegate: HomeDataManagerDelegate?
+    private var homeService = HomeService()
+    private weak var delegate: HomeDataManagerDelegate?
+
+    init() {
+        homeService.setDelegate(self)
+    }
 
     func setDelegate(_ delegate: HomeDataManagerDelegate) {
         self.delegate = delegate
     }
 
     func getHomeViewComponents(currentLocation: CLLocation) {
-        homeService.fetchData { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let componentsData):
-                self.delegate?.updateHomeComponents(componentsData)
-            case .failure(let error):
-                self.delegate?.didGetComponentsError(error)
-            }
-        }
+        homeService.fetchData(
+            currentLocation: (latitude: currentLocation.coordinate.latitude,
+                              longitude: currentLocation.coordinate.longitude))
+    }
+}
+
+extension HomeDataManager: HomeServiceDelegate {
+    func didFetchHeroImageData(_ heroImageData: HomeViewComponentsData.HeroImageData) {
+    }
+    
+    func didFetchAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData) {
+    }
+    
+    func didFetchThemeSpotData(_ themeSpotData: HomeViewComponentsData.ThemeSpotData) {
     }
 }
