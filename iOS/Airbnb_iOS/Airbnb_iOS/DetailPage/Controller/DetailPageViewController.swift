@@ -12,11 +12,21 @@ class DetailPageViewController: UIViewController {
     private let detailPageDataSource = DetailPageCollectionDataSource()
     private lazy var detailPageCollectionView = DetailPageCollectionView(frame: view.frame)
     private lazy var toolBarView = DetailPageToolBar()
+    private lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrowshape.turn.up.backward"), for: .normal)
+        button.backgroundColor = .white
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 23
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setDetailPageCollectionView()
         self.setToolbar()
+        self.setBackButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,5 +56,16 @@ private extension DetailPageViewController {
         
         let customView = UIBarButtonItem(customView: toolBarView)
         navigationController?.toolbar.setItems([customView], animated: false)
+    }
+    
+    func setBackButton() {
+        view.addSubview(backButton)
+
+        NSLayoutConstraint.activate([
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            backButton.widthAnchor.constraint(equalToConstant: 44),
+            backButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
     }
 }

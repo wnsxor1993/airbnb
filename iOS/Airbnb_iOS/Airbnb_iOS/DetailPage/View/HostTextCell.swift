@@ -30,7 +30,7 @@ class HostTextCell: UICollectionViewCell {
     private let hostImage: UIImageView = {
         let hostImage = UIImageView()
         hostImage.clipsToBounds = true
-        hostImage.layer.cornerRadius = 3.14
+        hostImage.layer.cornerRadius = 35
         hostImage.translatesAutoresizingMaskIntoConstraints = false
         return hostImage
     }()
@@ -89,7 +89,7 @@ private extension HostTextCell {
             hostImage.leadingAnchor.constraint(equalTo: roomInfo.trailingAnchor, constant: 16),
             hostImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             hostImage.topAnchor.constraint(equalTo: roomInfo.topAnchor),
-            hostImage.bottomAnchor.constraint(equalTo: hostName.bottomAnchor)
+            hostImage.heightAnchor.constraint(equalTo: hostImage.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
