@@ -49,27 +49,11 @@ private extension DetailPageViewController {
         self.detailPageCollectionView.collectionView.delegate = self
         self.detailPageCollectionView.setDataSource(detailPageDataSource)
         self.view.addSubview(detailPageCollectionView)
-//        detailPageCollectionView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            detailPageCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            detailPageCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            detailPageCollectionView.bottomAnchor.constraint(equalTo: toolBarView.topAnchor),
-//            detailPageCollectionView.topAnchor.constraint(equalTo: view.topAnchor)
-//        ])
     }
     
     func setToolbar() {
         navigationController?.navigationBar.isHidden = true
-//        self.view.addSubview(toolBarView)
-//        toolBarView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            toolBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            toolBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            toolBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//            toolBarView.heightAnchor.constraint(equalToConstant: 105)
-//        ])
+
         let toolBar = UIToolbar()
         view.addSubview(toolBar)
         toolBar.translatesAutoresizingMaskIntoConstraints = false
