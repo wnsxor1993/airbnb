@@ -23,9 +23,10 @@ class DetailTextCell: UICollectionViewCell {
     
     private let moreButton: UIButton = {
         let more = UIButton()
-        more.titleLabel?.text = "더보기 > "
-        more.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
-        more.titleLabel?.textColor = .gray1
+        let attributedString = NSMutableAttributedString(string: "더보기 > ", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.kern: 0.37, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .semibold)])
+        
+        more.setAttributedTitle(attributedString, for: .normal)
+        more.setTitleColor(UIColor.gray1, for: .normal)
         more.translatesAutoresizingMaskIntoConstraints = false
         return more
     }()
@@ -53,13 +54,13 @@ class DetailTextCell: UICollectionViewCell {
 private extension DetailTextCell {
 
     func setLayout() {
-        self.addSubViews(detailText, moreButton)
+        contentView.addSubViews(detailText, moreButton)
 
         NSLayoutConstraint.activate([
             detailText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             detailText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             detailText.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
-            detailText.heightAnchor.constraint(equalToConstant: 66)
+            detailText.heightAnchor.constraint(greaterThanOrEqualToConstant: 66)
         ])
 
         NSLayoutConstraint.activate([

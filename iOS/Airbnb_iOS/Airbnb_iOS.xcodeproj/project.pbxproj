@@ -47,6 +47,8 @@
 		D298A22F284DE0E3004B12C9 /* HostTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A22E284DE0E3004B12C9 /* HostTextCell.swift */; };
 		D298A231284DE46D004B12C9 /* DetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A230284DE46D004B12C9 /* DetailTextCell.swift */; };
 		D298A233284DEF43004B12C9 /* DetailPageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A232284DEF43004B12C9 /* DetailPageCollectionView.swift */; };
+		D298A235284EE409004B12C9 /* DetailPageCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A234284EE409004B12C9 /* DetailPageCollectionLayout.swift */; };
+		D298A237284EE882004B12C9 /* DetailPageCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A236284EE882004B12C9 /* DetailPageCollectionDataSource.swift */; };
 		D2B52C3E283E0CDE00C58271 /* BorwsingSpotCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B52C3D283E0CDE00C58271 /* BorwsingSpotCollectionView.swift */; };
 		D2B52C40283F153900C58271 /* HomeViewCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B52C3F283F153900C58271 /* HomeViewCollectionLayout.swift */; };
 		D2BD027228484CA100AC7B78 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD027128484CA100AC7B78 /* LocationManager.swift */; };
@@ -108,6 +110,8 @@
 		D298A22E284DE0E3004B12C9 /* HostTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTextCell.swift; sourceTree = "<group>"; };
 		D298A230284DE46D004B12C9 /* DetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextCell.swift; sourceTree = "<group>"; };
 		D298A232284DEF43004B12C9 /* DetailPageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageCollectionView.swift; sourceTree = "<group>"; };
+		D298A234284EE409004B12C9 /* DetailPageCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageCollectionLayout.swift; sourceTree = "<group>"; };
+		D298A236284EE882004B12C9 /* DetailPageCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageCollectionDataSource.swift; sourceTree = "<group>"; };
 		D2B52C3D283E0CDE00C58271 /* BorwsingSpotCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorwsingSpotCollectionView.swift; sourceTree = "<group>"; };
 		D2B52C3F283F153900C58271 /* HomeViewCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCollectionLayout.swift; sourceTree = "<group>"; };
 		D2BD027128484CA100AC7B78 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -415,6 +419,7 @@
 			children = (
 				D247A48F284068DA00A92DDD /* FamousSpotCollectionDataSource.swift */,
 				D247A4912840690400A92DDD /* BrowsingSpotCollectionDataSource.swift */,
+				D298A236284EE882004B12C9 /* DetailPageCollectionDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -462,6 +467,7 @@
 			children = (
 				D2B52C3F283F153900C58271 /* HomeViewCollectionLayout.swift */,
 				D2EA1A16284455F800C75419 /* BrowsingSpotCollectionLayout.swift */,
+				D298A234284EE409004B12C9 /* DetailPageCollectionLayout.swift */,
 			);
 			path = CollectionLayout;
 			sourceTree = "<group>";
@@ -716,11 +722,13 @@
 				02AE9A3D28406A6600F3B5E5 /* String+.swift in Sources */,
 				D298A233284DEF43004B12C9 /* DetailPageCollectionView.swift in Sources */,
 				D2BD027B284DAD4000AC7B78 /* AlamofireNet.swift in Sources */,
+				D298A237284EE882004B12C9 /* DetailPageCollectionDataSource.swift in Sources */,
 				02072FF92849F365003D7D28 /* HomeService.swift in Sources */,
 				D298A22D284DDA73004B12C9 /* TitleTextCell.swift in Sources */,
 				02FAD36F2848AB110053327B /* FindAccomodationTableDelegate.swift in Sources */,
 				02B3BBA02844B85600753CA7 /* Day.swift in Sources */,
 				02B3BBA22844B85F00753CA7 /* MonthMetadata.swift in Sources */,
+				D298A235284EE409004B12C9 /* DetailPageCollectionLayout.swift in Sources */,
 				D247A4922840690400A92DDD /* BrowsingSpotCollectionDataSource.swift in Sources */,
 				0287404C283DBE810009C62D /* UiView+.swift in Sources */,
 				D247A48C283F640A00A92DDD /* BrowsingSpotCell.swift in Sources */,

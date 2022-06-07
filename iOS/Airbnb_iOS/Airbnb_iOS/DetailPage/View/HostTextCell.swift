@@ -30,6 +30,7 @@ class HostTextCell: UICollectionViewCell {
     private let hostImage: UIImageView = {
         let hostImage = UIImageView()
         hostImage.clipsToBounds = true
+        hostImage.layer.cornerRadius = 3.14
         hostImage.translatesAutoresizingMaskIntoConstraints = false
         return hostImage
     }()
@@ -68,7 +69,7 @@ class HostTextCell: UICollectionViewCell {
 private extension HostTextCell {
 
     func setLayout() {
-        self.addSubViews(roomInfo, hostName, hostImage, detailText)
+        contentView.addSubViews(roomInfo, hostName, hostImage, detailText)
 
         NSLayoutConstraint.activate([
             roomInfo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -97,7 +98,5 @@ private extension HostTextCell {
             detailText.topAnchor.constraint(equalTo: hostName.bottomAnchor, constant: 16),
             detailText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
         ])
-        
-        self.hostImage.layer.cornerRadius = hostImage.frame.width / 3
     }
 }

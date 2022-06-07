@@ -27,15 +27,15 @@ final class ThumbnailImageCell: UICollectionViewCell {
         fatalError()
     }
 
-    func configureImage(imageData: Data) {
-        imageView.image = UIImage(data: imageData)
+    func configureImage(imageData: UIImage) {
+        imageView.image = imageData
     }
 }
 
 private extension ThumbnailImageCell {
     
     func setLayout() {
-        self.addSubview(imageView)
+        contentView.addSubview(imageView)
         
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

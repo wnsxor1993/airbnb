@@ -66,7 +66,7 @@ class TitleTextCell: UICollectionViewCell {
 private extension TitleTextCell {
 
     func setLayout() {
-        self.addSubViews(roomName, rateStar, rateText, lotateText)
+        contentView.addSubViews(roomName, rateStar, rateText, lotateText)
 
         NSLayoutConstraint.activate([
             roomName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
