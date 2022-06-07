@@ -14,9 +14,13 @@ struct DateConverter {
         return dateFormatter
     }()
 
-    static func convertToDateRangeString(dateRange: ClosedRange<Date>) -> String {
-        dateFormatter.dateFormat = "M월 d일"
-        return "\(dateFormatter.string(from: dateRange.lowerBound)) - \(dateFormatter.string(from: dateRange.upperBound))"
+    static func convertToDateRangeString(dateRange: ClosedRange<Date>?) -> String? {
+        if let dateRange = dateRange {
+            dateFormatter.dateFormat = "M월 d일"
+            return "\(dateFormatter.string(from: dateRange.lowerBound)) - \(dateFormatter.string(from: dateRange.upperBound))"
+        } else {
+            return nil
+        }
     }
 
     static func convertToYearAndMonthString(date: Date) -> String {
