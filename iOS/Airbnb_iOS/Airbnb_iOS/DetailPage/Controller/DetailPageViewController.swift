@@ -74,12 +74,25 @@ private extension DetailPageViewController {
     
     func setBackButton() {
         view.addSubview(backButton)
-
+        
+        if #available(iOS 14.0, *) {
+            backButton.addAction(UIAction(handler: { _ in
+                self.navigationController?.popViewController(animated: true)
+            }), for: .touchDown)
+        } else {
+            backButton.addTarget(self, action: #selector(touchedBackButton), for: .touchDown)
+        }
+        
         NSLayoutConstraint.activate([
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             backButton.widthAnchor.constraint(equalToConstant: 44),
             backButton.heightAnchor.constraint(equalToConstant: 44)
         ])
+    }
+    
+    @objc
+    func touchedBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
