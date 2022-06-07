@@ -37,7 +37,7 @@ private extension DetailPageCollectionLayout {
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.4))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        
+
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         
@@ -51,7 +51,12 @@ private extension DetailPageCollectionLayout {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.2))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
+        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
+                                                heightDimension: .absolute(0.5))
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+        
         let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [footer]
         return section
     }
     
@@ -62,7 +67,12 @@ private extension DetailPageCollectionLayout {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.18))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
+        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
+                                                heightDimension: .absolute(0.5))
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+        
         let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [footer]
         return section
     }
     

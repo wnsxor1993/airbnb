@@ -20,6 +20,7 @@ class DetailPageCollectionView: UIView {
         collectionView.register(TitleTextCell.self, forCellWithReuseIdentifier: TitleTextCell.identifier)
         collectionView.register(HostTextCell.self, forCellWithReuseIdentifier: HostTextCell.identifier)
         collectionView.register(DetailTextCell.self, forCellWithReuseIdentifier: DetailTextCell.identifier)
+        collectionView.register(CollectionFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CollectionFooterView.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()

@@ -51,7 +51,7 @@ class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            cell.configure(info: data.hostPage.detailInfo, name: data.hostPage.hostName, image: data.hostPage.hostFace, detail: data.hostPage.roomInfo)
+            cell.configure(info: data.hostPage.roomInfo, name: data.hostPage.hostName, image: data.hostPage.hostFace, detail: data.hostPage.detailInfo)
             return cell
             
         case .thirdCase:
@@ -62,6 +62,14 @@ class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
             cell.configure(detail: data.description.description)
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionFooterView.identifier, for: indexPath) as? CollectionFooterView else {
+            return UICollectionReusableView()
+        }
+
+        return footerView
     }
 }
 

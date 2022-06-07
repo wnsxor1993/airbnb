@@ -38,6 +38,7 @@
 		02FAD36D2848AA340053327B /* FindAccomodationTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAD36C2848AA340053327B /* FindAccomodationTableDataSource.swift */; };
 		02FAD36F2848AB110053327B /* FindAccomodationTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */; };
 		6D77C14CD0C71F86C79B5949 /* Pods_Airbnb_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FCF364B69EE3C5A4173A56F /* Pods_Airbnb_iOS.framework */; };
+		D207EBCD284F3AA3003B67F0 /* CollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207EBCC284F3AA3003B67F0 /* CollectionFooterView.swift */; };
 		D2402414284F21BF00E87E0F /* DetailPageToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2402413284F21BF00E87E0F /* DetailPageToolBar.swift */; };
 		D247A48C283F640A00A92DDD /* BrowsingSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247A48B283F640A00A92DDD /* BrowsingSpotCell.swift */; };
 		D247A490284068DA00A92DDD /* FamousSpotCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247A48F284068DA00A92DDD /* FamousSpotCollectionDataSource.swift */; };
@@ -102,6 +103,7 @@
 		1E326D4FAA083AF8388B21BD /* Pods-Airbnb_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbnb_iOS.release.xcconfig"; path = "Target Support Files/Pods-Airbnb_iOS/Pods-Airbnb_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		9FCF364B69EE3C5A4173A56F /* Pods_Airbnb_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Airbnb_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C9C3510E21BC4268E4F21D /* Pods-Airbnb_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbnb_iOS.debug.xcconfig"; path = "Target Support Files/Pods-Airbnb_iOS/Pods-Airbnb_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D207EBCC284F3AA3003B67F0 /* CollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFooterView.swift; sourceTree = "<group>"; };
 		D2402413284F21BF00E87E0F /* DetailPageToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageToolBar.swift; sourceTree = "<group>"; };
 		D247A48B283F640A00A92DDD /* BrowsingSpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowsingSpotCell.swift; sourceTree = "<group>"; };
 		D247A48F284068DA00A92DDD /* FamousSpotCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousSpotCollectionDataSource.swift; sourceTree = "<group>"; };
@@ -416,6 +418,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D207EBCB284F384A003B67F0 /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				D298A22A284DD8E3004B12C9 /* ThumbnailImageCell.swift */,
+				D298A22C284DDA73004B12C9 /* TitleTextCell.swift */,
+				D298A22E284DE0E3004B12C9 /* HostTextCell.swift */,
+				D298A230284DE46D004B12C9 /* DetailTextCell.swift */,
+			);
+			path = CollectionCell;
+			sourceTree = "<group>";
+		};
 		D2562ED8283DCE3B00336E49 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,10 +470,8 @@
 			children = (
 				D298A232284DEF43004B12C9 /* DetailPageCollectionView.swift */,
 				D2402413284F21BF00E87E0F /* DetailPageToolBar.swift */,
-				D298A22A284DD8E3004B12C9 /* ThumbnailImageCell.swift */,
-				D298A22C284DDA73004B12C9 /* TitleTextCell.swift */,
-				D298A22E284DE0E3004B12C9 /* HostTextCell.swift */,
-				D298A230284DE46D004B12C9 /* DetailTextCell.swift */,
+				D207EBCC284F3AA3003B67F0 /* CollectionFooterView.swift */,
+				D207EBCB284F384A003B67F0 /* CollectionCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -707,6 +718,7 @@
 				02DF0CD9283CB77F003D0679 /* ThemeSpotCell.swift in Sources */,
 				D2FFBFD1283C868300C97D16 /* AppDelegate.swift in Sources */,
 				D2FFBFE8283CA72500C97D16 /* WishlistViewController.swift in Sources */,
+				D207EBCD284F3AA3003B67F0 /* CollectionFooterView.swift in Sources */,
 				02AE9A2F283FD5AF00F3B5E5 /* CalendarUseCase.swift in Sources */,
 				D2FFBFE6283CA70B00C97D16 /* HomeViewController.swift in Sources */,
 				0287404F283DFD250009C62D /* FindAccomodationViewController.swift in Sources */,
