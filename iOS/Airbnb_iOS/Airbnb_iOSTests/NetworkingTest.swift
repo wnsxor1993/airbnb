@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Alamofire
 @testable import Airbnb_iOS
 
 final class NetworkingTest: XCTestCase {
@@ -21,16 +22,16 @@ final class NetworkingTest: XCTestCase {
         let alamo = AlamofireNet()
         let param = ["product_cd" : "9200000002487"]
         
-        var getResult: Data?
-        var postResult: Data?
+        var getResult: Result<Data, AFError>?
+        var postResult: Result<Data, AFError>?
         
-        alamo.connectNetwork(url: "https://api.codesquad.kr/onban/main", method: .get, param: nil, completion: { data in
-            getResult = data
+        alamo.connectNetwork(url: "https://api.codesquad.kr/onban/main", method: .get, param: nil, completion: { result in
+            getResult = result
             getExpectation.fulfill()
         })
         
-        alamo.connectNetwork(url: "https://www.starbucks.co.kr/menu/productViewAjax.do", method: .post, param: param, completion: { data in
-            postResult = data
+        alamo.connectNetwork(url: "https://www.starbucks.co.kr/menu/productViewAjax.do", method: .post, param: param, completion: { result in
+            postResult = result
             postExpectation.fulfill()
         })
         
