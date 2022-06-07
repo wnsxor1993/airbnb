@@ -10,6 +10,8 @@
 		02072FF52849D216003D7D28 /* HomeViewComponentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */; };
 		02072FF72849E242003D7D28 /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF62849E242003D7D28 /* HomeDataManager.swift */; };
 		02072FF92849F365003D7D28 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF82849F365003D7D28 /* HomeService.swift */; };
+		0238DE41284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */; };
+		0238DE43284F75D60084B6D7 /* AccomodationsViewComponentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */; };
 		0244F60F284DD3DE002D385C /* HomeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0244F60E284DD3DE002D385C /* HomeDto.swift */; };
 		02501E16284DC84B00CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
 		02501E18284DC94A00CB4CB8 /* JSONConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */; };
@@ -83,6 +85,8 @@
 		02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewComponentsData.swift; sourceTree = "<group>"; };
 		02072FF62849E242003D7D28 /* HomeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
 		02072FF82849F365003D7D28 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsCollectionDataSource.swift; sourceTree = "<group>"; };
+		0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsViewComponentsData.swift; sourceTree = "<group>"; };
 		0244F60E284DD3DE002D385C /* HomeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDto.swift; sourceTree = "<group>"; };
 		02501E15284DC84B00CB4CB8 /* mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
 		02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConverterTests.swift; sourceTree = "<group>"; };
@@ -356,6 +360,7 @@
 				02B3BB9F2844B85600753CA7 /* Day.swift */,
 				02B3BBA12844B85F00753CA7 /* MonthMetadata.swift */,
 				02FAD3672848A13B0053327B /* AccomodationData.swift */,
+				0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				02FAD36C2848AA340053327B /* FindAccomodationTableDataSource.swift */,
 				02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */,
 				026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */,
+				0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */,
 			);
 			path = "DataSource&Delegate";
 			sourceTree = "<group>";
@@ -789,6 +795,7 @@
 				02FAD3682848A13B0053327B /* AccomodationData.swift in Sources */,
 				D2FFBFD5283C868300C97D16 /* TabBarController.swift in Sources */,
 				02B3BB9B2844653600753CA7 /* CalendarViewController.swift in Sources */,
+				0238DE41284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift in Sources */,
 				02874057283E0E600009C62D /* BudgetView.swift in Sources */,
 				02AE9A37283FDADF00F3B5E5 /* DateConverter.swift in Sources */,
 				02FAD36D2848AA340053327B /* FindAccomodationTableDataSource.swift in Sources */,
@@ -821,6 +828,7 @@
 				02072FF92849F365003D7D28 /* HomeService.swift in Sources */,
 				02FAD36F2848AB110053327B /* FindAccomodationTableDelegate.swift in Sources */,
 				02B3BBA02844B85600753CA7 /* Day.swift in Sources */,
+				0238DE43284F75D60084B6D7 /* AccomodationsViewComponentsData.swift in Sources */,
 				02B3BBA22844B85F00753CA7 /* MonthMetadata.swift in Sources */,
 				D247A4922840690400A92DDD /* BrowsingSpotCollectionDataSource.swift in Sources */,
 				0287404C283DBE810009C62D /* UiView+.swift in Sources */,
