@@ -166,9 +166,9 @@ extension HomeViewController: HomeDataManagerDelegate {
 
     func updateAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData) {
         switch dataSource.data[1] {
-        case .secondSection(var previousData):
-            previousData.append(aroundSpotData)
-            dataSource.data[1] = .secondSection(previousData)
+        case .secondSection(let previousData):
+            let updatedData = previousData + [aroundSpotData]
+            dataSource.data[1] = .secondSection(updatedData)
         default:
             return
         }
@@ -179,9 +179,9 @@ extension HomeViewController: HomeDataManagerDelegate {
 
     func updateThemeSpotData(_ themeSpotData: HomeViewComponentsData.ThemeSpotData) {
         switch dataSource.data[2] {
-        case .thirdSection(var previousData):
-            previousData.append(themeSpotData)
-            dataSource.data[2] = .thirdSection(previousData)
+        case .thirdSection(let previousData):
+            let updatedData = previousData + [themeSpotData]
+            dataSource.data[2] = .thirdSection(updatedData)
         default:
             return
         }
