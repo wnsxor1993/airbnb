@@ -22,14 +22,24 @@ final class AccomodationsCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fillProportionally
         return stackView
+    }()
+
+    private let starImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(systemName: "star.fill")
+        imageView.tintColor = .primary
+        return imageView
     }()
 
     private let gradeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 12, weight: .init(rawValue: 400))
-        label.textColor = .gray1
+        label.textColor = .gray3
+        label.textAlignment = .center
         return label
     }()
 
@@ -68,6 +78,7 @@ final class AccomodationsCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubViews(accomodationImageView, gradeAndCountReviewStackView, nameLabel, pricePerDayLabel, finalPriceLabel)
+        gradeAndCountReviewStackView.addArrangedSubview(starImageView)
         gradeAndCountReviewStackView.addArrangedSubview(gradeLabel)
         gradeAndCountReviewStackView.addArrangedSubview(countReviewLabel)
     }
@@ -81,8 +92,9 @@ final class AccomodationsCell: UICollectionViewCell {
         accomodationImageView.image = UIImage(data: imageData)
         gradeLabel.text = String(grade)
         countReviewLabel.text = "(후기 \(countReview)개)"
-        pricePerDayLabel.text = "₩\(pricePerDay.toKRW()) / 박"
-        finalPriceLabel.attributedText = "총 ₩\(finalPrice.toKRW())".underLine()
+        nameLabel.text = name
+        pricePerDayLabel.text = "\(pricePerDay.toKRWWithCurrencyMark()) / 박"
+        finalPriceLabel.attributedText = "총액 \(finalPrice.toKRWWithCurrencyMark())".underLine()
     }
 
     override func layoutSubviews() {
@@ -95,7 +107,7 @@ final class AccomodationsCell: UICollectionViewCell {
             gradeAndCountReviewStackView.topAnchor.constraint(equalTo: accomodationImageView.bottomAnchor, constant: 9),
             gradeAndCountReviewStackView.leadingAnchor.constraint(equalTo: accomodationImageView.leadingAnchor),
             gradeAndCountReviewStackView.trailingAnchor.constraint(equalTo: accomodationImageView.trailingAnchor),
-            gradeAndCountReviewStackView.heightAnchor.constraint(equalToConstant: 18),
+            gradeAndCountReviewStackView.heightAnchor.constraint(equalToConstant: 20),
 
             nameLabel.topAnchor.constraint(equalTo: gradeAndCountReviewStackView.bottomAnchor, constant: 8),
             nameLabel.leadingAnchor.constraint(equalTo: accomodationImageView.leadingAnchor),
@@ -110,7 +122,10 @@ final class AccomodationsCell: UICollectionViewCell {
             finalPriceLabel.topAnchor.constraint(equalTo: pricePerDayLabel.bottomAnchor, constant: 8),
             finalPriceLabel.leadingAnchor.constraint(equalTo: accomodationImageView.leadingAnchor),
             finalPriceLabel.trailingAnchor.constraint(equalTo: accomodationImageView.trailingAnchor),
-            finalPriceLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            finalPriceLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            starImageView.widthAnchor.constraint(equalTo: starImageView.heightAnchor),
+            gradeLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 32)
         ])
     }
 }
