@@ -79,7 +79,7 @@ private extension HomeService {
             let aroundSpotData = HomeViewComponentsData.AroundSpotData.init(
                 imageData: imageData,
                 title: DTO.title,
-                distanceDescription: String(DTO.distance))
+                distanceDescription: DTO.distance.toKM())
             delegate?.didFetchAroundSpotData(aroundSpotData)
         }
     }
