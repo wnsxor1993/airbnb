@@ -14,8 +14,7 @@ class DetailTextCell: UICollectionViewCell {
     private let detailText: UILabel = {
         let detail = UILabel()
         detail.font = .systemFont(ofSize: 17)
-        detail.numberOfLines = 0
-        detail.lineBreakMode = .byWordWrapping
+        detail.numberOfLines = 3
         detail.textColor = .gray1
         detail.translatesAutoresizingMaskIntoConstraints = false
         return detail
