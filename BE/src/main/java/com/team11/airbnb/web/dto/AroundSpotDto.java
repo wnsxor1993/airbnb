@@ -5,10 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class ArroundSpotDto {
+public class AroundSpotDto {
 
     private String title;
-    private String label;
     private int distance;
     private String imagePath;
 }
