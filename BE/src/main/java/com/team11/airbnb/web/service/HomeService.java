@@ -33,12 +33,14 @@ public class HomeService {
         List<AroundSpotDto> aroundSpotDtoList = new ArrayList<>();
         List<ThemeSpotDto> themeSpotDtoList = new ArrayList<>();
         for (District district : districtList) {
-            AroundSpotDto aroundSpotDto = new AroundSpotDto(district.getName(), 10,
+            AroundSpotDto aroundSpotDto = new AroundSpotDto(district.getId(), district.getName(),
+                10,
                 district.getImagePath());
             aroundSpotDtoList.add(aroundSpotDto);
         }
         for (ThemeSpot themeSpot : themeSpotList) {
-            ThemeSpotDto themeSpotDto = new ThemeSpotDto(themeSpot.getImagePath(), themeSpot.getTitle());
+            ThemeSpotDto themeSpotDto = new ThemeSpotDto(themeSpot.getImagePath(),
+                themeSpot.getTitle());
             themeSpotDtoList.add(themeSpotDto);
         }
         return new HomeData(mainEventDto, aroundSpotDtoList, themeSpotDtoList);

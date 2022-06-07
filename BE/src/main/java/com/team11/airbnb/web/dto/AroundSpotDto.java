@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class AroundSpotDto {
 
+    private Long id;
     private String title;
     private int distance;
     private String imagePath;
