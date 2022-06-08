@@ -17,11 +17,11 @@ protocol HomeDataManagerDelegate: AnyObject {
 
 final class HomeDataManager {
 
-    private var homeService = HomeService()
+    private var homeRepository = HomeRepository()
     private weak var delegate: HomeDataManagerDelegate?
 
     init() {
-        homeService.setDelegate(self)
+        homeRepository.setDelegate(self)
     }
 
     func setDelegate(_ delegate: HomeDataManagerDelegate) {
@@ -29,13 +29,13 @@ final class HomeDataManager {
     }
 
     func getHomeViewComponents(currentLocation: CLLocation) {
-        homeService.fetchData(
+        homeRepository.fetchData(
             currentLocation: (latitude: currentLocation.coordinate.latitude,
                               longitude: currentLocation.coordinate.longitude))
     }
 }
 
-extension HomeDataManager: HomeServiceDelegate {
+extension HomeDataManager: HomeRepositoryDelegate {
     func didFetchHeroImageData(_ heroImageData: HomeViewComponentsData.HeroImageData) {
         delegate?.updateHeroImageData(heroImageData)
     }

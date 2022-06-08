@@ -1,5 +1,5 @@
 //
-//  HomeService.swift
+//  HomeRepository.swift
 //  Airbnb_iOS
 //
 //  Created by 김한솔 on 2022/06/03.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol HomeServiceDelegate: AnyObject {
+protocol HomeRepositoryDelegate: AnyObject {
     func didFetchHeroImageData(_ heroImageData: HomeViewComponentsData.HeroImageData)
     func didFetchAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData)
     func didFetchThemeSpotData(_ themeSpotData: HomeViewComponentsData.ThemeSpotData)
 }
 
-struct HomeService {
-    private weak var delegate: HomeServiceDelegate?
+struct HomeRepository {
+    private weak var delegate: HomeRepositoryDelegate?
 
     func fetchData(currentLocation: (latitude: Double, longitude: Double)) {
         // 대략적으로 네트워크를 이용했을 때의 코드 구현
@@ -47,12 +47,12 @@ struct HomeService {
         convert(DTO: decodedData)
     }
 
-    mutating func setDelegate(_ delegate: HomeServiceDelegate) {
+    mutating func setDelegate(_ delegate: HomeRepositoryDelegate) {
         self.delegate = delegate
     }
 }
 
-private extension HomeService {
+private extension HomeRepository {
     func convert(DTO: HomeDto) {
         convertToHeroImageData(DTO: DTO.mainEventDto)
         DTO.aroundSpotDto.forEach { eachAroundSpotDto in

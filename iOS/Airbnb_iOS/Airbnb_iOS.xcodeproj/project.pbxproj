@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		02072FF52849D216003D7D28 /* HomeViewComponentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */; };
 		02072FF72849E242003D7D28 /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF62849E242003D7D28 /* HomeDataManager.swift */; };
-		02072FF92849F365003D7D28 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF82849F365003D7D28 /* HomeService.swift */; };
+		02072FF92849F365003D7D28 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF82849F365003D7D28 /* HomeRepository.swift */; };
 		0238DE41284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */; };
 		0238DE43284F75D60084B6D7 /* AccomodationsViewComponentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */; };
 		0244F60F284DD3DE002D385C /* HomeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0244F60E284DD3DE002D385C /* HomeDto.swift */; };
@@ -97,7 +97,7 @@
 /* Begin PBXFileReference section */
 		02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewComponentsData.swift; sourceTree = "<group>"; };
 		02072FF62849E242003D7D28 /* HomeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
-		02072FF82849F365003D7D28 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		02072FF82849F365003D7D28 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsCollectionDataSource.swift; sourceTree = "<group>"; };
 		0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsViewComponentsData.swift; sourceTree = "<group>"; };
 		0244F60E284DD3DE002D385C /* HomeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDto.swift; sourceTree = "<group>"; };
@@ -206,12 +206,12 @@
 			path = DataSource;
 			sourceTree = "<group>";
 		};
-		02072FFB2849F3CA003D7D28 /* Service */ = {
+		02072FFB2849F3CA003D7D28 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				02072FF82849F365003D7D28 /* HomeService.swift */,
+				02072FF82849F365003D7D28 /* HomeRepository.swift */,
 			);
-			path = Service;
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		02874046283D37AA0009C62D /* Extension */ = {
@@ -247,7 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				D2BD027028484C7600AC7B78 /* UseCase */,
-				02072FFB2849F3CA003D7D28 /* Service */,
+				02072FFB2849F3CA003D7D28 /* Repository */,
 				02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */,
 				0244F60E284DD3DE002D385C /* HomeDto.swift */,
 			);
@@ -912,7 +912,7 @@
 				D298A233284DEF43004B12C9 /* DetailPageCollectionView.swift in Sources */,
 				D2BD027B284DAD4000AC7B78 /* AlamofireNet.swift in Sources */,
 				D298A237284EE882004B12C9 /* DetailPageCollectionDataSource.swift in Sources */,
-				02072FF92849F365003D7D28 /* HomeService.swift in Sources */,
+				02072FF92849F365003D7D28 /* HomeRepository.swift in Sources */,
 				D298A22D284DDA73004B12C9 /* TitleTextCell.swift in Sources */,
 				02FAD36F2848AB110053327B /* DecidingOptionsTableDelegate.swift in Sources */,
 				02B3BBA02844B85600753CA7 /* Day.swift in Sources */,
