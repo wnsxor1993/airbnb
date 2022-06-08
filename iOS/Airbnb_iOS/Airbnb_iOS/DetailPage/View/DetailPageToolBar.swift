@@ -9,6 +9,8 @@ import UIKit
 
 class DetailPageToolBar: UIView {
     
+    var delegate: ReserveToolBarDelegate?
+    
     private let costLabel: UILabel = {
         let cost = UILabel()
         cost.font = .systemFont(ofSize: 17, weight: .semibold)
@@ -37,6 +39,7 @@ class DetailPageToolBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        setReserveButtonAction()
         setContstraint()
     }
 
@@ -55,6 +58,21 @@ class DetailPageToolBar: UIView {
 }
 
 private extension DetailPageToolBar {
+    
+    func setReserveButtonAction() {
+        if #available(iOS 14.0, *) {
+            reserveButton.addAction(UIAction(handler: { _ in
+                self.delegate?.didSelectReserveButton()
+            }), for: .touchDown)
+        } else {
+            reserveButton.addTarget(self, action: #selector(touchedMoreButton), for: .touchDown)
+        }
+    }
+    
+    @objc
+    func touchedMoreButton() {
+        self.delegate?.didSelectReserveButton()
+    }
     
     func setContstraint() {
         self.addSubViews(costLabel, dateLabel, reserveButton)

@@ -54,6 +54,7 @@ private extension DetailPageViewController {
     
     func setToolbar() {
         navigationController?.navigationBar.isHidden = true
+        self.toolBarView.delegate = self
 
         let toolBar = UIToolbar()
         view.addSubview(toolBar)
@@ -98,7 +99,12 @@ private extension DetailPageViewController {
     }
 }
 
-extension DetailPageViewController: DetailTextDescriptionDelegate {
+extension DetailPageViewController: DetailTextDescriptionDelegate, ReserveToolBarDelegate {
+    
+    func didSelectReserveButton() {
+        print("예약 완료")
+    }
+    
     func didSelectMoreButton() {
         self.detailPageDataSource.toggleIsShowMore()
         

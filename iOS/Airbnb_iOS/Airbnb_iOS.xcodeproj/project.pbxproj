@@ -44,6 +44,7 @@
 		D247A48C283F640A00A92DDD /* BrowsingSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247A48B283F640A00A92DDD /* BrowsingSpotCell.swift */; };
 		D247A490284068DA00A92DDD /* FamousSpotCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247A48F284068DA00A92DDD /* FamousSpotCollectionDataSource.swift */; };
 		D247A4922840690400A92DDD /* BrowsingSpotCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247A4912840690400A92DDD /* BrowsingSpotCollectionDataSource.swift */; };
+		D254C8752850350200F1B1B0 /* ReserveToolBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D254C8742850350200F1B1B0 /* ReserveToolBarDelegate.swift */; };
 		D298A228284DD84A004B12C9 /* DetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A227284DD84A004B12C9 /* DetailPageViewController.swift */; };
 		D298A22B284DD8E3004B12C9 /* ThumbnailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A22A284DD8E3004B12C9 /* ThumbnailImageCell.swift */; };
 		D298A22D284DDA73004B12C9 /* TitleTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298A22C284DDA73004B12C9 /* TitleTextCell.swift */; };
@@ -110,6 +111,7 @@
 		D247A48B283F640A00A92DDD /* BrowsingSpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowsingSpotCell.swift; sourceTree = "<group>"; };
 		D247A48F284068DA00A92DDD /* FamousSpotCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousSpotCollectionDataSource.swift; sourceTree = "<group>"; };
 		D247A4912840690400A92DDD /* BrowsingSpotCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowsingSpotCollectionDataSource.swift; sourceTree = "<group>"; };
+		D254C8742850350200F1B1B0 /* ReserveToolBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveToolBarDelegate.swift; sourceTree = "<group>"; };
 		D298A227284DD84A004B12C9 /* DetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageViewController.swift; sourceTree = "<group>"; };
 		D298A22A284DD8E3004B12C9 /* ThumbnailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailImageCell.swift; sourceTree = "<group>"; };
 		D298A22C284DDA73004B12C9 /* TitleTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextCell.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				D207EBD3284F9568003B67F0 /* DetailTextDescriptionDelegate.swift */,
+				D254C8742850350200F1B1B0 /* ReserveToolBarDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				D2FFBFD1283C868300C97D16 /* AppDelegate.swift in Sources */,
 				D2FFBFE8283CA72500C97D16 /* WishlistViewController.swift in Sources */,
 				D207EBCD284F3AA3003B67F0 /* CollectionFooterView.swift in Sources */,
+				D254C8752850350200F1B1B0 /* ReserveToolBarDelegate.swift in Sources */,
 				02AE9A2F283FD5AF00F3B5E5 /* CalendarUseCase.swift in Sources */,
 				D2FFBFE6283CA70B00C97D16 /* HomeViewController.swift in Sources */,
 				0287404F283DFD250009C62D /* FindAccomodationViewController.swift in Sources */,
