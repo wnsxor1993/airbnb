@@ -43,6 +43,7 @@ private extension DecidingOptionsViewController {
     func setViewInitialState() {
         view.backgroundColor = .white
         navigationItem.title = "숙소 찾기"
+        navigationController?.navigationBar.topItem?.backButtonTitle = "뒤로"
         view = decidingOptionsView
         setToolbar()
     }

@@ -27,6 +27,9 @@ final class AccomodationsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.topItem?.backButtonTitle = "뒤로"
+        navigationItem.title = "숙소 찾기"
     }
 
     override func viewWillDisappear(_ animated: Bool) {

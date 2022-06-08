@@ -129,7 +129,7 @@ private extension BrowseViewController {
     
     func setNavigationItem() {
         self.navigationItem.title = "숙소 찾기"
-        self.navigationItem.backButtonTitle = "뒤로"
+        navigationController?.navigationBar.topItem?.backButtonTitle = "뒤로"
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationController?.hidesBarsOnSwipe = false
     }
