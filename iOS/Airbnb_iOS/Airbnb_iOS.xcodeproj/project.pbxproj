@@ -10,12 +10,20 @@
 		02072FF52849D216003D7D28 /* HomeViewComponentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */; };
 		02072FF72849E242003D7D28 /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF62849E242003D7D28 /* HomeDataManager.swift */; };
 		02072FF92849F365003D7D28 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF82849F365003D7D28 /* HomeService.swift */; };
+		0238DE41284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */; };
+		0238DE43284F75D60084B6D7 /* AccomodationsViewComponentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */; };
 		0244F60F284DD3DE002D385C /* HomeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0244F60E284DD3DE002D385C /* HomeDto.swift */; };
 		02501E16284DC84B00CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
 		02501E18284DC94A00CB4CB8 /* JSONConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */; };
 		02501E19284DC9C400CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
 		026731772848B0BC007FEBEF /* CalendarCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */; };
 		0267317B284924D8007FEBEF /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0267317A284924D8007FEBEF /* Int+.swift */; };
+		027F9C34284F1E3E00AEC054 /* AccomodationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C33284F1E3E00AEC054 /* AccomodationsViewController.swift */; };
+		027F9C36284F1EB600AEC054 /* AccomodationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C35284F1EB600AEC054 /* AccomodationsView.swift */; };
+		027F9C38284F207A00AEC054 /* AccomodationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C37284F207A00AEC054 /* AccomodationsCell.swift */; };
+		027F9C3A284F4C6500AEC054 /* AccomodationOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C39284F4C6500AEC054 /* AccomodationOptionCell.swift */; };
+		027F9C3C284F4D6500AEC054 /* CountAccomodationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C3B284F4D6500AEC054 /* CountAccomodationsCell.swift */; };
+		027F9C3E284F4FDC00AEC054 /* AccomodationViewCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F9C3D284F4FDC00AEC054 /* AccomodationViewCollectionLayout.swift */; };
 		02874048283D37B50009C62D /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02874047283D37B50009C62D /* UIColor+.swift */; };
 		0287404A283D3B6D0009C62D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02874049283D3B6D0009C62D /* HomeView.swift */; };
 		0287404C283DBE810009C62D /* UiView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287404B283DBE810009C62D /* UiView+.swift */; };
@@ -91,11 +99,19 @@
 		02072FF42849D216003D7D28 /* HomeViewComponentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewComponentsData.swift; sourceTree = "<group>"; };
 		02072FF62849E242003D7D28 /* HomeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
 		02072FF82849F365003D7D28 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsCollectionDataSource.swift; sourceTree = "<group>"; };
+		0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsViewComponentsData.swift; sourceTree = "<group>"; };
 		0244F60E284DD3DE002D385C /* HomeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDto.swift; sourceTree = "<group>"; };
 		02501E15284DC84B00CB4CB8 /* mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
 		02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConverterTests.swift; sourceTree = "<group>"; };
 		026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionDataSource.swift; sourceTree = "<group>"; };
 		0267317A284924D8007FEBEF /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		027F9C33284F1E3E00AEC054 /* AccomodationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsViewController.swift; sourceTree = "<group>"; };
+		027F9C35284F1EB600AEC054 /* AccomodationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsView.swift; sourceTree = "<group>"; };
+		027F9C37284F207A00AEC054 /* AccomodationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsCell.swift; sourceTree = "<group>"; };
+		027F9C39284F4C6500AEC054 /* AccomodationOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationOptionCell.swift; sourceTree = "<group>"; };
+		027F9C3B284F4D6500AEC054 /* CountAccomodationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountAccomodationsCell.swift; sourceTree = "<group>"; };
+		027F9C3D284F4FDC00AEC054 /* AccomodationViewCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationViewCollectionLayout.swift; sourceTree = "<group>"; };
 		02874047283D37B50009C62D /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		02874049283D3B6D0009C62D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0287404B283DBE810009C62D /* UiView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiView+.swift"; sourceTree = "<group>"; };
@@ -345,6 +361,7 @@
 				02FAD36B2848AA1A0053327B /* DataSource&Delegate */,
 				0287404E283DFD250009C62D /* FindAccomodationViewController.swift */,
 				02B3BB9A2844653600753CA7 /* CalendarViewController.swift */,
+				027F9C33284F1E3E00AEC054 /* AccomodationsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -358,6 +375,10 @@
 				02874056283E0E600009C62D /* BudgetView.swift */,
 				02B3BB9C28446AB400753CA7 /* CalendarCollectionCell.swift */,
 				02B3BBA32844E7A100753CA7 /* CalendarCollectionHeaderView.swift */,
+				027F9C35284F1EB600AEC054 /* AccomodationsView.swift */,
+				027F9C37284F207A00AEC054 /* AccomodationsCell.swift */,
+				027F9C39284F4C6500AEC054 /* AccomodationOptionCell.swift */,
+				027F9C3B284F4D6500AEC054 /* CountAccomodationsCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -369,6 +390,7 @@
 				02B3BB9F2844B85600753CA7 /* Day.swift */,
 				02B3BBA12844B85F00753CA7 /* MonthMetadata.swift */,
 				02FAD3672848A13B0053327B /* AccomodationData.swift */,
+				0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -443,6 +465,7 @@
 				02FAD36C2848AA340053327B /* FindAccomodationTableDataSource.swift */,
 				02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */,
 				026731762848B0BC007FEBEF /* CalendarCollectionDataSource.swift */,
+				0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */,
 			);
 			path = "DataSource&Delegate";
 			sourceTree = "<group>";
@@ -539,6 +562,7 @@
 			children = (
 				D2B52C3F283F153900C58271 /* HomeViewCollectionLayout.swift */,
 				D2EA1A16284455F800C75419 /* BrowsingSpotCollectionLayout.swift */,
+				027F9C3D284F4FDC00AEC054 /* AccomodationViewCollectionLayout.swift */,
 				D298A234284EE409004B12C9 /* DetailPageCollectionLayout.swift */,
 			);
 			path = CollectionLayout;
@@ -842,6 +866,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				027F9C3C284F4D6500AEC054 /* CountAccomodationsCell.swift in Sources */,
+				027F9C3A284F4C6500AEC054 /* AccomodationOptionCell.swift in Sources */,
 				026731772848B0BC007FEBEF /* CalendarCollectionDataSource.swift in Sources */,
 				02072FF72849E242003D7D28 /* HomeDataManager.swift in Sources */,
 				02DF0CD7283CB3C7003D0679 /* AroundSpotCell.swift in Sources */,
@@ -851,6 +877,7 @@
 				02FAD3682848A13B0053327B /* AccomodationData.swift in Sources */,
 				D2FFBFD5283C868300C97D16 /* TabBarController.swift in Sources */,
 				02B3BB9B2844653600753CA7 /* CalendarViewController.swift in Sources */,
+				0238DE41284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift in Sources */,
 				02874057283E0E600009C62D /* BudgetView.swift in Sources */,
 				02AE9A37283FDADF00F3B5E5 /* DateConverter.swift in Sources */,
 				02FAD36D2848AA340053327B /* FindAccomodationTableDataSource.swift in Sources */,
@@ -867,6 +894,7 @@
 				02AE9A2F283FD5AF00F3B5E5 /* CalendarUseCase.swift in Sources */,
 				D2FFBFE6283CA70B00C97D16 /* HomeViewController.swift in Sources */,
 				0287404F283DFD250009C62D /* FindAccomodationViewController.swift in Sources */,
+				027F9C3E284F4FDC00AEC054 /* AccomodationViewCollectionLayout.swift in Sources */,
 				D2BD027228484CA100AC7B78 /* LocationManager.swift in Sources */,
 				D2FFBFD3283C868300C97D16 /* SceneDelegate.swift in Sources */,
 				D298A22F284DE0E3004B12C9 /* HostTextCell.swift in Sources */,
@@ -876,10 +904,13 @@
 				D2FFBFEA283CA73B00C97D16 /* ReservationViewController.swift in Sources */,
 				D207EBD4284F9568003B67F0 /* DetailTextDescriptionDelegate.swift in Sources */,
 				02DF0CDD283CBAB6003D0679 /* HomeViewCollectionDataSource.swift in Sources */,
+				027F9C36284F1EB600AEC054 /* AccomodationsView.swift in Sources */,
 				D2BD0279284DACA800AC7B78 /* JSONConverter.swift in Sources */,
 				0267317B284924D8007FEBEF /* Int+.swift in Sources */,
 				02B3BB9D28446AB400753CA7 /* CalendarCollectionCell.swift in Sources */,
 				0244F60F284DD3DE002D385C /* HomeDto.swift in Sources */,
+				027F9C38284F207A00AEC054 /* AccomodationsCell.swift in Sources */,
+				027F9C34284F1E3E00AEC054 /* AccomodationsViewController.swift in Sources */,
 				02874048283D37B50009C62D /* UIColor+.swift in Sources */,
 				02AE9A3D28406A6600F3B5E5 /* String+.swift in Sources */,
 				D298A233284DEF43004B12C9 /* DetailPageCollectionView.swift in Sources */,
@@ -889,6 +920,7 @@
 				D298A22D284DDA73004B12C9 /* TitleTextCell.swift in Sources */,
 				02FAD36F2848AB110053327B /* FindAccomodationTableDelegate.swift in Sources */,
 				02B3BBA02844B85600753CA7 /* Day.swift in Sources */,
+				0238DE43284F75D60084B6D7 /* AccomodationsViewComponentsData.swift in Sources */,
 				02B3BBA22844B85F00753CA7 /* MonthMetadata.swift in Sources */,
 				D298A235284EE409004B12C9 /* DetailPageCollectionLayout.swift in Sources */,
 				D2402414284F21BF00E87E0F /* DetailPageToolBar.swift in Sources */,
