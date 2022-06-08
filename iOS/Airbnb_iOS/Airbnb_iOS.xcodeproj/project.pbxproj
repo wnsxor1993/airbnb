@@ -522,6 +522,8 @@
 				D207EBCB284F384A003B67F0 /* CollectionCell */,
 			);
 			path = View;
+            sourceTree = "<group>";
+        };
 		D298A217284DBB29004B12C9 /* Airbnb_iOSTests */ = {
 			isa = PBXGroup;
 			children = (
