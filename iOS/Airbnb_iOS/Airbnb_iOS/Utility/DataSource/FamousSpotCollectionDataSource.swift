@@ -9,9 +9,7 @@ import UIKit
 
 class FamousSpotCollectionDataSource: NSObject, UICollectionViewDataSource {
 
-    private var data: [SpotItem] = {
-        [SpotItem].init(repeating: SpotItem(image: UIImage(named: "SeoulImage") ?? UIImage(), title: "서울", distance: "차로 30분 거리"), count: 8)
-    }()
+    private var data = [HomeViewComponentsData.AroundSpotData]()
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
@@ -23,7 +21,7 @@ class FamousSpotCollectionDataSource: NSObject, UICollectionViewDataSource {
         }
 
         let item = data[indexPath.item]
-        cell.configure(image: item.image, title: item.title, distance: item.distance)
+        cell.configure(imageData: item.imageData, title: item.title, distance: item.distance)
 
         return cell
     }
@@ -38,10 +36,4 @@ class FamousSpotCollectionDataSource: NSObject, UICollectionViewDataSource {
 
         return headerView
     }
-}
-
-struct SpotItem {
-    let image: UIImage
-    let title: String
-    let distance: String
 }

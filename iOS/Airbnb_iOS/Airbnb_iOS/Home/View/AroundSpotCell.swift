@@ -43,15 +43,10 @@ final class AroundSpotCell: UICollectionViewCell {
         fatalError()
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        configure(image: nil, title: nil, distance: nil)
-    }
-
-    func configure(image: UIImage?, title: String?, distance: String?) {
-        imageView.image = image
+    func configure(imageData: Data, title: String, distance: Int) {
+        imageView.image = UIImage(data: imageData)
         titleLabel.text = title
-        distanceLabel.text = distance
+        distanceLabel.text = distance.toKM()
     }
 }
 

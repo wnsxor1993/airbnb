@@ -79,7 +79,7 @@ private extension HomeRepository {
             let aroundSpotData = HomeViewComponentsData.AroundSpotData.init(
                 imageData: imageData,
                 title: DTO.title,
-                distanceDescription: DTO.distance.toKM())
+                distance: DTO.distance)
             delegate?.didFetchAroundSpotData(aroundSpotData)
         }
     }
