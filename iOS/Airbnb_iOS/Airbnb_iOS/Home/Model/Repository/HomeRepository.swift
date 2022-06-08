@@ -17,34 +17,24 @@ struct HomeRepository {
     private weak var delegate: HomeRepositoryDelegate?
 
     func fetchData(currentLocation: (latitude: Double, longitude: Double)) {
-        // 대략적으로 네트워크를 이용했을 때의 코드 구현
-//        let baseURL = "https://test.com"
-//        let param = [
-//            "latitude": currentLocation.latitude,
-//            "longitude": currentLocation.longitude
-//        ]
-//
-//        AlamofireNet().connectNetwork(url: baseURL, method: .post, param: param) { result in
-//            switch result {
-//            case .success(let data):
-//                guard let decodedData: HomeDto = JSONConverter.decodeJsonObject(data: data) else {
-//                    return
-//                }
-//                let convertedData = convert(DTO: decodedData)
-//            case .failure(let error):
-//                print(error)
-//            }
-//
-//        }
+        let baseURL = "http://144.24.86.236/home"
+        let param = [
+            "x": currentLocation.latitude,
+            "y": currentLocation.longitude
+        ]
 
-        // mock.json 파일을 사용하기 위한 코드 (아직 서버가 올라와있지 않음)
-        guard let mockJsonPath = Bundle.main.url(forResource: "mock", withExtension: "json"),
-              let jsonData = try? Data(contentsOf: mockJsonPath),
-              let decodedData: HomeDto = JSONConverter.decodeJsonObject(data: jsonData) else {
-            return
+        AlamofireNet().connectNetwork(url: baseURL, method: .get, param: param) { result in
+            switch result {
+            case .success(let data):
+                guard let decodedData: HomeDto = JSONConverter.decodeJsonObject(data: data) else {
+                    return
+                }
+                convert(DTO: decodedData)
+            case .failure(let error):
+                print(error)
+            }
+
         }
-
-        convert(DTO: decodedData)
     }
 
     mutating func setDelegate(_ delegate: HomeRepositoryDelegate) {
