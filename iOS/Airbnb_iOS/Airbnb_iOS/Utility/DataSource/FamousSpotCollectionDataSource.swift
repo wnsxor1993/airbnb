@@ -9,7 +9,7 @@ import UIKit
 
 class FamousSpotCollectionDataSource: NSObject, UICollectionViewDataSource {
 
-    private var data = [HomeViewComponentsData.AroundSpotData]()
+    var data = [HomeViewComponentsData.AroundSpotData]()
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count

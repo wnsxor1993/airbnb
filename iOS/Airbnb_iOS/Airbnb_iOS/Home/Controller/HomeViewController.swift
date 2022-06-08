@@ -10,7 +10,6 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
 
-    private let browseViewController = BrowseViewController()
     private lazy var homeView = HomeView(frame: view.frame)
     private let dataSource = HomeViewCollectionDataSource()
 
@@ -42,6 +41,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.hidesBarsOnSwipe = true
+        tabBarController?.tabBar.isHidden = false
     }
 
     func getHomeViewComponents() {
@@ -52,7 +52,6 @@ class HomeViewController: UIViewController {
 private extension HomeViewController {
 
     func configureSettings() {
-        self.addChild(browseViewController)
         self.setHomeView()
         self.setSearchBar()
         self.setLocationAccess()
@@ -110,6 +109,11 @@ private extension HomeViewController {
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        var famousSpotData = [HomeViewComponentsData.AroundSpotData]()
+        if case let HomeViewComponentsData.secondSection(aroundSpotData) = dataSource.data[1] {
+            famousSpotData = aroundSpotData
+        }
+        let browseViewController = BrowseViewController(famousSpotData: famousSpotData)
         browseViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(browseViewController, animated: true)
 
