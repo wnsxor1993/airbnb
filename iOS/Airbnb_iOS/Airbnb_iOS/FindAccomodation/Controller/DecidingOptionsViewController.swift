@@ -1,5 +1,5 @@
 //
-//  FindAccomodationViewCont.swift
+//  DecidingOptionsViewController.swift
 //  Airbnb_iOS
 //
 //  Created by 김한솔 on 2022/05/25.
@@ -7,19 +7,19 @@
 
 import UIKit
 
-final class FindAccomodationViewController: UIViewController {
+final class DecidingOptionsViewController: UIViewController {
 
-    private lazy var findAccomodationView = FindAccomodationView(frame: view.frame)
-    private let dataSource = FindAccomodationTableDataSource()
-    private let findAccomodationTableDelegate = FindAccomodationTableDelegate()
+    private lazy var decidingOptionsView = DecidingOptionsView(frame: view.frame)
+    private let dataSource = DecidingOptionsTableDataSource()
+    private let decidingOptionsTableDelegate = DecidingOptionsTableDelegate()
     private var calendarViewController: CalendarViewController?
     private let detailPageViewController = DetailPageViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewInitialState()
-        findAccomodationView.setTableViewDateSource(dataSource)
-        findAccomodationView.setTableViewDelegate(findAccomodationTableDelegate)
+        decidingOptionsView.setTableViewDateSource(dataSource)
+        decidingOptionsView.setTableViewDelegate(decidingOptionsTableDelegate)
         setCalendarView()
     }
 
@@ -39,12 +39,12 @@ final class FindAccomodationViewController: UIViewController {
     }
 }
 
-private extension FindAccomodationViewController {
+private extension DecidingOptionsViewController {
 
     func setViewInitialState() {
         view.backgroundColor = .white
         navigationItem.title = "숙소 찾기"
-        view = findAccomodationView
+        view = decidingOptionsView
         setToolbar()
     }
 
@@ -80,29 +80,26 @@ private extension FindAccomodationViewController {
         self.calendarViewController = calendarViewController
 
         addChild(calendarViewController)
-        findAccomodationView.setSelectView(calendarViewController.view)
+        decidingOptionsView.setSelectView(calendarViewController.view)
         calendarViewController.didMove(toParent: self)
         calendarViewController.setDelegate(self)
     }
 
     func resetCalendarView() {
         dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init())
-        findAccomodationView.reloadCell()
+        decidingOptionsView.reloadCell()
         toolbarItems?[2].isEnabled = false
     }
 
     func setBudgetView() {
-//        if let calendarViewController = calendarViewController {
-//            calendarViewController.removeFromParent()
-//        }
         self.navigationController?.pushViewController(detailPageViewController, animated: true)
     }
 }
 
-extension FindAccomodationViewController: CalendarViewControllerDelegate {
+extension DecidingOptionsViewController: CalendarViewControllerDelegate {
     func didSetDateRange(_ dateRange: ClosedRange<Date>) {
         dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init(dateRange: dateRange))
-        findAccomodationView.reloadCell()
+        decidingOptionsView.reloadCell()
         toolbarItems?[2].isEnabled = true
         toolbarItems?[0] = UIBarButtonItem(title: "지우기", style: .plain, target: self, action: #selector(removeButtonOfCalendarViewTouched))
     }

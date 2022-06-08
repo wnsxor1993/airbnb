@@ -1,5 +1,5 @@
 //
-//  FindAccomodationUseCase.swift
+//  CalendarUseCase.swift
 //  Airbnb_iOS
 //
 //  Created by 김한솔 on 2022/05/27.

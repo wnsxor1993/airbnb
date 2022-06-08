@@ -1,5 +1,5 @@
 //
-//  FindAccomodationView.swift
+//  DecidingOptionsView.swift
 //  Airbnb_iOS
 //
 //  Created by 김한솔 on 2022/05/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FindAccomodationView: UIView {
+final class DecidingOptionsView: UIView {
     private let selectView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +17,7 @@ final class FindAccomodationView: UIView {
     private let infoTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(FindAccomodationCell.self, forCellReuseIdentifier: FindAccomodationCell.identifier)
+        tableView.register(DecidedOptionsCell.self, forCellReuseIdentifier: DecidedOptionsCell.identifier)
         return tableView
     }()
 
@@ -55,7 +55,7 @@ final class FindAccomodationView: UIView {
     }
 }
 
-private extension FindAccomodationView {
+private extension DecidingOptionsView {
     func setUpLayout() {
         addSubViews(selectView, infoTableView)
         backgroundColor = .white

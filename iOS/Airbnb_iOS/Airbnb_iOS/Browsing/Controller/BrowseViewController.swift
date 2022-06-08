@@ -10,7 +10,7 @@ import MapKit
 
 class BrowseViewController: UIViewController {
 
-    private let findAccomodationVC = FindAccomodationViewController()
+    private let DecidingOptionsVC = DecidingOptionsViewController()
     private let famousSpotDataSource = FamousSpotCollectionDataSource()
     private let browsingSpotDataSource = BrowsingSpotCollectionDataSource()
     private lazy var browsingSpotCollectionView = BorwsingSpotCollectionView(frame: view.frame)
@@ -95,7 +95,7 @@ extension BrowseViewController: UICollectionViewDelegate {
                     let locationData = AccomodationData.location(.init(name: locationName, latitude: coordinate.latitude, longitude: coordinate.longitude))
 
                     DispatchQueue.main.async {
-                        guard let nextViewController = self?.findAccomodationVC else { return }
+                        guard let nextViewController = self?.DecidingOptionsVC else { return }
                         nextViewController.setLocationData(locationData)
                         self?.navigationController?.pushViewController(nextViewController, animated: true)
                     }

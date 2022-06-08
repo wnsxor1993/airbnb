@@ -1,5 +1,5 @@
 //
-//  FindAccomodationCell.swift
+//  DecidedOptionsCell.swift
 //  Airbnb_iOS
 //
 //  Created by 김한솔 on 2022/05/25.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class FindAccomodationCell: UITableViewCell {
-    static let identifier = "FindAccomodationCell"
+final class DecidedOptionsCell: UITableViewCell {
+    static let identifier = "DecidedOptionsCell"
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -49,7 +49,7 @@ final class FindAccomodationCell: UITableViewCell {
     }
 }
 
-private extension FindAccomodationCell {
+private extension DecidedOptionsCell {
     func setUpLayout() {
         addSubViews(titleLabel, descriptionLabel)
 
