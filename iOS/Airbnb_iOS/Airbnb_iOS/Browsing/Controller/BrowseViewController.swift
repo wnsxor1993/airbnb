@@ -28,6 +28,15 @@ class BrowseViewController: UIViewController {
 
     private var searchDataManager = MKDataManager()
 
+    init(famousSpotData: [HomeViewComponentsData.AroundSpotData]) {
+        super.init(nibName: nil, bundle: nil)
+        famousSpotDataSource.data = famousSpotData
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureAllInitialSettings()

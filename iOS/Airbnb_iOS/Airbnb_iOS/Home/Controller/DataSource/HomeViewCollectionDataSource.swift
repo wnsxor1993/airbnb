@@ -48,7 +48,7 @@ extension HomeViewCollectionDataSource: UICollectionViewDataSource {
             }
 
             let item = aroundSpotData[indexPath.item]
-            cell.configure(image: UIImage(data: item.imageData), title: item.title, distance: item.distanceDescription)
+            cell.configure(imageData: item.imageData, title: item.title, distance: item.distance)
             return cell
         case let .thirdSection(themeSpotData):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThemeSpotCell.identifier, for: indexPath) as? ThemeSpotCell else {
