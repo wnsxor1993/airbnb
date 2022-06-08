@@ -13,6 +13,7 @@ final class FindAccomodationViewController: UIViewController {
     private let dataSource = FindAccomodationTableDataSource()
     private let findAccomodationTableDelegate = FindAccomodationTableDelegate()
     private var calendarViewController: CalendarViewController?
+    private let detailPageViewController = DetailPageViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,9 +92,10 @@ private extension FindAccomodationViewController {
     }
 
     func setBudgetView() {
-        if let calendarViewController = calendarViewController {
-            calendarViewController.removeFromParent()
-        }
+//        if let calendarViewController = calendarViewController {
+//            calendarViewController.removeFromParent()
+//        }
+        self.navigationController?.pushViewController(detailPageViewController, animated: true)
     }
 }
 
