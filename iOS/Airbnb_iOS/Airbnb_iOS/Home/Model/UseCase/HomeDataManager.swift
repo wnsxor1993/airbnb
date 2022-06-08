@@ -9,27 +9,42 @@ import CoreLocation
 
 protocol HomeDataManagerDelegate: AnyObject {
     func updateHomeComponents(_ homeComponentsData: [HomeViewComponentsData])
+    func updateHeroImageData(_ heroImageData: HomeViewComponentsData.HeroImageData)
+    func updateAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData)
+    func updateThemeSpotData(_ themeSpotData: HomeViewComponentsData.ThemeSpotData)
     func didGetComponentsError(_ error: Error)
 }
 
 final class HomeDataManager {
 
-    private let homeService = HomeService()
-    private var delegate: HomeDataManagerDelegate?
+    private var homeService = HomeService()
+    private weak var delegate: HomeDataManagerDelegate?
+
+    init() {
+        homeService.setDelegate(self)
+    }
 
     func setDelegate(_ delegate: HomeDataManagerDelegate) {
         self.delegate = delegate
     }
 
     func getHomeViewComponents(currentLocation: CLLocation) {
-        homeService.fetchData { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let componentsData):
-                self.delegate?.updateHomeComponents(componentsData)
-            case .failure(let error):
-                self.delegate?.didGetComponentsError(error)
-            }
-        }
+        homeService.fetchData(
+            currentLocation: (latitude: currentLocation.coordinate.latitude,
+                              longitude: currentLocation.coordinate.longitude))
+    }
+}
+
+extension HomeDataManager: HomeServiceDelegate {
+    func didFetchHeroImageData(_ heroImageData: HomeViewComponentsData.HeroImageData) {
+        delegate?.updateHeroImageData(heroImageData)
+    }
+    
+    func didFetchAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData) {
+        delegate?.updateAroundSpotData(aroundSpotData)
+    }
+    
+    func didFetchThemeSpotData(_ themeSpotData: HomeViewComponentsData.ThemeSpotData) {
+        delegate?.updateThemeSpotData(themeSpotData)
     }
 }

@@ -1,0 +1,35 @@
+{
+    "mainEventDto": {
+        "title": "슬기로운 자연생활",
+        "label": "에어비앤비가 엄선한 위시리스트를 만나보세요.",
+        "imagePath": "https://team11-airbnb-images.s3.ap-northeast-2.amazonaws.com/CroppedHeroImage.png",
+        "buttonText": "여행 아이디어 얻기"
+    },
+    "aroundSpotDto": [
+        {
+            "title": "서울",
+            "distance": 10,
+            "imagePath": "https://team11-airbnb-images.s3.ap-northeast-2.amazonaws.com/seoul.png"
+        },
+        {
+            "title": "광주",
+            "distance": 10,
+            "imagePath": "https://team11-airbnb-images.s3.ap-northeast-2.amazonaws.com/gwangju.png"
+        },
+        {
+            "title": "의정부",
+            "distance": 10,
+            "imagePath": "https://team11-airbnb-images.s3.ap-northeast-2.amazonaws.com/uijeongbu.png"
+        }
+    ],
+    "themeSpotDto": [
+        {
+            "imagePath": "https://team11-airbnb-images.s3.ap-northeast-2.amazonaws.com/theme1.png",
+            "title": "자연생활을 만끽할 수 있는 숙소"
+        },
+        {
+            "imagePath": "https://team11-airbnb-images.s3.ap-northeast-2.amazonaws.com/theme3.jpeg",
+            "title": "독특한 공간"
+        }
+    ]
+}

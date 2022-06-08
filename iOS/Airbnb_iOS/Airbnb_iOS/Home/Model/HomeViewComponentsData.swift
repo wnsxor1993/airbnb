@@ -17,6 +17,20 @@ enum HomeViewComponentsData {
         let title: String
         let description: String
         let buttonTitle: String
+
+        init(imageData: Data, title: String, description: String, buttonTitle: String) {
+            self.imageData = imageData
+            self.title = title
+            self.description = description
+            self.buttonTitle = buttonTitle
+        }
+
+        init() {
+            imageData = Data()
+            title = ""
+            description = ""
+            buttonTitle = ""
+        }
     }
 
     struct AroundSpotData {
