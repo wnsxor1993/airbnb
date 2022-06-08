@@ -63,8 +63,10 @@
 |---|---|---|
 |<img src="https://user-images.githubusercontent.com/92504186/172555626-c3f1d257-bc19-47da-930d-7a795e694590.jpg" alt="SS 2022-06-08 PM 03 33 54" width="100%;" />|<img src="https://user-images.githubusercontent.com/92504186/172573654-15bbfb5d-bb00-453d-adf8-bce7037b0fda.jpg" alt="SS 2022-06-08 PM 05 46 10" width="100%;" />|<img src="https://user-images.githubusercontent.com/92504186/172573807-5c3be300-06ea-410d-8934-f920ee5f3f0a.jpg" alt="SS 2022-06-08 PM 05 47 14" width="100%;" />|
 
+
+
 |DecidingOptionsView(CalendarView)|Accomodations|DetailPageView|
-<!-- |---|---|---| -->
+|---|---|---|
 |<img src="https://user-images.githubusercontent.com/92504186/172574209-9566550c-0f08-4e2a-87d1-aeaf3b169ccc.jpg" alt="SS 2022-06-08 PM 05 49 25" width="100%;" />|<img src="https://user-images.githubusercontent.com/92504186/172556620-44cdc920-a530-4112-9d0e-28bde42f9e2a.jpg" alt="SS 2022-06-08 PM 04 23 32" width="100%;" />|<img src="https://user-images.githubusercontent.com/92504186/172555940-a2d45376-1fb1-4910-814d-d0ea011b68a5.jpg" alt="SS 2022-06-08 PM 04 20 19" width="100%;" />|
 
 </div>
