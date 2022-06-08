@@ -13,6 +13,7 @@ final class FindAccomodationViewController: UIViewController {
     private let dataSource = FindAccomodationTableDataSource()
     private let findAccomodationTableDelegate = FindAccomodationTableDelegate()
     private var calendarViewController: CalendarViewController? // removeFromParent()를 위한 프로퍼티화
+    private let detailPageViewController = DetailPageViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ final class FindAccomodationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.hidesBarsOnSwipe = false
+        navigationController?.isToolbarHidden = false
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,9 +89,10 @@ private extension FindAccomodationViewController {
     }
 
     func setBudgetView() {
-        if let calendarViewController = calendarViewController {
-            calendarViewController.removeFromParent()
-        }
+//        if let calendarViewController = calendarViewController {
+//            calendarViewController.removeFromParent()
+//        }
+        self.navigationController?.pushViewController(detailPageViewController, animated: true)
     }
 }
 
