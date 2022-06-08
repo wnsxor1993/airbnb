@@ -165,28 +165,20 @@ extension HomeViewController: HomeDataManagerDelegate {
     }
 
     func updateAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData) {
-        switch dataSource.data[1] {
-        case .secondSection(let previousData):
-            let updatedData = previousData + [aroundSpotData]
+        if case let HomeViewComponentsData.secondSection(previousData) = dataSource.data[1] {
+            let updatedData = (previousData + [aroundSpotData]).sorted {
+                $0.distance < $1.distance
+            }
             dataSource.data[1] = .secondSection(updatedData)
-        default:
-            return
-        }
-        DispatchQueue.main.async { [weak self] in
-            self?.homeView.reloadCollectionViewCell(sectionNumber: 1)
+            homeView.reloadCollectionViewCell(sectionNumber: 1)
         }
     }
 
     func updateThemeSpotData(_ themeSpotData: HomeViewComponentsData.ThemeSpotData) {
-        switch dataSource.data[2] {
-        case .thirdSection(let previousData):
+        if case let HomeViewComponentsData.thirdSection(previousData) = dataSource.data[2] {
             let updatedData = previousData + [themeSpotData]
             dataSource.data[2] = .thirdSection(updatedData)
-        default:
-            return
-        }
-        DispatchQueue.main.async { [weak self] in
-            self?.homeView.reloadCollectionViewCell(sectionNumber: 2)
+            homeView.reloadCollectionViewCell(sectionNumber: 2)
         }
     }
 
