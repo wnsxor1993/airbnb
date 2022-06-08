@@ -10,6 +10,16 @@ import UIKit
 class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
 
     private var data = DetailPageItem()
+    private(set) var delegateObject: DetailPageViewController?
+    private var isShowMore = false
+    
+    func setDelegateObject(object: DetailPageViewController) {
+        self.delegateObject = object
+    }
+    
+    func toggleIsShowMore() {
+        isShowMore.toggle()
+    }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return DetailPageCase.allCases.count
@@ -55,11 +65,19 @@ class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
             return cell
             
         case .thirdCase:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailTextCell.identifier, for: indexPath) as? DetailTextCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailTextCell.identifier, for: indexPath) as? DetailTextCell, let object = delegateObject else {
                 return UICollectionViewCell()
             }
             
+            cell.delegate = object
             cell.configure(detail: data.description.description)
+            
+            if isShowMore {
+                cell.changeNoLimitNumberOfLines()
+            } else {
+                cell.changeLimitNumberOfLines()
+            }
+            
             return cell
         }
     }
@@ -126,7 +144,6 @@ struct DetailPageItem {
             description =
             """
             조선이 임진왜란을 당하여 전쟁 초기 이를 감당하기 어려울 정도로 국력이 쇠약해진 것은 왜란이 일어난 선조대에 이르러서 비롯된 것은 아니었다. 이미 훨씬 이전부터 중쇠(中衰)의 기운이 나타나기 시작하였다.
-            
             정치적으로는 연산군 이후 명종대에 이르는 4대 사화(四大士禍)와 훈구(勳舊)·사림(士林) 세력간에 계속된 정쟁으로 인한 중앙 정계의 혼란, 사림 세력이 득세한 선조 즉위 이후 격화된 당쟁 등으로 정치의 정상적인 운영을 수행하기 어려운 지경이었다.
             """
         }

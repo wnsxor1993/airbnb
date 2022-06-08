@@ -47,6 +47,7 @@ private extension DetailPageViewController {
     
     func setDetailPageCollectionView() {
         self.detailPageCollectionView.collectionView.delegate = self
+        self.detailPageDataSource.setDelegateObject(object: self)
         self.detailPageCollectionView.setDataSource(detailPageDataSource)
         self.view.addSubview(detailPageCollectionView)
     }
@@ -94,5 +95,15 @@ private extension DetailPageViewController {
     @objc
     func touchedBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension DetailPageViewController: DetailTextDescriptionDelegate {
+    func didSelectMoreButton() {
+        self.detailPageDataSource.toggleIsShowMore()
+        
+        DispatchQueue.main.async {
+            self.detailPageCollectionView.collectionView.reloadSections(IndexSet(integer: IndexSet.Element(bitPattern: 3)))
+        }
     }
 }

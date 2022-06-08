@@ -39,6 +39,7 @@
 		02FAD36F2848AB110053327B /* FindAccomodationTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAD36E2848AB110053327B /* FindAccomodationTableDelegate.swift */; };
 		6D77C14CD0C71F86C79B5949 /* Pods_Airbnb_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FCF364B69EE3C5A4173A56F /* Pods_Airbnb_iOS.framework */; };
 		D207EBCD284F3AA3003B67F0 /* CollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207EBCC284F3AA3003B67F0 /* CollectionFooterView.swift */; };
+		D207EBD4284F9568003B67F0 /* DetailTextDescriptionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207EBD3284F9568003B67F0 /* DetailTextDescriptionDelegate.swift */; };
 		D2402414284F21BF00E87E0F /* DetailPageToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2402413284F21BF00E87E0F /* DetailPageToolBar.swift */; };
 		D247A48C283F640A00A92DDD /* BrowsingSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247A48B283F640A00A92DDD /* BrowsingSpotCell.swift */; };
 		D247A490284068DA00A92DDD /* FamousSpotCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247A48F284068DA00A92DDD /* FamousSpotCollectionDataSource.swift */; };
@@ -104,6 +105,7 @@
 		9FCF364B69EE3C5A4173A56F /* Pods_Airbnb_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Airbnb_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C9C3510E21BC4268E4F21D /* Pods-Airbnb_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbnb_iOS.debug.xcconfig"; path = "Target Support Files/Pods-Airbnb_iOS/Pods-Airbnb_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D207EBCC284F3AA3003B67F0 /* CollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFooterView.swift; sourceTree = "<group>"; };
+		D207EBD3284F9568003B67F0 /* DetailTextDescriptionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextDescriptionDelegate.swift; sourceTree = "<group>"; };
 		D2402413284F21BF00E87E0F /* DetailPageToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageToolBar.swift; sourceTree = "<group>"; };
 		D247A48B283F640A00A92DDD /* BrowsingSpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowsingSpotCell.swift; sourceTree = "<group>"; };
 		D247A48F284068DA00A92DDD /* FamousSpotCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousSpotCollectionDataSource.swift; sourceTree = "<group>"; };
@@ -429,6 +431,14 @@
 			path = CollectionCell;
 			sourceTree = "<group>";
 		};
+		D207EBD2284F9521003B67F0 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				D207EBD3284F9568003B67F0 /* DetailTextDescriptionDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
 		D2562ED8283DCE3B00336E49 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +470,7 @@
 		D298A224284DD81A004B12C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D207EBD2284F9521003B67F0 /* Delegate */,
 				D298A227284DD84A004B12C9 /* DetailPageViewController.swift */,
 			);
 			path = Controller;
@@ -729,6 +740,7 @@
 				D2B52C3E283E0CDE00C58271 /* BorwsingSpotCollectionView.swift in Sources */,
 				02B3BB9928445E9B00753CA7 /* CalendarView.swift in Sources */,
 				D2FFBFEA283CA73B00C97D16 /* ReservationViewController.swift in Sources */,
+				D207EBD4284F9568003B67F0 /* DetailTextDescriptionDelegate.swift in Sources */,
 				02DF0CDD283CBAB6003D0679 /* HomeViewCollectionDataSource.swift in Sources */,
 				D2BD0279284DACA800AC7B78 /* JSONConverter.swift in Sources */,
 				0267317B284924D8007FEBEF /* Int+.swift in Sources */,

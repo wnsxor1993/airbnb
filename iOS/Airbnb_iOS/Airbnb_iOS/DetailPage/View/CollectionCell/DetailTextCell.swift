@@ -10,6 +10,7 @@ import UIKit
 class DetailTextCell: UICollectionViewCell {
     
     static let identifier = "DetailTextCell"
+    var delegate: DetailTextDescriptionDelegate?
 
     private let detailText: UILabel = {
         let detail = UILabel()
@@ -33,6 +34,7 @@ class DetailTextCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setLayout()
+        self.setMoreButtonAction()
     }
 
     @available(*, unavailable)
@@ -48,10 +50,33 @@ class DetailTextCell: UICollectionViewCell {
     func configure(detail: String?) {
         detailText.text = detail
     }
+    
+    func changeNoLimitNumberOfLines() {
+        self.detailText.numberOfLines = 0
+    }
+    
+    func changeLimitNumberOfLines() {
+        self.detailText.numberOfLines = 3
+    }
 }
 
 private extension DetailTextCell {
 
+    func setMoreButtonAction() {
+        if #available(iOS 14.0, *) {
+            moreButton.addAction(UIAction(handler: { _ in
+                self.delegate?.didSelectMoreButton()
+            }), for: .touchDown)
+        } else {
+            moreButton.addTarget(self, action: #selector(touchedMoreButton), for: .touchDown)
+        }
+    }
+    
+    @objc
+    func touchedMoreButton() {
+        self.delegate?.didSelectMoreButton()
+    }
+    
     func setLayout() {
         contentView.addSubViews(detailText, moreButton)
 
