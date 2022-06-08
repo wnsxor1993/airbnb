@@ -74,6 +74,9 @@ struct AccomodationViewCollectionLayout {
                 widthDimension: .fractionalWidth(1),
                 heightDimension: .estimated(381))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(
+                top: 0, leading: 0,
+                bottom: itemInset*4/3, trailing: 0)
 
             let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                            heightDimension: .estimated(420)),

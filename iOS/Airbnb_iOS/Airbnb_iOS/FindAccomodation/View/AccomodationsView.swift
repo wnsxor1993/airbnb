@@ -27,7 +27,6 @@ final class AccomodationsView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         addSubview(accomodationsCollectionView)
-        layoutMargins = UIEdgeInsets(top: 32, left: 16, bottom: 0, right: 16)
     }
 
     @available(*, unavailable)
