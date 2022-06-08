@@ -13,7 +13,6 @@ final class DecidingOptionsViewController: UIViewController {
     private let dataSource = DecidingOptionsTableDataSource()
     private let decidingOptionsTableDelegate = DecidingOptionsTableDelegate()
     private var calendarViewController: CalendarViewController?
-    private let detailPageViewController = DetailPageViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,10 +88,6 @@ private extension DecidingOptionsViewController {
         dataSource.reservationInfo[1] = AccomodationData.accomodationPeriod(.init())
         decidingOptionsView.reloadCell()
         toolbarItems?[2].isEnabled = false
-    }
-
-    func setBudgetView() {
-        self.navigationController?.pushViewController(detailPageViewController, animated: true)
     }
 }
 

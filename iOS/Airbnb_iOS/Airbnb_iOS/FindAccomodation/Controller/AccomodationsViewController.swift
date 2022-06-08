@@ -15,6 +15,7 @@ final class AccomodationsViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         dataSource.data[0] = AccomodationsViewComponentsData.accomodationOptionSection(.init(locationName: location?.name, dateRange: dateRange))
         accomodationsView.setDataSource(dataSource)
+        accomodationsView.setDelegate(object: self)
         view = accomodationsView
     }
 
@@ -31,5 +32,14 @@ final class AccomodationsViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tabBarController?.tabBar.isHidden = true
+    }
+}
+
+extension AccomodationsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.section == 2 else { return }
+        
+        let detailPageViewController = DetailPageViewController()
+        self.navigationController?.pushViewController(detailPageViewController, animated: true)
     }
 }

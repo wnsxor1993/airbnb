@@ -9,8 +9,7 @@ import UIKit
 import MapKit
 
 class BrowseViewController: UIViewController {
-
-    private let DecidingOptionsVC = DecidingOptionsViewController()
+    
     private let famousSpotDataSource = FamousSpotCollectionDataSource()
     private let browsingSpotDataSource = BrowsingSpotCollectionDataSource()
     private lazy var browsingSpotCollectionView = BorwsingSpotCollectionView(frame: view.frame)
@@ -95,9 +94,9 @@ extension BrowseViewController: UICollectionViewDelegate {
                     let locationData = AccomodationData.location(.init(name: locationName, latitude: coordinate.latitude, longitude: coordinate.longitude))
 
                     DispatchQueue.main.async {
-                        guard let nextViewController = self?.DecidingOptionsVC else { return }
-                        nextViewController.setLocationData(locationData)
-                        self?.navigationController?.pushViewController(nextViewController, animated: true)
+                        let decidingOptionsVC = DecidingOptionsViewController()
+                        decidingOptionsVC.setLocationData(locationData)
+                        self?.navigationController?.pushViewController(decidingOptionsVC, animated: true)
                     }
                 case .failure(let error):
                     print(error)

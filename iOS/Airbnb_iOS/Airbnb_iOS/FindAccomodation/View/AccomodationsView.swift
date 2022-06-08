@@ -33,6 +33,10 @@ final class AccomodationsView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    func setDelegate(object: UICollectionViewDelegate) {
+        self.accomodationsCollectionView.delegate = object
+    }
 
     func setDataSource(_ dataSource: AccomodationsCollectionDataSource) {
         accomodationsCollectionView.dataSource = dataSource
