@@ -1,4 +1,4 @@
-package com.team11.airbnb.openapi;
+package com.team11.airbnb.web.service;
 
 import com.digidemic.unitof.UnitOf;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team11.airbnb.domain.District;
 import com.team11.airbnb.domain.Location;
+import com.team11.airbnb.openapi.Position;
 import com.team11.airbnb.web.dto.AroundSpotDto;
 import com.team11.airbnb.web.repository.DistrictRepository;
 import java.time.Duration;
