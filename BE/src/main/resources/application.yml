@@ -1,8 +1,11 @@
 spring:
   datasource:
-    url: datasource_url
-    username: datasource_username
-    password: datasource_password
+#    url: datasource_url
+#    username: datasource_username
+#    password: datasource_password
+    url: jdbc:mysql://airbnb-db.cabi5bwgwykn.ap-northeast-2.rds.amazonaws.com:3306/airbnb
+    username: team11
+    password: Password1!
     driver-class-name: com.mysql.cj.jdbc.Driver
   sql:
     init:
@@ -10,7 +13,7 @@ spring:
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true

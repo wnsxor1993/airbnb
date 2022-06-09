@@ -9,82 +9,78 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ BE-deploy ]
+    branches: [ deploy-test ]
   pull_request:
-    branches: [ BE-deploy ]
+    branches: [ deploy-test ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./BE
-
     steps:
       - uses: actions/checkout@v2
+
+      # JDK11로 gradle 빌드
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'temurin'
-
-      - name: Insert data source information into application.yml
-        run: |
-          sed -i "s|datasource_url|$DATASOURCE_URL|g" ./src/main/resources/application.yml
-          sed -i "s|datasource_username|$DATASOURCE_USERNAME|g" ./src/main/resources/application.yml
-          sed -i "s|datasource_password|$DATASOURCE_PASSWORD|g" ./src/main/resources/application.yml
-        env:
-          DATASOURCE_URL: ${{ secrets.DATASOURCE_URL }}
-          DATASOURCE_USERNAME: ${{ secrets.DATASOURCE_USERNAME }}
-          DATASOURCE_PASSWORD: ${{ secrets.DATASOURCE_PASSWORD }}
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew bootJar
+        run: ./gradlew build
 
       # 도커 빌드(도커 이미지 생성)
       - name: Docker build
         run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t philsogood/airbnb:1.0 .
-          docker push ${{ secrets.DOCKER_USERNAME }}/airbnb:1.0
-          docker rmi ${{ secrets.DOCKER_USERNAME }}/airbnb:1.0
-
-      # 디렉토리 생성
-      - name: Make Directory
-        run: mkdir -p deploy
-
-      # appspec.yml 파일 복사
-      - name: Copy appspec.yml
-        run: cp appspec.yml ./deploy
-
-      # script files 복사
-      - name: Copy script
-        run: cp ./scripts/*.sh ./deploy
-
-      # 파일 압축
-      - name: Make zip file
-        run: zip -r ./airbnb.zip ./deploy
-
-      # S3와 CodeDeploy를 통한 배포
+          docker login -u zinophilsquad -p Password1234!
+          docker build -t zinophilsquad/airbnb-test-deploy:1.0 .
+          docker push zinophilsquad/airbnb-test-deploy:1.0
+          docker rmi zinophilsquad/airbnb-test-deploy:1.0
+      # 도커 이미지 배포 및 실행(EC2 ubuntu20.04로 배포)
       - name: Deploy
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: appleboy/ssh-action@master
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
-
-
-      - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 --acl private ./airbnb.zip s3://airbnb-phil-deploy-dockerimage/
-
-      - name: Start CodeDeploy
-        run: aws deploy create-deployment --application-name Airbnb-Codedeploy-Application --deployment-group-name Airbnb-Codedeploy-Target-Group --s3-location bucket=airbnb-phil-deploy-dockerimage,key=airbnb.zip,bundleType=zip
-
-      # 배경 성공시 슬랙 알람
+          host: 144.24.86.236
+          username: ubuntu
+          key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIEogIBAAKCAQEAzR7erj4IQoFcQ5S1yBOARlMe1BIAPymPV7og8/ltqbGn36uf
+            QrQLrJs0HAQ1aFrXeyd+aIKm68XSlWAcHVIwIEC/Sz14vIMhQYZLS++frVJnkWjN
+            W75bc3/Wkh7u71l45OM+8LXztkKwIi7z+CfP/0lK7PKMPPdZbZCe2hZJjwnSNUVg
+            C6/SO/Kbp7K6e6d3f2XYRREazER3pxnQLJiykHIQPzA6siRFrnqbprGnp47mtQSp
+            CrLY3aRxsjXg0TkK9lEUYM5iUMNBFXMYH+RmR11I20o+AJehbt47jAFgIl93fcAd
+            yrEo7jTNHbr0r6TeOLTdJNoTcd1Wl8us3OBrMwIDAQABAoIBAApp/iWb4ft5FIrH
+            KruFEfGAGC6YLgmxkyTXFFk5WVymN78JYu/rXYmz5N9kmfmPCHr+NFLGCgd/vFii
+            eorv40r1PpZpVo9A8Rf3ONdwIQvsWnRtfQ+isy3tWE2EOIlPt5hCBANgmYZauGqO
+            i7XA/7RsWjDRglaOEFeZt2xHJBDuTWsmNWCCdc5o8rX73c1cUz6BcN2I7/av6LSU
+            gM40F8/z+eu8Z7vzAY/HtKHbrj/lqABsgObKnNa4VI0dlQYKhlHwXAM+hZ7e57mr
+            i9f42nmZUktkldqb3UNepKy2BJxL9b9KfaXNPBF81d525uAytTMqNCaAte8o386v
+            ziv9xyECgYEA8UoI3vzdOPjAp7GAKpqnIEVQCvj+FlqhnejMCp84lZ3tWrWlKRCO
+            2kGNHdykLxIvIKtGMRxlP9Iv5X4j9w5Ag2mLgwuOgL71mXHNKB+fO8d8xijX5XWz
+            zvkrGfQFYbZG4IQiS1EFXmFDHLHlNx32fV2SBKaj9Rqx9e/yxObKuJsCgYEA2aBT
+            svYcvjqFHTtLjs9Y0yLzbuU/k+LZHQBTnXBGXPTk5FaImKgXlf0qs+KL2NcjW+h3
+            vKpgz0LC0xSrNxaPjr8WqiM/6swvUiRYa8FVCECzVIfBSpoK987nf02bxTUD94N4
+            0ck1eEX9EwH1pNAVrRYQyst+dVeewx6RSYjwRUkCgYBJ1VO9mDbBdizNo50KbGRz
+            lYIWuXZWtMj7nv7AyVPxRHAa77ZoSG7ODnz2BEwhMzlEj+Rcpsm8q76IRP8QXEYV
+            cDiGkwS6FLTmjVIv0u1Qx4xAvsLBrjClRs2PlYIIElTB4uzziwlPhgeZQj5XjU2d
+            swI5dhx5pf+KuC/bXJvvvQKBgGrbCR3fMD/LVh8DRVdKwg9xotu5np0LjpVp2qR8
+            Q2BTMqxXPNzP9DzGQRhwTUBcalUvcNNnSP+bhTPFe0giQLzTYNqLUlAEj9uiUvQd
+            ypWxxxvjSGpL9sS0iAB+59RN8rOujz1asXFr1BZoKOgS8AG7yuT4RBBzxFWEBcx4
+            e5lZAoGAE7b8lrbOmqGnGt9a+ui9X5PLPJycOEVib9JPIADFoPaKobWj4Kor1QSn
+            jOW3jBPDLMNARWSmLKIod+My9JtQb3Y1XfIB0IQcdm8zPVKZ6Dvc71GUFSucqxVt
+            tjB2069+PZnVYyzCI0zkmmzRRxqYKLhVRVcrfdHgAxMzd5Is8ro=
+            -----END RSA PRIVATE KEY-----
+          envs: GITHUB_SHA
+          script: |
+            sudo docker ps -a -q --filter "name=airbnb-test-deploy" | grep -q . && docker stop airbnb-test-deploy && docker rm airbnb-test-deploy | true
+            sudo docker rmi zinophilsquad/airbnb-test-deploy:1.0
+            sudo docker pull zinophilsquad/airbnb-test-deploy:1.0
+            sudo docker run -d -p 80:8080 --name airbnb-test-deploy zinophilsquad/airbnb-test-deploy:1.0
+            sudo docker rmi -f $(docker images -f "dangling=true" -q) || true
+      # 빌드 성공시 슬랙채널로 알람
       - name: action-slack
         uses: 8398a7/action-slack@v3
         with:
