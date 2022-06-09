@@ -22,3 +22,4 @@ spring:
 logging:
   level:
     com.team11: debug
+
