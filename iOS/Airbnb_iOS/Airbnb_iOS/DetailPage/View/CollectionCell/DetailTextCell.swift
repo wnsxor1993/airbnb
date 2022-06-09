@@ -10,7 +10,6 @@ import UIKit
 class DetailTextCell: UICollectionViewCell {
     
     static let identifier = "DetailTextCell"
-    var delegate: DetailTextDescriptionDelegate?
 
     private let detailText: UILabel = {
         let detail = UILabel()
@@ -65,7 +64,7 @@ private extension DetailTextCell {
     func setMoreButtonAction() {
         if #available(iOS 14.0, *) {
             moreButton.addAction(UIAction(handler: { _ in
-                self.delegate?.didSelectMoreButton()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moreButton"), object: self)
             }), for: .touchDown)
         } else {
             moreButton.addTarget(self, action: #selector(touchedMoreButton), for: .touchDown)
@@ -74,7 +73,7 @@ private extension DetailTextCell {
     
     @objc
     func touchedMoreButton() {
-        self.delegate?.didSelectMoreButton()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moreButton"), object: self)
     }
     
     func setLayout() {

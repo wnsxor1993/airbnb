@@ -9,12 +9,12 @@ import UIKit
 
 class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
 
+    private var newData: AccomodationsViewComponentsData.AccomodationInfo
     private var data = DetailPageItem()
-    private(set) var delegateObject: DetailPageViewController?
     private var isShowMore = false
     
-    func setDelegateObject(object: DetailPageViewController) {
-        self.delegateObject = object
+    init(data: AccomodationsViewComponentsData.AccomodationInfo) {
+        self.newData = data
     }
     
     func toggleIsShowMore() {
@@ -65,11 +65,10 @@ class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
             return cell
             
         case .thirdCase:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailTextCell.identifier, for: indexPath) as? DetailTextCell, let object = delegateObject else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailTextCell.identifier, for: indexPath) as? DetailTextCell else {
                 return UICollectionViewCell()
             }
             
-            cell.delegate = object
             cell.configure(detail: data.description.description)
             
             if isShowMore {
