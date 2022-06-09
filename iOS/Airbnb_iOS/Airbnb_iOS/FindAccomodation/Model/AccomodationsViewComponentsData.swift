@@ -56,4 +56,13 @@ enum RoomType {
             self = .none
         }
     }
+    
+    var description: String {
+        switch self {
+        case .residence:
+            return "레지던스 전체"
+        case .none:
+            return "테스트"
+        }
+    }
 }

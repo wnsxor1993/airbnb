@@ -36,6 +36,7 @@ class DetailPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setDetailPageDatasource()
         self.setDetailPageCollectionView()
         self.setToolbar()
         self.setBackButton()

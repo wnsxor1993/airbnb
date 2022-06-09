@@ -8,13 +8,19 @@
 import UIKit
 
 class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
+    
+    enum DetailPageCase: CaseIterable {
+        case mainImages
+        case roomTitle
+        case hostTitle
+        case description
+    }
 
-    private var newData: AccomodationsViewComponentsData.AccomodationInfo
-    private var data = DetailPageItem()
+    private var data: AccomodationsViewComponentsData.AccomodationInfo
     private var isShowMore = false
     
     init(data: AccomodationsViewComponentsData.AccomodationInfo) {
-        self.newData = data
+        self.data = data
     }
     
     func toggleIsShowMore() {
@@ -27,44 +33,51 @@ class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch DetailPageCase.allCases[section] {
-        case .zeroCase:
-            return data.image.count
-        case .firstCase:
+        case .mainImages:
+            return data.imageData.count
+        case .roomTitle:
             return 1
-        case .secondCase:
+        case .hostTitle:
             return 1
-        case .thirdCase:
+        case .description:
             return 1
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch DetailPageCase.allCases[indexPath.section] {
-        case .zeroCase:
+        case .mainImages:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThumbnailImageCell.identifier, for: indexPath) as? ThumbnailImageCell else {
                 return UICollectionViewCell()
             }
             
-            cell.configureImage(imageData: data.image[indexPath.item])
+            let image = UIImage(data: data.imageData[indexPath.item])
+            cell.configureImage(imageData: image)
             return cell
             
-        case .firstCase:
+        case .roomTitle:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleTextCell.identifier, for: indexPath) as? TitleTextCell else {
                 return UICollectionViewCell()
             }
             
-            cell.configure(name: data.titlePage.roomName, rate: data.titlePage.rating, lotate: data.titlePage.place)
+            let rate = "\(data.grade) (후기 \(data.countReview)개)"
+            
+            cell.configure(name: data.name, rate: rate, lotate: "test")
             return cell
             
-        case .secondCase:
+        case .hostTitle:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HostTextCell.identifier, for: indexPath) as? HostTextCell else {
                 return UICollectionViewCell()
             }
             
-            cell.configure(info: data.hostPage.roomInfo, name: data.hostPage.hostName, image: data.hostPage.hostFace, detail: data.hostPage.detailInfo)
+            let hostName = "호스트: \(data.hostInfo.name)님"
+            let hostImage = UIImage(data: data.hostInfo.profileImageData)
+            let detail = "최대인원 \(data.roomDescription.capacity)명 * 침실 \(data.roomDescription.numberOfBedRoom)개 * 침대 \(data.roomDescription.numberOfBed)개 * 욕실 \(data.roomDescription.numberOfBathRoom)개"
+            
+            cell.configure(info: data.roomDescription.roomType.description, name: hostName, image: hostImage, detail: detail)
             return cell
             
-        case .thirdCase:
+        case .description:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailTextCell.identifier, for: indexPath) as? DetailTextCell else {
                 return UICollectionViewCell()
             }
@@ -87,64 +100,5 @@ class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
         }
 
         return footerView
-    }
-}
-
-enum DetailPageCase: CaseIterable {
-    case zeroCase
-    case firstCase
-    case secondCase
-    case thirdCase
-}
-
-struct DetailPageItem {
-    let image: [UIImage]
-    let titlePage: TitlePage
-    let hostPage: HostPage
-    let description: DetailPage
-    
-    init() {
-        image = Array(repeating: UIImage(named: "roomImage") ?? UIImage(), count: 8)
-        titlePage = TitlePage()
-        hostPage = HostPage()
-        description = DetailPage()
-    }
-    
-    struct TitlePage {
-        let roomName: String
-        let rating: String
-        let place: String
-        
-        init() {
-            roomName = "Spacious and Comfortable cozy house #4"
-            rating = "4.80 (후기 127개)"
-            place = "서초구, 서울, 한국"
-        }
-    }
-    
-    struct HostPage {
-        let roomInfo: String
-        let hostName: String
-        let hostFace: UIImage
-        let detailInfo: String
-        
-        init() {
-            roomInfo = "레지던스 전체"
-            hostName = "호스트: Jong님"
-            detailInfo = "최대인원 3명∙원룸∙침대 1개∙욕실 1개"
-            hostFace = UIImage(named: "host") ?? UIImage()
-        }
-    }
-    
-    struct DetailPage {
-        let description: String
-        
-        init() {
-            description =
-            """
-            조선이 임진왜란을 당하여 전쟁 초기 이를 감당하기 어려울 정도로 국력이 쇠약해진 것은 왜란이 일어난 선조대에 이르러서 비롯된 것은 아니었다. 이미 훨씬 이전부터 중쇠(中衰)의 기운이 나타나기 시작하였다.
-            정치적으로는 연산군 이후 명종대에 이르는 4대 사화(四大士禍)와 훈구(勳舊)·사림(士林) 세력간에 계속된 정쟁으로 인한 중앙 정계의 혼란, 사림 세력이 득세한 선조 즉위 이후 격화된 당쟁 등으로 정치의 정상적인 운영을 수행하기 어려운 지경이었다.
-            """
-        }
     }
 }

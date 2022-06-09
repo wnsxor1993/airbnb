@@ -27,7 +27,7 @@ final class ThumbnailImageCell: UICollectionViewCell {
         fatalError()
     }
 
-    func configureImage(imageData: UIImage) {
+    func configureImage(imageData: UIImage?) {
         imageView.image = imageData
     }
 }
