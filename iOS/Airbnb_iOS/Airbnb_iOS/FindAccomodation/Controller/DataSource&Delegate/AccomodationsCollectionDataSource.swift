@@ -11,12 +11,8 @@ final class AccomodationsCollectionDataSource: NSObject {
     // 임시로 데이터를 가지고 있도록 구현
     var data: [AccomodationsViewComponentsData] = [
         .accomodationOptionSection(nil),
-        .countAccomodationsSection(count: 3),
-        .accomodationsSection([
-            .init(imageData: UIImage(named: "LivingImage")?.pngData() ?? Data(), grade: 5.0, countReview: 178, name: "Spacious and Comfortable cozy House", pricePerDay: 82953, finalPrice: 1493157),
-            .init(imageData: UIImage(named: "LivingImage")?.pngData() ?? Data(), grade: 5.0, countReview: 178, name: "Spacious and Comfortable cozy House", pricePerDay: 82953, finalPrice: 1493157),
-            .init(imageData: UIImage(named: "LivingImage")?.pngData() ?? Data(), grade: 5.0, countReview: 178, name: "Spacious and Comfortable cozy House", pricePerDay: 82953, finalPrice: 1493157)
-        ])
+        .countAccomodationsSection(count: 0),
+        .accomodationsSection([])
     ]
 }
 

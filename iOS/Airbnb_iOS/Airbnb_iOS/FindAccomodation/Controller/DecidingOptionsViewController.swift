@@ -62,6 +62,7 @@ private extension DecidingOptionsViewController {
         if case let .location(locationData) = dataSource.reservationInfo[0],
            case let .accomodationPeriod(dataRangeData) = dataSource.reservationInfo[1] {
             let accomodationsViewController = AccomodationsViewController(location: locationData, dateRange: dataRangeData.dateRange)
+            accomodationsViewController.getViewComponentsData()
             navigationController?.pushViewController(accomodationsViewController, animated: true)
         }
     }

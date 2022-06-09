@@ -42,6 +42,10 @@ final class AccomodationsView: UIView {
         accomodationsCollectionView.dataSource = dataSource
     }
 
+    func reloadCollectionViewCell(sectionNumber: Int) {
+        accomodationsCollectionView.reloadSections([sectionNumber])
+    }
+
     override func layoutSubviews() {
         NSLayoutConstraint.activate([
             accomodationsCollectionView.topAnchor.constraint(equalTo: topAnchor),

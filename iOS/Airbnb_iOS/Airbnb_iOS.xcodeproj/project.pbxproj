@@ -12,6 +12,9 @@
 		02072FF92849F365003D7D28 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02072FF82849F365003D7D28 /* HomeRepository.swift */; };
 		0238DE41284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */; };
 		0238DE43284F75D60084B6D7 /* AccomodationsViewComponentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */; };
+		023D10D42851834600023D3F /* AccomodationsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D10D32851834600023D3F /* AccomodationsDataManager.swift */; };
+		023D10D6285183BB00023D3F /* AccomodationsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D10D5285183BB00023D3F /* AccomodationsRepository.swift */; };
+		023D10D92851868A00023D3F /* AccomodationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D10D82851868A00023D3F /* AccomodationDTO.swift */; };
 		0244F60F284DD3DE002D385C /* HomeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0244F60E284DD3DE002D385C /* HomeDto.swift */; };
 		02501E16284DC84B00CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
 		02501E18284DC94A00CB4CB8 /* JSONConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */; };
@@ -100,6 +103,9 @@
 		02072FF82849F365003D7D28 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		0238DE40284F750A0084B6D7 /* AccomodationsCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsCollectionDataSource.swift; sourceTree = "<group>"; };
 		0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsViewComponentsData.swift; sourceTree = "<group>"; };
+		023D10D32851834600023D3F /* AccomodationsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsDataManager.swift; sourceTree = "<group>"; };
+		023D10D5285183BB00023D3F /* AccomodationsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsRepository.swift; sourceTree = "<group>"; };
+		023D10D82851868A00023D3F /* AccomodationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationDTO.swift; sourceTree = "<group>"; };
 		0244F60E284DD3DE002D385C /* HomeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDto.swift; sourceTree = "<group>"; };
 		02501E15284DC84B00CB4CB8 /* mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
 		02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConverterTests.swift; sourceTree = "<group>"; };
@@ -210,6 +216,14 @@
 			isa = PBXGroup;
 			children = (
 				02072FF82849F365003D7D28 /* HomeRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		023D10D7285183C100023D3F /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				023D10D5285183BB00023D3F /* AccomodationsRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -384,10 +398,12 @@
 			isa = PBXGroup;
 			children = (
 				D2EA19C4284076DB00C75419 /* UseCase */,
+				023D10D7285183C100023D3F /* Repository */,
 				02B3BB9F2844B85600753CA7 /* Day.swift */,
 				02B3BBA12844B85F00753CA7 /* MonthMetadata.swift */,
 				02FAD3672848A13B0053327B /* AccomodationData.swift */,
 				0238DE42284F75D60084B6D7 /* AccomodationsViewComponentsData.swift */,
+				023D10D82851868A00023D3F /* AccomodationDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -589,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				02AE9A2E283FD5AF00F3B5E5 /* CalendarUseCase.swift */,
+				023D10D32851834600023D3F /* AccomodationsDataManager.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -880,6 +897,7 @@
 				D298A231284DE46D004B12C9 /* DetailTextCell.swift in Sources */,
 				02874053283E01E70009C62D /* DecidedOptionsCell.swift in Sources */,
 				D2EA1A17284455F800C75419 /* BrowsingSpotCollectionLayout.swift in Sources */,
+				023D10D92851868A00023D3F /* AccomodationDTO.swift in Sources */,
 				02072FF52849D216003D7D28 /* HomeViewComponentsData.swift in Sources */,
 				D247A490284068DA00A92DDD /* FamousSpotCollectionDataSource.swift in Sources */,
 				02DF0CD9283CB77F003D0679 /* ThemeSpotCell.swift in Sources */,
@@ -908,12 +926,14 @@
 				027F9C38284F207A00AEC054 /* AccomodationsCell.swift in Sources */,
 				027F9C34284F1E3E00AEC054 /* AccomodationsViewController.swift in Sources */,
 				02874048283D37B50009C62D /* UIColor+.swift in Sources */,
+				023D10D42851834600023D3F /* AccomodationsDataManager.swift in Sources */,
 				02AE9A3D28406A6600F3B5E5 /* String+.swift in Sources */,
 				D298A233284DEF43004B12C9 /* DetailPageCollectionView.swift in Sources */,
 				D2BD027B284DAD4000AC7B78 /* AlamofireNet.swift in Sources */,
 				D298A237284EE882004B12C9 /* DetailPageCollectionDataSource.swift in Sources */,
 				02072FF92849F365003D7D28 /* HomeRepository.swift in Sources */,
 				D298A22D284DDA73004B12C9 /* TitleTextCell.swift in Sources */,
+				023D10D6285183BB00023D3F /* AccomodationsRepository.swift in Sources */,
 				02FAD36F2848AB110053327B /* DecidingOptionsTableDelegate.swift in Sources */,
 				02B3BBA02844B85600753CA7 /* Day.swift in Sources */,
 				0238DE43284F75D60084B6D7 /* AccomodationsViewComponentsData.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 final class AccomodationsViewController: UIViewController {
     private lazy var accomodationsView = AccomodationsView(frame: view.frame)
     private let dataSource = AccomodationsCollectionDataSource()
+    private let dataManager = AccomodationsDataManager()
 
     init(location: AccomodationData.Location?, dateRange: ClosedRange<Date>?) {
         super.init(nibName: nil, bundle: nil)
@@ -17,6 +18,8 @@ final class AccomodationsViewController: UIViewController {
         accomodationsView.setDataSource(dataSource)
         accomodationsView.setDelegate(object: self)
         view = accomodationsView
+
+        dataManager.setDelegate(self)
     }
 
     @available(*, unavailable)
@@ -36,6 +39,10 @@ final class AccomodationsViewController: UIViewController {
         super.viewWillDisappear(animated)
         tabBarController?.tabBar.isHidden = true
     }
+
+    func getViewComponentsData() {
+        dataManager.getAccomodationsData()
+    }
 }
 
 extension AccomodationsViewController: UICollectionViewDelegate {
@@ -44,5 +51,19 @@ extension AccomodationsViewController: UICollectionViewDelegate {
         
         let detailPageViewController = DetailPageViewController()
         self.navigationController?.pushViewController(detailPageViewController, animated: true)
+    }
+}
+
+extension AccomodationsViewController: AccomodationsDataManagerDelegate {
+    func updateAccomodationComponentsData(_ data: AccomodationsViewComponentsData.AccomodationInfo) {
+        if case let AccomodationsViewComponentsData.accomodationsSection(previousData) = dataSource.data[2],
+           case let AccomodationsViewComponentsData.countAccomodationsSection(count) = dataSource.data[1] {
+            let updatedData = (previousData ?? []) + [data]
+            let updatedCount = count + 1
+            dataSource.data[2] = .accomodationsSection(updatedData)
+            dataSource.data[1] = .countAccomodationsSection(count: updatedCount)
+            accomodationsView.reloadCollectionViewCell(sectionNumber: 2)
+            accomodationsView.reloadCollectionViewCell(sectionNumber: 1)
+        }
     }
 }
