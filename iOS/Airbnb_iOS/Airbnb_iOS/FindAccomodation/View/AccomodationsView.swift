@@ -43,7 +43,9 @@ final class AccomodationsView: UIView {
     }
 
     func reloadCollectionViewCell(sectionNumber: Int) {
-        accomodationsCollectionView.reloadSections([sectionNumber])
+        DispatchQueue.main.async { [weak self] in
+            self?.accomodationsCollectionView.reloadSections([sectionNumber])
+        }
     }
 
     override func layoutSubviews() {

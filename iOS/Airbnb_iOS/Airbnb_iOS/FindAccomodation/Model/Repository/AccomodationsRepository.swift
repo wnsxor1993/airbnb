@@ -40,48 +40,35 @@ struct AccomodationsRepository {
 
 private extension AccomodationsRepository {
     func convert(DTOs: [AccomodationDTO]) {
-//        for DTO in DTOs {
-//            let roomDescription = AccomodationsViewComponentsData.AccomodationInfo.RoomDescription(
-//                roomType: .init(DTO.roomInfo.roomType),
-//                numberOfBed: DTO.roomInfo.numberOfBed,
-//                numberOfBedRoom: DTO.roomInfo.numberOfBedroom,
-//                numberOfBathRoom: DTO.roomInfo.numberOfBathroom,
-//                capacity: DTO.roomInfo.capacity)
-//
-//            let dispatchGroup = DispatchGroup()
-//            dispatchGroup.enter()
-//
-//            var hostInfo: AccomodationsViewComponentsData.AccomodationInfo.HostInfo
-//            fetchImage(url: DTO.host.profileImagePath) { data in
-//                hostInfo = AccomodationsViewComponentsData.AccomodationInfo.HostInfo(name: DTO.host.name,
-//                                                                                         profileImageData: data,
-//                                                                                         isSuperHost: DTO.host.superHost)
-//                dispatchGroup.leave()
-//            }
-//
-//            DTO.roomImages.forEach { image in
-//                fetchImage(url: image.imagePath) { data in
-//                    let accomodationsComponentsData = AccomodationsViewComponentsData.AccomodationInfo(imageData: <#T##[Data]#>, grade: <#T##Double#>, countReview: <#T##Int#>, name: <#T##String#>, pricePerDay: <#T##Int#>, finalPrice: <#T##Int#>, description: <#T##String#>, roomDescription: roomDescription, hostInfo: hostInfo)
-//                    dispatchGroup.leave()
-//                }
-//            }
-//
-//            let queueForGroup = DispatchQueue(label: "endQueue", attributes: .concurrent)
-//            dispatchGroup.notify(queue: queueForGroup) {
-//
-//            }
-//        }
-        // 방법 생각이 조금 더 필요할 듯... 이미지 fetch가 너무 많아 어떻게 해야할지 모르겠음
-
         for DTO in DTOs {
-            fetchImage(url: DTO.roomImages[0].imagePath) { imageData in
-                let accomodationInfo = AccomodationsViewComponentsData.AccomodationInfo(
-                    imageData: imageData,
-                    grade: Double(DTO.averageGrade),
-                    countReview: DTO.numberOfReviews,
-                    name: DTO.name,
-                    pricePerDay: DTO.price,
-                    finalPrice: DTO.price * 4)
+            let dispatchGroup = DispatchGroup()
+            let serialQueue = DispatchQueue.init(label: "SerialQueue")
+            var imageDataArray = [Data]()
+            var hostImage = Data()
+
+            dispatchGroup.enter()
+            DTO.roomImages.forEach {
+                fetchImage(url: $0.imagePath) { imageData in
+                    serialQueue.async {
+                        imageDataArray.append(imageData)
+                    }
+                }
+            }
+
+            fetchImage(url: DTO.host.profileImagePath) { imageData in
+                serialQueue.async {
+                    hostImage = imageData
+                }
+                dispatchGroup.leave()
+            }
+
+            let endQueue = DispatchQueue.init(label: "EndQueue", attributes: .concurrent)
+
+            dispatchGroup.notify(queue: endQueue) {
+                let roomDescription = AccomodationsViewComponentsData.AccomodationInfo.RoomDescription(roomType: .init(DTO.roomInfo.roomType), numberOfBed: DTO.roomInfo.numberOfBed, numberOfBedRoom: DTO.roomInfo.numberOfBedroom, numberOfBathRoom: DTO.roomInfo.numberOfBathroom, capacity: DTO.roomInfo.capacity)
+                let hostInfo = AccomodationsViewComponentsData.AccomodationInfo.HostInfo(name: DTO.host.name, profileImageData: hostImage, isSuperHost: DTO.host.superHost)
+                let accomodationInfo = AccomodationsViewComponentsData.AccomodationInfo(imageData: imageDataArray, grade: Double(DTO.averageGrade), countReview: DTO.numberOfReviews, name: DTO.name, pricePerDay: DTO.price, finalPrice: DTO.price * 2, description: DTO.description, roomDescription: roomDescription, hostInfo: hostInfo)
+                print(accomodationInfo)
 
                 delegate?.didFetchedData(accomodationInfo)
             }

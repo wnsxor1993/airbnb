@@ -18,11 +18,42 @@ enum AccomodationsViewComponentsData {
     }
 
     struct AccomodationInfo {
-        let imageData: Data
+        let imageData: [Data]
         let grade: Double
         let countReview: Int
         let name: String
         let pricePerDay: Int
         let finalPrice: Int
+        let description: String
+        let roomDescription: RoomDescription
+        let hostInfo: HostInfo
+
+        struct RoomDescription {
+            let roomType: RoomType
+            let numberOfBed: Int
+            let numberOfBedRoom: Int
+            let numberOfBathRoom: Int
+            let capacity: Int
+        }
+
+        struct HostInfo {
+            let name: String
+            let profileImageData: Data
+            let isSuperHost: Bool
+        }
+    }
+}
+
+enum RoomType {
+    case residence
+    case none
+    // API 보고 추가해야함
+    init(_ roomType: String) {
+        switch roomType {
+        case "RESIDENCE":
+            self = .residence
+        default:
+            self = .none
+        }
     }
 }

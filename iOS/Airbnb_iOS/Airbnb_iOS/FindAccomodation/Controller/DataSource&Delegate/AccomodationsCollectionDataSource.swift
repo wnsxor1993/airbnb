@@ -54,7 +54,7 @@ extension AccomodationsCollectionDataSource: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
 
-            cell.configure(imageData: item.imageData,
+            cell.configure(imageData: item.imageData[0],
                            grade: item.grade,
                            countReview: item.countReview,
                            name: item.name,
