@@ -8,7 +8,9 @@ import lombok.Getter;
 public class AroundSpotDto {
 
     private Long id;
-    private String title;
-    private int distance;
+    private String title;;
     private String imagePath;
+    private String distance;
+    private String time;
+
 }

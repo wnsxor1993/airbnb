@@ -1,11 +1,20 @@
 package com.team11.airbnb.openapi;
 
+import com.digidemic.unitof.UnitOf;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.team11.airbnb.domain.District;
+import com.team11.airbnb.domain.Location;
+import com.team11.airbnb.web.dto.AroundSpotDto;
+import com.team11.airbnb.web.repository.DistrictRepository;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -15,39 +24,35 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.digidemic.unitof.UnitOf;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class DistrictSearchService {
 
-    private String kakaokey = "a1d0ecbd325633346f2938e35d6db4d4";
+    private final String kakaokey = "a1d0ecbd325633346f2938e35d6db4d4";
+    private final DistrictRepository districtRepository;
 
-    public List<DistanceInfoResponse> searchDistrictInfo(Position position)
+    public List<AroundSpotDto> searchDistrictInfo(Position position)
         throws JsonProcessingException {
-        District[] districts = District.values();
-        List<DistanceInfoResponse> distanceInfoResponses = new ArrayList<>();
+        List<District> districts = districtRepository.findAll();
+        List<AroundSpotDto> aroundSpotDtoList = new ArrayList<>();
         for (District district : districts) {
-            Map<String, String> result = calculateDistanceAndTime(position, district.getLongtitude(),
-                district.getLatitude());
+            Map<String, String> result = calculateDistanceAndTime(position, district.getLocation());
             String distance = result.get("distance");
             String time = result.get("time");
-            distanceInfoResponses.add(
-                new DistanceInfoResponse(district.name(), distance, time));
+            aroundSpotDtoList.add(
+                new AroundSpotDto(district.getId(), district.getName(), district.getImagePath(),
+                    distance, time));
         }
 
-        return distanceInfoResponses;
+        return aroundSpotDtoList;
     }
 
-    private Map<String, String> calculateDistanceAndTime(Position position, double destinationX,
-        double destinationY) throws
-        JsonProcessingException {
+    private Map<String, String> calculateDistanceAndTime(Position position, Location location)
+        throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
+        double destinationX = Double.parseDouble(location.getLongitude());
+        double destinationY = Double.parseDouble(location.getLatitude());
         String url = getUrl(position.getX(), position.getY(), destinationX, destinationY);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET,
             new HttpEntity<>(getHeaders()), String.class);
@@ -69,7 +74,6 @@ public class DistrictSearchService {
         double distanceByMeters = summary.get("distance").asDouble();
         Long timeBySeconds = summary.get("duration").asLong();
         log.warn("distance = {}, time  = {}", distanceByMeters, timeBySeconds);
-
 
         Duration duration = Duration.ofSeconds(timeBySeconds);
         String timeByMinutes = String.valueOf(duration.toMinutes());
@@ -95,11 +99,8 @@ public class DistrictSearchService {
         String origin = originX + "," + originY;
         String destination = destinationX + "," + destinationY;
         log.info("origin = {}, destination = {}", origin, destination);
-        return UriComponentsBuilder.fromHttpUrl(url)
-            .queryParam("origin", origin)
-            .queryParam("destination", destination)
-            .queryParam("summary", true)
-            .encode()
+        return UriComponentsBuilder.fromHttpUrl(url).queryParam("origin", origin)
+            .queryParam("destination", destination).queryParam("summary", true).encode()
             .toUriString();
     }
 }
