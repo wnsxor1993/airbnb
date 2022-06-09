@@ -9,8 +9,13 @@ import UIKit
 
 class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
 
+    private var newData: AccomodationsViewComponentsData.AccomodationInfo
     private var data = DetailPageItem()
     private var isShowMore = false
+    
+    init(data: AccomodationsViewComponentsData.AccomodationInfo) {
+        self.newData = data
+    }
     
     func toggleIsShowMore() {
         isShowMore.toggle()

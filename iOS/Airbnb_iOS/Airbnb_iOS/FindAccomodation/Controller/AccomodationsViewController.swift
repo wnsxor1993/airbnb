@@ -49,8 +49,12 @@ extension AccomodationsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == 2 else { return }
         
-        let detailPageViewController = DetailPageViewController()
-        self.navigationController?.pushViewController(detailPageViewController, animated: true)
+        if case let AccomodationsViewComponentsData.accomodationsSection(data) = dataSource.data[2] {
+            let detailPageViewController = DetailPageViewController(data: data?[indexPath.item])
+            self.navigationController?.pushViewController(detailPageViewController, animated: true)
+        }
+//        let detailPageViewController = DetailPageViewController()
+//        self.navigationController?.pushViewController(detailPageViewController, animated: true)
     }
 }
 

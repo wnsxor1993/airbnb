@@ -9,9 +9,11 @@ import UIKit
 
 class DetailPageViewController: UIViewController {
 
-    private let detailPageDataSource = DetailPageCollectionDataSource()
+    private var detailPageDataSource: DetailPageCollectionDataSource?
     private lazy var detailPageCollectionView = DetailPageCollectionView(frame: view.frame)
     private lazy var toolBarView = DetailPageToolBar()
+    
+    private let roomData: AccomodationsViewComponentsData.AccomodationInfo?
     
     private lazy var backButton: UIButton = {
         let button = UIButton()
@@ -22,6 +24,15 @@ class DetailPageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    init(data: AccomodationsViewComponentsData.AccomodationInfo?) {
+        self.roomData = data
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +57,15 @@ extension DetailPageViewController: UICollectionViewDelegate {
 
 private extension DetailPageViewController {
     
+    func setDetailPageDatasource() {
+        guard let data = roomData else { return }
+        self.detailPageDataSource = DetailPageCollectionDataSource(data: data)
+    }
+    
     func setDetailPageCollectionView() {
+        guard let dataSource = self.detailPageDataSource else { return }
         self.detailPageCollectionView.collectionView.delegate = self
-        self.detailPageCollectionView.setDataSource(detailPageDataSource)
+        self.detailPageCollectionView.setDataSource(dataSource)
         self.view.addSubview(detailPageCollectionView)
     }
     
@@ -104,7 +121,7 @@ private extension DetailPageViewController {
     
     @objc
     func didSelectMoreButton() {
-        self.detailPageDataSource.toggleIsShowMore()
+        self.detailPageDataSource?.toggleIsShowMore()
         
         DispatchQueue.main.async {
             self.detailPageCollectionView.collectionView.reloadSections(IndexSet(integer: IndexSet.Element(bitPattern: 3)))
