@@ -28,6 +28,7 @@ class DetailPageViewController: UIViewController {
         self.setDetailPageCollectionView()
         self.setToolbar()
         self.setBackButton()
+        self.setMoreButtonNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +48,6 @@ private extension DetailPageViewController {
     
     func setDetailPageCollectionView() {
         self.detailPageCollectionView.collectionView.delegate = self
-        self.detailPageDataSource.setDelegateObject(object: self)
         self.detailPageCollectionView.setDataSource(detailPageDataSource)
         self.view.addSubview(detailPageCollectionView)
     }
@@ -97,19 +97,24 @@ private extension DetailPageViewController {
     func touchedBackButton() {
         self.navigationController?.popViewController(animated: true)
     }
-}
-
-extension DetailPageViewController: DetailTextDescriptionDelegate, ReserveToolBarDelegate {
     
-    func didSelectReserveButton() {
-        print("예약 완료")
+    func setMoreButtonNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectMoreButton), name: NSNotification.Name(rawValue: "moreButton"), object: nil)
     }
     
+    @objc
     func didSelectMoreButton() {
         self.detailPageDataSource.toggleIsShowMore()
         
         DispatchQueue.main.async {
             self.detailPageCollectionView.collectionView.reloadSections(IndexSet(integer: IndexSet.Element(bitPattern: 3)))
         }
+    }
+}
+
+extension DetailPageViewController: ReserveToolBarDelegate {
+    
+    func didSelectReserveButton() {
+        print("예약 완료")
     }
 }
