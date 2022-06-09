@@ -16,7 +16,7 @@ struct AccomodationsRepository {
 
     func fetchData() {
         let baseURL = "http://144.24.86.236/room/1"
-        AlamofireNet().connectNetwork(url: baseURL, method: .get, param: nil) { result in
+        AlamofireNet().connectNetwork(url: baseURL, method: .get, param: nil, encode: .default) { result in
             switch result {
             case .success(let data):
 //                guard let decodedData: [AccomodationDTO] = JSONConverter.decodeJsonObject(data: data) else {
@@ -76,7 +76,7 @@ private extension AccomodationsRepository {
     }
 
     func fetchImage(url: String, handler: @escaping (Data) -> Void) {
-        AlamofireNet().connectNetwork(url: url, method: .get, param: nil) { result in
+        AlamofireNet().connectNetwork(url: url, method: .get, param: nil, encode: .default) { result in
             switch result {
             case .success(let data):
                 handler(data)

@@ -9,10 +9,10 @@ import Alamofire
 
 struct AlamofireNet {
     
-    func connectNetwork(url: String, method: Alamofire.HTTPMethod, param: Parameters?, completion handler: @escaping (Result<Data, AFError>) -> Void) {
+    func connectNetwork(url: String, method: Alamofire.HTTPMethod, param: Parameters?, encode: URLEncoding, completion handler: @escaping (Result<Data, AFError>) -> Void) {
         guard let validURL = URL(string: url) else { return }
         
-        let validRequest = AF.request(validURL, method: method, parameters: param).validate(statusCode: 200..<300)
+        let validRequest = AF.request(validURL, method: method, parameters: param, encoding: encode).validate(statusCode: 200..<300)
         
         validRequest.response { response in
             switch response.result {

@@ -23,7 +23,7 @@ struct HomeRepository {
             "y": currentLocation.longitude
         ]
 
-        AlamofireNet().connectNetwork(url: baseURL, method: .get, param: param) { result in
+        AlamofireNet().connectNetwork(url: baseURL, method: .get, param: param, encode: .queryString) { result in
             switch result {
             case .success(let data):
                 guard let decodedData: HomeDto = JSONConverter.decodeJsonObject(data: data) else {
@@ -84,7 +84,7 @@ private extension HomeRepository {
     }
 
     func fetchImage(url: String, handler: @escaping (Data) -> Void) {
-        AlamofireNet().connectNetwork(url: url, method: .get, param: nil) { result in
+        AlamofireNet().connectNetwork(url: url, method: .get, param: nil, encode: .default) { result in
             switch result {
             case .success(let data):
                 handler(data)

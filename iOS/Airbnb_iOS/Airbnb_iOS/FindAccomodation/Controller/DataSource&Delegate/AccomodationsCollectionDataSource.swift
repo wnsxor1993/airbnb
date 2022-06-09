@@ -54,7 +54,15 @@ extension AccomodationsCollectionDataSource: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
 
-            cell.configure(imageData: item.imageData[0],
+            var imageData: Data
+            
+            if item.imageData.count > 0 {
+                imageData = item.imageData[0]
+            } else {
+                imageData = Data()
+            }
+            
+            cell.configure(imageData: imageData,
                            grade: item.grade,
                            countReview: item.countReview,
                            name: item.name,
