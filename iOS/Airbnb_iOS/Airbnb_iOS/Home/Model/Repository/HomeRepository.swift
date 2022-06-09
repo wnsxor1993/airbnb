@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol HomeRepositoryDelegate: AnyObject {
     func didFetchHeroImageData(_ heroImageData: HomeViewComponentsData.HeroImageData)
@@ -69,7 +70,7 @@ private extension HomeRepository {
             let aroundSpotData = HomeViewComponentsData.AroundSpotData.init(
                 imageData: imageData,
                 title: DTO.title,
-                distance: DTO.distance)
+                distance: Int(Double(DTO.distance) ?? 0))
             delegate?.didFetchAroundSpotData(aroundSpotData)
         }
     }
