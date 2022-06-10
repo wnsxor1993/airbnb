@@ -1,7 +1,7 @@
 package com.team11.airbnb.web.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,6 @@ import com.team11.airbnb.domain.MainEvent;
 import com.team11.airbnb.domain.ThemeSpot;
 import com.team11.airbnb.web.dto.MainEventDto;
 import com.team11.airbnb.web.dto.ThemeSpotDto;
-import com.team11.airbnb.web.repository.DistrictRepository;
 import com.team11.airbnb.web.repository.MainEventRepository;
 import com.team11.airbnb.web.repository.ThemeRepository;
 
@@ -24,13 +23,9 @@ public class HomeService {
 
     public List<ThemeSpotDto> getThemeSpotDtoList() {
         List<ThemeSpot> themeSpotList = themeRepository.findAll();
-        List<ThemeSpotDto> themeSpotDtoList = new ArrayList<>();
-        for (ThemeSpot themeSpot : themeSpotList) {
-            ThemeSpotDto themeSpotDto = new ThemeSpotDto(themeSpot.getImagePath(),
-                themeSpot.getTitle());
-            themeSpotDtoList.add(themeSpotDto);
-        }
-        return themeSpotDtoList;
+        return themeSpotList.stream()
+            .map(ThemeSpotDto::new)
+            .collect(Collectors.toList());
     }
 
     public MainEventDto getMainEventDto() throws Exception {
