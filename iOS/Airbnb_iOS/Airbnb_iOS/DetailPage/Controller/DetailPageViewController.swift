@@ -9,11 +9,12 @@ import UIKit
 
 class DetailPageViewController: UIViewController {
 
-    private var detailPageDataSource: DetailPageCollectionDataSource?
+    private var detailPageDataSource = DetailPageCollectionDataSource()
     private lazy var detailPageCollectionView = DetailPageCollectionView(frame: view.frame)
     private lazy var toolBarView = DetailPageToolBar()
+    private var repository = DetailPageRepository()
     
-    private let roomData: AccomodationsViewComponentsData.AccomodationInfo?
+    private let roomId: Int?
     
     private lazy var backButton: UIButton = {
         let button = UIButton()
@@ -25,9 +26,11 @@ class DetailPageViewController: UIViewController {
         return button
     }()
     
-    init(data: AccomodationsViewComponentsData.AccomodationInfo?) {
-        self.roomData = data
+    init(roomId: Int?) {
+        self.roomId = roomId
         super.init(nibName: nil, bundle: nil)
+        setDetailPageRepositoryDelegate()
+        repository.fetchData(id: roomId ?? 1)
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +39,6 @@ class DetailPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setDetailPageDatasource()
         self.setDetailPageCollectionView()
         self.setToolbar()
         self.setBackButton()
@@ -48,25 +50,16 @@ class DetailPageViewController: UIViewController {
     }
 }
 
-extension DetailPageViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-}
-
 // MARK: Configure All Initial setting
 
 private extension DetailPageViewController {
     
-    func setDetailPageDatasource() {
-        guard let data = roomData else { return }
-        self.detailPageDataSource = DetailPageCollectionDataSource(data: data)
+    func setDetailPageRepositoryDelegate() {
+        repository.delegate = self
     }
     
     func setDetailPageCollectionView() {
-        guard let dataSource = self.detailPageDataSource else { return }
-        self.detailPageCollectionView.collectionView.delegate = self
-        self.detailPageCollectionView.setDataSource(dataSource)
+        self.detailPageCollectionView.setDataSource(detailPageDataSource)
         self.view.addSubview(detailPageCollectionView)
     }
     
@@ -122,7 +115,7 @@ private extension DetailPageViewController {
     
     @objc
     func didSelectMoreButton() {
-        self.detailPageDataSource?.toggleIsShowMore()
+        self.detailPageDataSource.toggleIsShowMore()
         
         DispatchQueue.main.async {
             self.detailPageCollectionView.collectionView.reloadSections(IndexSet(integer: IndexSet.Element(bitPattern: 3)))
@@ -134,5 +127,14 @@ extension DetailPageViewController: ReserveToolBarDelegate {
     
     func didSelectReserveButton() {
         print("예약 완료")
+    }
+}
+
+extension DetailPageViewController: DetailPageRepositoryDelegate {
+    func didFetchData(_ data: DetailRoomInfo) {
+        detailPageDataSource.data = data
+        DispatchQueue.main.async {
+            self.detailPageCollectionView.collectionView.reloadData()
+        }
     }
 }

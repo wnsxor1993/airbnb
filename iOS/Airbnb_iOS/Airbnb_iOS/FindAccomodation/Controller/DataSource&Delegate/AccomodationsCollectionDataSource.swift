@@ -8,7 +8,6 @@
 import UIKit
 
 final class AccomodationsCollectionDataSource: NSObject {
-    // 임시로 데이터를 가지고 있도록 구현
     var data: [AccomodationsViewComponentsData] = [
         .accomodationOptionSection(nil),
         .countAccomodationsSection(count: 0),
@@ -57,17 +56,23 @@ extension AccomodationsCollectionDataSource: UICollectionViewDataSource {
             var imageData: Data
             
             if item.imageData.count > 0 {
-                imageData = item.imageData[0]
+                imageData = item.imageData
             } else {
                 imageData = Data()
             }
+
+            var distanceOfDate = 0
+
+            if case let AccomodationsViewComponentsData.accomodationOptionSection(option) = data[0] {
+                distanceOfDate = Calendar.current.dateComponents([.day], from: option?.dateRange?.lowerBound ?? Date(), to: option?.dateRange?.upperBound ?? Date()).day ?? 0
+            }
             
             cell.configure(imageData: imageData,
-                           grade: item.grade,
-                           countReview: item.countReview,
-                           name: item.name,
-                           pricePerDay: item.pricePerDay,
-                           finalPrice: item.finalPrice)
+                           grade: Double(item.averageGrade),
+                           countReview: item.numberOfReviews,
+                           name: item.title,
+                           pricePerDay: item.price,
+                           finalPrice: item.price * distanceOfDate)
 
             return cell
         }
