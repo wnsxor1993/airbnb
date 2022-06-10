@@ -20,8 +20,8 @@ struct HomeRepository {
     func fetchData(currentLocation: (latitude: Double, longitude: Double)) {
         let baseURL = "http://144.24.86.236/home"
         let param = [
-            "x": currentLocation.latitude,
-            "y": currentLocation.longitude
+            "x": currentLocation.longitude,
+            "y": currentLocation.latitude
         ]
 
         AlamofireNet().connectNetwork(url: baseURL, method: .get, param: param, encode: .queryString) { result in
