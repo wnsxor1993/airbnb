@@ -76,7 +76,6 @@ private extension HomeViewController {
     func configureSettings() {
         self.setHomeView()
         self.setSearchBar()
-//        self.setLocationAccess()
     }
 
     func setHomeView() {
@@ -88,11 +87,6 @@ private extension HomeViewController {
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
     }
-
-//    func setLocationAccess() {
-//        self.locationManager.locationManager.delegate = self
-//        self.alertLocationAccessNeeded(isDenied: self.locationManager.setLocationAccess())
-//    }
 
     func setHomeDataManagerDelegate() {
         homeViewDataManager.setDelegate(self)
@@ -160,11 +154,21 @@ extension HomeViewController: HomeDataManagerDelegate {
 
     func updateAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData) {
         if case let HomeViewComponentsData.secondSection(previousData) = dataSource.data[1] {
-            let updatedData = (previousData + [aroundSpotData]).sorted {
-                $0.time < $1.time
+
+            // 이미 추가된 AroundSpotCell인지 구별해주는 Bool 상수
+            let isAlreadyAdded = previousData.allSatisfy {
+                $0.title != aroundSpotData.title
             }
-            dataSource.data[1] = .secondSection(updatedData)
-            homeView.reloadCollectionViewCell(sectionNumber: 1)
+
+            if isAlreadyAdded {
+                let updatedData = (previousData + [aroundSpotData]).sorted {
+                    $0.time < $1.time
+                }
+
+                dataSource.data[1] = .secondSection(updatedData)
+                homeView.reloadCollectionViewCell(sectionNumber: 1)
+            }
+            
         }
     }
 
