@@ -19,3 +19,16 @@ spring:
 logging:
   level:
     com.team11: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled:
+      show-details: always
+  health:
+    db:
+      enabled: true
