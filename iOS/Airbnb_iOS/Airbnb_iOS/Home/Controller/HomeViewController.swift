@@ -14,9 +14,8 @@ class HomeViewController: UIViewController {
     private let dataSource = HomeViewCollectionDataSource()
 
     private let homeViewDataManager = HomeDataManager()
-
-    private let locationManager = LocationManager()
-    private var currentLocation = CLLocation()
+    private var accessCase: LocationManager.AceessCase
+    private(set) var nowLocation: CLLocation?
 
     let searchBar: UISearchBar = {
         let searcher = UISearchBar()
@@ -24,7 +23,8 @@ class HomeViewController: UIViewController {
         return searcher
     }()
 
-    init() {
+    init(locationAccess: LocationManager.AceessCase) {
+        self.accessCase = locationAccess
         super.init(nibName: nil, bundle: nil)
         setHomeDataManagerDelegate()
     }
@@ -36,6 +36,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureSettings()
+        self.getHomeViewComponents()
+        self.alertLocationAccessNeeded(isDenied: self.accessCase)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +47,27 @@ class HomeViewController: UIViewController {
     }
 
     func getHomeViewComponents() {
-        homeViewDataManager.getHomeViewComponents(currentLocation: currentLocation)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNotification), name: NSNotification.Name("location"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadDataForLocation), name: NSNotification.Name("repository"), object: nil)
+    }
+    
+    @objc
+    func didReceiveNotification(_ notification: Notification) {
+        guard let location = notification.userInfo?["location"] as? CLLocation else { return }
+
+        self.nowLocation = location
+        homeViewDataManager.getHomeViewComponents(currentLocation: location)
+    }
+    
+    @objc
+    func reloadDataForLocation() {
+        DispatchQueue.main.async {
+            self.homeView.reloadCollectionViewCell()
+        }
+    }
+    
+    func setNowLocation(location: CLLocation) {
+        self.nowLocation = location
     }
 }
 
@@ -54,7 +76,7 @@ private extension HomeViewController {
     func configureSettings() {
         self.setHomeView()
         self.setSearchBar()
-        self.setLocationAccess()
+//        self.setLocationAccess()
     }
 
     func setHomeView() {
@@ -67,10 +89,10 @@ private extension HomeViewController {
         self.navigationItem.titleView = searchBar
     }
 
-    func setLocationAccess() {
-        self.locationManager.locationManager.delegate = self
-        self.alertLocationAccessNeeded(isDenied: self.locationManager.setLocationAccess())
-    }
+//    func setLocationAccess() {
+//        self.locationManager.locationManager.delegate = self
+//        self.alertLocationAccessNeeded(isDenied: self.locationManager.setLocationAccess())
+//    }
 
     func setHomeDataManagerDelegate() {
         homeViewDataManager.setDelegate(self)
@@ -118,38 +140,6 @@ extension HomeViewController: UISearchBarDelegate {
         self.navigationController?.pushViewController(browseViewController, animated: true)
 
         return false
-    }
-}
-
-extension HomeViewController: CLLocationManagerDelegate {
-
-    @available(iOS 14, *)
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedAlways, .authorizedWhenInUse:
-            manager.startUpdatingLocation()
-        case .denied:
-            self.alertLocationAccessNeeded(isDenied: .denied)
-        default:
-            return
-        }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            manager.startUpdatingLocation()
-        case .denied:
-            self.alertLocationAccessNeeded(isDenied: .denied)
-        default:
-            return
-        }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else { return }
-
-        self.currentLocation = location
     }
 }
 

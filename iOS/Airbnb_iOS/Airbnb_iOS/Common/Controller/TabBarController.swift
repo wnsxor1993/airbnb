@@ -6,19 +6,27 @@
 //
 
 import UIKit
+import CoreLocation
 
 final class TabBarController: UITabBarController {
+    
+    private let locationManager = LocationManager()
+    private var currentLocation = CLLocation()
+    private var homeVC: HomeViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTabBarItem()
         self.setTabBarBackgroundColor()
+        self.locationManager.locationManager.delegate = self
     }
 }
 
 private extension TabBarController {
     func setTabBarItem() {
-        let homeViewController = HomeViewController()
-        homeViewController.getHomeViewComponents()
+        let locationAccess = self.locationManager.setLocationAccess()
+        let homeViewController = HomeViewController(locationAccess: locationAccess)
+        self.homeVC = homeViewController
         let navigationViewController = UINavigationController(rootViewController: homeViewController)
         navigationViewController.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
 
@@ -41,5 +49,39 @@ private extension TabBarController {
         } else {
             self.tabBar.barTintColor = .gray6
         }
+    }
+}
+
+extension TabBarController: CLLocationManagerDelegate {
+
+    @available(iOS 14, *)
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            manager.startUpdatingLocation()
+        case .denied:
+            print("")
+            //self.alertLocationAccessNeeded(isDenied: .denied)
+        default:
+            return
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            manager.startUpdatingLocation()
+        case .denied:
+            print("")
+            //self.alertLocationAccessNeeded(isDenied: .denied)
+        default:
+            return
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first, let homeVC = self.homeVC, homeVC.nowLocation != location else { return }
+
+        NotificationCenter.default.post(name: NSNotification.Name("location"), object: self, userInfo: ["location": location])
     }
 }

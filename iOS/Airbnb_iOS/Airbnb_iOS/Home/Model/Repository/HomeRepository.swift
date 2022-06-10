@@ -52,6 +52,8 @@ private extension HomeRepository {
         DTO.themeSpotDto.forEach { eachThemeSpotDto in
             convertToThemeSpotData(DTO: eachThemeSpotDto)
         }
+        
+        self.postNotification()
     }
 
     func convertToHeroImageData(DTO: MainEventDto) {
@@ -63,6 +65,8 @@ private extension HomeRepository {
                 buttonTitle: DTO.buttonText)
             delegate?.didFetchHeroImageData(heroImageData)
         }
+        
+        self.postNotification()
     }
 
     func convertToAroundSpotData(DTO: AroundSpotDto) {
@@ -73,6 +77,8 @@ private extension HomeRepository {
                 distance: Int(Double(DTO.distance) ?? 0))
             delegate?.didFetchAroundSpotData(aroundSpotData)
         }
+        
+        self.postNotification()
     }
 
     func convertToThemeSpotData(DTO: ThemeSpotDto) {
@@ -82,6 +88,8 @@ private extension HomeRepository {
                 title: DTO.title)
             delegate?.didFetchThemeSpotData(themeSpotData)
         }
+        
+        self.postNotification()
     }
 
     func fetchImage(url: String, handler: @escaping (Data) -> Void) {
@@ -93,5 +101,9 @@ private extension HomeRepository {
                 print(error)
             }
         }
+    }
+    
+    func postNotification() {
+        NotificationCenter.default.post(name: NSNotification.Name("repository"), object: self)
     }
 }
