@@ -21,7 +21,7 @@ class FamousSpotCollectionDataSource: NSObject, UICollectionViewDataSource {
         }
 
         let item = data[indexPath.item]
-        cell.configure(imageData: item.imageData, title: item.title, distance: item.distance)
+        cell.configure(imageData: item.imageData, title: item.title, time: item.time)
 
         return cell
     }

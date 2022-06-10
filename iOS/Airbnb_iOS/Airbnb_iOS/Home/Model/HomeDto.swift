@@ -15,7 +15,7 @@ struct HomeDto: Codable {
 
 struct AroundSpotDto: Codable {
     let title: String
-    let distance: String
+    let time: String
     let imagePath: String
 }
 

@@ -36,7 +36,7 @@ enum HomeViewComponentsData {
     struct AroundSpotData {
         let imageData: Data
         let title: String
-        let distance: Int
+        let time: Int
     }
 
     struct ThemeSpotData {

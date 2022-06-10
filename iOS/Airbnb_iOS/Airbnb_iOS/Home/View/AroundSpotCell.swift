@@ -43,10 +43,10 @@ final class AroundSpotCell: UICollectionViewCell {
         fatalError()
     }
 
-    func configure(imageData: Data, title: String, distance: Int) {
+    func configure(imageData: Data, title: String, time: Int) {
         imageView.image = UIImage(data: imageData)
         titleLabel.text = title
-        distanceLabel.text = distance.toKM()
+        distanceLabel.text = "차로 \(time)분 거리"
     }
 }
 

@@ -161,7 +161,7 @@ extension HomeViewController: HomeDataManagerDelegate {
     func updateAroundSpotData(_ aroundSpotData: HomeViewComponentsData.AroundSpotData) {
         if case let HomeViewComponentsData.secondSection(previousData) = dataSource.data[1] {
             let updatedData = (previousData + [aroundSpotData]).sorted {
-                $0.distance < $1.distance
+                $0.time < $1.time
             }
             dataSource.data[1] = .secondSection(updatedData)
             homeView.reloadCollectionViewCell(sectionNumber: 1)
