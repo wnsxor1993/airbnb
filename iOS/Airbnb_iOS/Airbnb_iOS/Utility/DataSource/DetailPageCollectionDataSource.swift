@@ -35,10 +35,6 @@ class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
 
     private var isShowMore = false
     
-    init(data: AccomodationsViewComponentsData.AccomodationInfo) {
-        self.data = data
-    }
-    
     func toggleIsShowMore() {
         isShowMore.toggle()
     }
