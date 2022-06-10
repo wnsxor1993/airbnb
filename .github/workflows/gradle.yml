@@ -48,10 +48,10 @@ jobs:
       # 도커 빌드(도커 이미지 생성)
       - name: Docker build
         run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t philsogood/airbnb:1.0 .
-          docker push ${{ secrets.DOCKER_USERNAME }}/airbnb:1.0
-          docker rmi ${{ secrets.DOCKER_USERNAME }}/airbnb:1.0
+          docker login -u zinophilsquad -p ${{ secrets.DOCKER_PASSWORD }}
+          docker build -t zinophilsquad/airbnb:1.0 .
+          docker push zinophilsquad/airbnb:1.0
+          docker rmi zinophilsquad/airbnb:1.0
 
       # 디렉토리 생성
       - name: Make Directory
