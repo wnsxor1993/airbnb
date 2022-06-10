@@ -15,18 +15,15 @@ struct AccomodationsRepository {
     private weak var delegate: AccomodationsRepositoryDelegate?
 
     func fetchData() {
-        let baseURL = "http://144.24.86.236/room/1"
+        let baseURL = "http://144.24.86.236/rooms"
         AlamofireNet().connectNetwork(url: baseURL, method: .get, param: nil, encode: .default) { result in
             switch result {
             case .success(let data):
-//                guard let decodedData: [AccomodationDTO] = JSONConverter.decodeJsonObject(data: data) else {
-//                    return
-//                }
-//
-//                convert(DTOs: decodedData)
-                // 아직 API가 없어, 임의로..
-                guard let decodedData: AccomodationDTO = JSONConverter.decodeJsonObject(data: data) else { return }
-                convert(DTOs: [decodedData])
+                guard let decodedData: [AccomodationDTO] = JSONConverter.decodeJsonObject(data: data) else {
+                    return
+                }
+                convert(DTOs: decodedData)
+
             case .failure(let error):
                 print(error)
             }
@@ -41,38 +38,18 @@ struct AccomodationsRepository {
 private extension AccomodationsRepository {
     func convert(DTOs: [AccomodationDTO]) {
         for DTO in DTOs {
-            let dispatchGroup = DispatchGroup()
-            let serialQueue = DispatchQueue.init(label: "SerialQueue")
-            var imageDataArray = [Data]()
-            var hostImage = Data()
-
-            dispatchGroup.enter()
-            DTO.roomImages.forEach {
-                fetchImage(url: $0.imagePath) { imageData in
-                    serialQueue.async {
-                        imageDataArray.append(imageData)
-                    }
-                }
-            }
-
-            fetchImage(url: DTO.host.profileImagePath) { imageData in
-                serialQueue.async {
-                    hostImage = imageData
-                }
-                dispatchGroup.leave()
-            }
-
-            let endQueue = DispatchQueue.init(label: "EndQueue", attributes: .concurrent)
-
-            dispatchGroup.notify(queue: endQueue) {
-                let roomDescription = AccomodationsViewComponentsData.AccomodationInfo.RoomDescription(roomType: .init(DTO.roomInfo.roomType), numberOfBed: DTO.roomInfo.numberOfBed, numberOfBedRoom: DTO.roomInfo.numberOfBedroom, numberOfBathRoom: DTO.roomInfo.numberOfBathroom, capacity: DTO.roomInfo.capacity)
-                let hostInfo = AccomodationsViewComponentsData.AccomodationInfo.HostInfo(name: DTO.host.name, profileImageData: hostImage, isSuperHost: DTO.host.superHost)
-                let accomodationInfo = AccomodationsViewComponentsData.AccomodationInfo(imageData: imageDataArray, grade: Double(DTO.averageGrade), countReview: DTO.numberOfReviews, name: DTO.name, pricePerDay: DTO.price, finalPrice: DTO.price * 2, description: DTO.description, roomDescription: roomDescription, hostInfo: hostInfo)
-                print(accomodationInfo)
-
-                delegate?.didFetchedData(accomodationInfo)
+            fetchImage(url: DTO.imagePath) { imageData in
+                let roomData = AccomodationsViewComponentsData.AccomodationInfo(
+                    id: DTO.id,
+                    title: DTO.title,
+                    averageGrade: DTO.averageGrade,
+                    numberOfReviews: DTO.numberOfReviews,
+                    imageData: imageData,
+                    price: DTO.price)
+                delegate?.didFetchedData(roomData)
             }
         }
+        
     }
 
     func fetchImage(url: String, handler: @escaping (Data) -> Void) {
