@@ -15,6 +15,9 @@
 		023D10D42851834600023D3F /* AccomodationsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D10D32851834600023D3F /* AccomodationsDataManager.swift */; };
 		023D10D6285183BB00023D3F /* AccomodationsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D10D5285183BB00023D3F /* AccomodationsRepository.swift */; };
 		023D10D92851868A00023D3F /* AccomodationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D10D82851868A00023D3F /* AccomodationDTO.swift */; };
+		0243A7852852DDD1005CA76C /* DetailPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243A7842852DDD1005CA76C /* DetailPageRepository.swift */; };
+		0243A7882852DFBA005CA76C /* DetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243A7872852DFBA005CA76C /* DetailDTO.swift */; };
+		0243A78A2852F215005CA76C /* DetailRoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243A7892852F215005CA76C /* DetailRoomInfo.swift */; };
 		0244F60F284DD3DE002D385C /* HomeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0244F60E284DD3DE002D385C /* HomeDto.swift */; };
 		02501E16284DC84B00CB4CB8 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 02501E15284DC84B00CB4CB8 /* mock.json */; };
 		02501E18284DC94A00CB4CB8 /* JSONConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */; };
@@ -105,6 +108,9 @@
 		023D10D32851834600023D3F /* AccomodationsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsDataManager.swift; sourceTree = "<group>"; };
 		023D10D5285183BB00023D3F /* AccomodationsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationsRepository.swift; sourceTree = "<group>"; };
 		023D10D82851868A00023D3F /* AccomodationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationDTO.swift; sourceTree = "<group>"; };
+		0243A7842852DDD1005CA76C /* DetailPageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageRepository.swift; sourceTree = "<group>"; };
+		0243A7872852DFBA005CA76C /* DetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDTO.swift; sourceTree = "<group>"; };
+		0243A7892852F215005CA76C /* DetailRoomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRoomInfo.swift; sourceTree = "<group>"; };
 		0244F60E284DD3DE002D385C /* HomeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDto.swift; sourceTree = "<group>"; };
 		02501E15284DC84B00CB4CB8 /* mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
 		02501E17284DC94A00CB4CB8 /* JSONConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConverterTests.swift; sourceTree = "<group>"; };
@@ -224,6 +230,16 @@
 				023D10D5285183BB00023D3F /* AccomodationsRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		0243A7862852DDD6005CA76C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0243A7842852DDD1005CA76C /* DetailPageRepository.swift */,
+				0243A7872852DFBA005CA76C /* DetailDTO.swift */,
+				0243A7892852F215005CA76C /* DetailRoomInfo.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		02874046283D37AA0009C62D /* Extension */ = {
@@ -541,6 +557,7 @@
 		D298A223284DD808004B12C9 /* DetailPage */ = {
 			isa = PBXGroup;
 			children = (
+				0243A7862852DDD6005CA76C /* Model */,
 				D298A229284DD8C6004B12C9 /* View */,
 				D298A224284DD81A004B12C9 /* Controller */,
 			);
@@ -883,6 +900,7 @@
 				02072FF72849E242003D7D28 /* HomeDataManager.swift in Sources */,
 				02DF0CD7283CB3C7003D0679 /* AroundSpotCell.swift in Sources */,
 				0287404A283D3B6D0009C62D /* HomeView.swift in Sources */,
+				0243A7852852DDD1005CA76C /* DetailPageRepository.swift in Sources */,
 				D2B52C40283F153900C58271 /* HomeViewCollectionLayout.swift in Sources */,
 				02DF0CDB283CB980003D0679 /* CollectionHeaderView.swift in Sources */,
 				02FAD3682848A13B0053327B /* AccomodationData.swift in Sources */,
@@ -914,6 +932,7 @@
 				02B3BB9928445E9B00753CA7 /* CalendarView.swift in Sources */,
 				D2FFBFEA283CA73B00C97D16 /* ReservationViewController.swift in Sources */,
 				02DF0CDD283CBAB6003D0679 /* HomeViewCollectionDataSource.swift in Sources */,
+				0243A78A2852F215005CA76C /* DetailRoomInfo.swift in Sources */,
 				027F9C36284F1EB600AEC054 /* AccomodationsView.swift in Sources */,
 				D2BD0279284DACA800AC7B78 /* JSONConverter.swift in Sources */,
 				0267317B284924D8007FEBEF /* Int+.swift in Sources */,
@@ -936,6 +955,7 @@
 				02B3BBA22844B85F00753CA7 /* MonthMetadata.swift in Sources */,
 				D298A235284EE409004B12C9 /* DetailPageCollectionLayout.swift in Sources */,
 				D2402414284F21BF00E87E0F /* DetailPageToolBar.swift in Sources */,
+				0243A7882852DFBA005CA76C /* DetailDTO.swift in Sources */,
 				D247A4922840690400A92DDD /* BrowsingSpotCollectionDataSource.swift in Sources */,
 				0287404C283DBE810009C62D /* UiView+.swift in Sources */,
 				D247A48C283F640A00A92DDD /* BrowsingSpotCell.swift in Sources */,

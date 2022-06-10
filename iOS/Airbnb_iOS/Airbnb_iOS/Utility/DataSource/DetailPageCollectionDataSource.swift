@@ -16,7 +16,23 @@ class DetailPageCollectionDataSource: NSObject, UICollectionViewDataSource {
         case description
     }
 
-    private var data: AccomodationsViewComponentsData.AccomodationInfo
+    var data = DetailRoomInfo(
+        imageData: [],
+        grade: 0,
+        countReview: 0,
+        name: "",
+        pricePerDay: 0,
+        finalPrice: 0,
+        description: "",
+        roomDescription: .init(roomType: .none,
+                              numberOfBed: 0,
+                              numberOfBedRoom: 0,
+                              numberOfBathRoom: 0,
+                              capacity: 0),
+        hostInfo: .init(name: "",
+                        profileImageData: Data(),
+                        isSuperHost: false))
+
     private var isShowMore = false
     
     init(data: AccomodationsViewComponentsData.AccomodationInfo) {

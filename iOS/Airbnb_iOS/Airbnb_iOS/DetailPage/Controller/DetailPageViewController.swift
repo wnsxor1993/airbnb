@@ -12,6 +12,7 @@ class DetailPageViewController: UIViewController {
     private var detailPageDataSource: DetailPageCollectionDataSource?
     private lazy var detailPageCollectionView = DetailPageCollectionView(frame: view.frame)
     private lazy var toolBarView = DetailPageToolBar()
+    private var repository = DetailPageRepository()
     
     private let roomData: AccomodationsViewComponentsData.AccomodationInfo?
     
@@ -28,6 +29,7 @@ class DetailPageViewController: UIViewController {
     init(data: AccomodationsViewComponentsData.AccomodationInfo?) {
         self.roomData = data
         super.init(nibName: nil, bundle: nil)
+        setDetailPageRepositoryDelegate()
     }
     
     required init?(coder: NSCoder) {
@@ -61,6 +63,8 @@ private extension DetailPageViewController {
     func setDetailPageDatasource() {
         guard let data = roomData else { return }
         self.detailPageDataSource = DetailPageCollectionDataSource(data: data)
+    func setDetailPageRepositoryDelegate() {
+        repository.delegate = self
     }
     
     func setDetailPageCollectionView() {
@@ -134,5 +138,14 @@ extension DetailPageViewController: ReserveToolBarDelegate {
     
     func didSelectReserveButton() {
         print("예약 완료")
+    }
+}
+
+extension DetailPageViewController: DetailPageRepositoryDelegate {
+    func didFetchData(_ data: DetailRoomInfo) {
+        detailPageDataSource.data = data
+        DispatchQueue.main.async {
+            self.detailPageCollectionView.collectionView.reloadData()
+        }
     }
 }
